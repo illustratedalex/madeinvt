@@ -6,7 +6,7 @@ import { foundingPartnerPublicSlots } from "@/data/foundingPartners";
 import { FoundingPartnerBenefits, FoundingPartnerCTA, FoundingPartnerHero, FoundingPartnerPromise, FoundingPartnerSlots } from "@/components/founding-partners";
 
 export const metadata = createPageMetadata({
-  title: "MadeInVT Founding Partners",
+  title: "MadeInVT Founding Makers",
   description: "A small founding partner program for local businesses that want to support MadeInVT's early growth.",
   path: "/founding-partners",
 });
@@ -18,7 +18,7 @@ export default function FoundingPartnersPage() {
 
       <section className="mx-auto max-w-6xl space-y-8 px-6 py-10 sm:px-8 lg:px-10">
         <FoundingPartnerHero
-          title="MadeInVT Founding Partners"
+          title="MadeInVT Founding Makers"
           headline="Help Build the Guide to Vermont"
           subheadline="We’re inviting a small group of local businesses to help shape MadeInVT from the beginning."
         />
@@ -26,11 +26,11 @@ export default function FoundingPartnersPage() {
         <EditorialSection
           eyebrow="What it is"
           title="A local support program for early growth"
-          description="MadeInVT is a locally built travel publication. Founding Partners help support early growth, with the goal of better stories, better visibility, and better tools for local businesses."
+          description="MadeInVT is a locally built maker publication. Founding Makers help support early growth, with the goal of better stories, better visibility, and better tools for local studios."
         >
           <Prose>
-            <p>We’re building MadeInVT with the same care we want to bring to every place we feature.</p>
-            <p>Founding Partners help fund the first stages of that work and stay close to the product while it grows.</p>
+            <p>We’re building MadeInVT with the same care we want to bring to every maker and studio we feature.</p>
+            <p>Founding Makers help fund the first stages of that work and stay close to the product while it grows.</p>
           </Prose>
         </EditorialSection>
 
@@ -40,8 +40,8 @@ export default function FoundingPartnersPage() {
 
         <EditorialSection
           eyebrow="Simple founding offer"
-          title="Founding Partner contribution"
-          description="$50/month or $500/year during beta. The Founding Partner rate is locked in for early supporters."
+          title="Founding Maker contribution"
+          description="$50/month or $500/year during beta. The Founding Maker rate is locked in for early supporters."
         >
           <div className="grid gap-4 md:grid-cols-2">
             <article className="rounded-3xl border border-[#e8dfc8] bg-[#fcfaf6] p-5">
@@ -60,7 +60,7 @@ export default function FoundingPartnersPage() {
         <FoundingPartnerSlots
           filled={foundingPartnerPublicSlots.filled}
           total={foundingPartnerPublicSlots.total}
-          label="Founding Partner spots filled"
+          label="Founding Maker spots filled"
           caption="A small cohort keeps the program personal and aligned with local businesses from the start."
         />
 

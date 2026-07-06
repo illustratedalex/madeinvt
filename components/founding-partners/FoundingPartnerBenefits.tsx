@@ -2,7 +2,7 @@ import { EditorialSection } from "@/components/ui";
 
 const benefits = [
   { title: "Enhanced business profile", description: "A richer partner page with better context, visuals, and local trust signals." },
-  { title: "Founding Partner badge", description: "A visible marker that shows early support without changing editorial standards." },
+  { title: "Founding Maker badge", description: "A visible marker that shows early support without changing editorial standards." },
   { title: "Featured partner section", description: "A dedicated area for early supporters inside the partner experience." },
   { title: "Events and deals", description: "A practical place to surface timely offers, events, and seasonal announcements." },
   { title: "Partner insights", description: "Early reporting on engagement, interest, and content interactions." },
@@ -15,7 +15,7 @@ export function FoundingPartnerBenefits() {
     <EditorialSection
       eyebrow="What partners receive"
       title="A practical early-support package"
-      description="Founding Partners get useful visibility and a closer connection to the product as it develops."
+      description="Founding Makers get useful visibility and a closer connection to the product as it develops."
     >
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {benefits.map((benefit) => (

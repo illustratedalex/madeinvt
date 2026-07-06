@@ -17,7 +17,7 @@ export function TimePicker({ options }: TimePickerProps) {
     <EditorialSection
       eyebrow="Step 3"
       title="Time Available"
-      description="Set your planning horizon so Concierge can pace the day."
+      description="Set your time horizon so Maker Finder can pace the discovery."
     >
       <div className="flex flex-wrap gap-2">
         {options.map((option) => (

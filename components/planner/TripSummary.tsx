@@ -9,7 +9,7 @@ type TripSummaryProps = {
 export function TripSummary({ trip, tripLink }: TripSummaryProps) {
   return (
     <section className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
-      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Trip summary</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Gift finder summary</p>
       <h2 className="mt-2 text-2xl font-semibold text-slate-900">{trip.title}</h2>
       <p className="mt-2 text-sm leading-7 text-slate-600">{trip.notes}</p>
 
@@ -32,7 +32,7 @@ export function TripSummary({ trip, tripLink }: TripSummaryProps) {
 
       {tripLink ? (
         <Link href={tripLink} className="mt-5 inline-flex rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-[#f8f2e4]">
-          Open trip detail
+          Open discovery detail
         </Link>
       ) : null}
     </section>

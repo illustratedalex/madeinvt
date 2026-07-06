@@ -40,8 +40,8 @@ export function ConciergeResults({ trip, aiConciergeEnabled }: ConciergeResultsP
 
       <EditorialSection
         eyebrow="Why these picks"
-        title="Concierge reasoning"
-        description="How your preferences shaped this itinerary."
+        title="Maker Finder reasoning"
+        description="How your preferences shaped this discovery set."
       >
         <ul className="space-y-2 text-sm leading-7 text-slate-700">
           {trip.reasoning.map((reason) => (

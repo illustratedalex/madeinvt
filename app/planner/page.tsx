@@ -11,7 +11,7 @@ import { getTrips } from "@/repositories/TripRepository";
 
 export const metadata: Metadata = {
   title: "Vermont Gift Finder",
-  description: "Build and preview Vermont itinerary plans using curated places, collections, events, and guides.",
+  description: "Build and preview Vermont gift and discovery plans using curated makers, collections, events, and stories.",
 };
 
 export default async function PlannerLandingPage() {
@@ -38,13 +38,13 @@ export default async function PlannerLandingPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Gift Finder</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Find Vermont handmade gifts.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
-            Build itinerary previews from curated Places, Collections, Events, and Guides.
+            Build gift and discovery previews from curated Makers, Collections, Events, and Stories.
           </p>
           <Link
             href="/planner/new"
             className="mt-8 inline-flex rounded-full bg-(--color-maple-gold) px-6 py-3 text-sm font-semibold text-(--color-forest-green) transition hover:opacity-90"
           >
-            Build New Itinerary
+            Build Gift Guide
           </Link>
         </div>
       </section>
@@ -57,7 +57,7 @@ export default async function PlannerLandingPage() {
         ) : null}
 
         <section className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Saved itinerary templates</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Saved gift finder templates</p>
           {trips.length ? (
             <div className="grid gap-4 lg:grid-cols-2">
               {trips.map((trip) => (
@@ -66,13 +66,13 @@ export default async function PlannerLandingPage() {
             </div>
           ) : (
             <article className="rounded-[24px] border border-dashed border-[#d7cbb3] bg-white p-5 text-sm text-slate-600">
-              No trips available yet. Start a new itinerary and generate a preview.
+              No templates available yet. Start a new gift finder and generate a preview.
             </article>
           )}
         </section>
 
         <section className="space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Experience rails for planning</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Experience rails for discovery</p>
           {plannerRails.map((rail) => (
             <RecommendationRail
               key={rail.key}

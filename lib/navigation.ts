@@ -9,9 +9,24 @@ export const publicNavigationGroups: NavigationGroup[] = [
     label: "Explore",
     href: "/places",
     items: [
+      { label: "Explore", href: "/places" },
+      { label: "Search", href: "/search" },
+    ],
+  },
+  {
+    label: "Makers",
+    href: "/places",
+    items: [
       { label: "Makers", href: "/places" },
+      { label: "Featured Makers", href: "/places" },
+    ],
+  },
+  {
+    label: "Collections",
+    href: "/collections",
+    items: [
       { label: "Collections", href: "/collections" },
-      { label: "Events", href: "/events" },
+      { label: "Gift Guides", href: "/collections" },
     ],
   },
   {
@@ -19,6 +34,7 @@ export const publicNavigationGroups: NavigationGroup[] = [
     href: "/collections",
     items: [
       { label: "Gift Guides", href: "/collections" },
+      { label: "Gift Finder", href: "/planner" },
       { label: "Maker Finder", href: "/concierge" },
     ],
   },
@@ -38,8 +54,16 @@ export const publicNavigationGroups: NavigationGroup[] = [
     items: [
       { label: "Studios", href: "/businesses" },
       { label: "Claim a Listing", href: "/businesses" },
-      { label: "Founding Partners", href: "/founding-partners" },
+      { label: "Founding Makers", href: "/founding-partners" },
       { label: "Partner Portal", href: "/partner-portal" },
+    ],
+  },
+  {
+    label: "Events",
+    href: "/events",
+    items: [
+      { label: "Events", href: "/events" },
+      { label: "Workshops", href: "/events" },
     ],
   },
   {
@@ -56,7 +80,7 @@ export const footerLinks = [
   { label: "About", href: "/about" },
   { label: "Our Coverage", href: "/our-coverage" },
   { label: "Why Trust MadeInVT?", href: "/why-trust-southernvt" },
-  { label: "Founding Partners", href: "/founding-partners" },
+  { label: "Founding Makers", href: "/founding-partners" },
   { label: "Contact", href: "/contact" },
   { label: "Updates", href: "/updates" },
   { label: "Partner Portal", href: "/partner-portal" },

@@ -35,14 +35,14 @@ export function TripSummaryCard({
           <MetaText as="p" variant="eyebrow">
             Step 6
           </MetaText>
-          <h2 className="mt-1 text-2xl font-semibold text-slate-900">Compass Concierge Plan</h2>
+          <h2 className="mt-1 text-2xl font-semibold text-slate-900">Compass Maker Finder Plan</h2>
         </div>
-        <Badge variant="forest">Generated Route</Badge>
+        <Badge variant="forest">Generated Discovery</Badge>
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <article className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-forest-green)">Featured Place</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-forest-green)">Featured Maker</p>
           <h3 className="mt-2 text-xl font-semibold text-slate-900">{featuredPlace.name}</h3>
           <Prose size="sm" className="mt-2">
             <p>{storySummary}</p>
@@ -64,7 +64,7 @@ export function TripSummaryCard({
 
       {placeDNA ? (
         <div className="mt-5 rounded-2xl border border-[#e8dfc8] bg-white p-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-forest-green)">Place DNA</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-forest-green)">Maker DNA Signals</p>
           <p className="mt-2 text-sm leading-7 text-slate-700">
             Best for {placeDNA.bestFor.slice(0, 3).join(", ")}. Recommended visit length: {placeDNA.recommendedVisitLength.replaceAll("_", " ")}.
           </p>
@@ -73,4 +73,3 @@ export function TripSummaryCard({
     </Card>
   );
 }
-

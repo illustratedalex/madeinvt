@@ -15,7 +15,7 @@ export function RecommendationTimeline({ entries }: RecommendationTimelineProps)
     <EditorialSection
       eyebrow="Suggested Timeline"
       title="Your day at a glance"
-      description="A calm, paced itinerary generated from your selections."
+      description="A calm, paced discovery timeline generated from your selections."
     >
       <ol className="space-y-3">
         {entries.map((entry) => (
@@ -31,4 +31,3 @@ export function RecommendationTimeline({ entries }: RecommendationTimelineProps)
     </EditorialSection>
   );
 }
-

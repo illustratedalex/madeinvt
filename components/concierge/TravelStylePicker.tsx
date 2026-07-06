@@ -16,8 +16,8 @@ export function TravelStylePicker({ options }: TravelStylePickerProps) {
   return (
     <EditorialSection
       eyebrow="Step 4"
-      title="Travel Style"
-      description="Tell Concierge who the day is for."
+      title="Discovery Style"
+      description="Tell Maker Finder who this discovery is for."
     >
       <div className="flex flex-wrap gap-2">
         {options.map((option) => (

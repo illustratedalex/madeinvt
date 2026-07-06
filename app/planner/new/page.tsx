@@ -11,8 +11,8 @@ import { CompassEngine } from "@/lib/compass/CompassEngine";
 import { isFeatureEnabled } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
-  title: "New Trip Itinerary",
-  description: "Generate a day-by-day Vermont itinerary preview from curated places, collections, events, and guides.",
+  title: "New Gift Finder",
+  description: "Generate a day-by-day Vermont gift and discovery preview from curated makers, collections, events, and stories.",
 };
 
 export default async function NewTripPlanPage() {
@@ -43,9 +43,9 @@ export default async function NewTripPlanPage() {
 
       <section className="mx-auto max-w-7xl space-y-5 px-6 pb-10 sm:px-8 lg:px-10">
         <div className="rounded-3xl border border-[#e8dfc8] bg-white/70 p-5 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Continue planning</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Continue discovery</p>
           <h2 className="mt-2 text-2xl font-semibold text-slate-900">Experience Layer</h2>
-          <p className="mt-2 text-sm leading-7 text-slate-600">Optional rails to refine your itinerary without interrupting the wizard flow.</p>
+          <p className="mt-2 text-sm leading-7 text-slate-600">Optional rails to refine your gift and discovery set without interrupting the wizard flow.</p>
         </div>
 
         <RecommendationRail

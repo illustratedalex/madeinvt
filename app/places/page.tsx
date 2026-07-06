@@ -56,9 +56,9 @@ export default async function PlacesPage({ searchParams }: PlacesPageProps) {
       flag="publicPlaces"
       fallback={
         <ComingSoon
-          title="Places Directory Is On The Way"
-          description="We are shaping a richer public places experience with editorial highlights, seasonal context, and cleaner discovery tools."
-          eyebrow="Public Places"
+          title="Makers Directory Is On The Way"
+          description="We are shaping a richer public maker experience with editorial highlights, seasonal context, and cleaner discovery tools."
+          eyebrow="Public Makers"
         />
       }
     >
@@ -81,7 +81,7 @@ export default async function PlacesPage({ searchParams }: PlacesPageProps) {
         {featuredPlaces.length ? (
           <section className="space-y-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--color-pine)">Featured places</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--color-pine)">Featured Makers</p>
               <h2 className="mt-2 text-3xl font-semibold text-slate-900">Editor favorites for this season</h2>
             </div>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -94,7 +94,7 @@ export default async function PlacesPage({ searchParams }: PlacesPageProps) {
 
         <section className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-2">
-            <h2 className="text-3xl font-semibold text-slate-900">Browse all places</h2>
+            <h2 className="text-3xl font-semibold text-slate-900">Browse all makers</h2>
             <p className="text-sm text-slate-600">{filteredPlaces.length} result{filteredPlaces.length === 1 ? "" : "s"}</p>
           </div>
 
@@ -106,7 +106,7 @@ export default async function PlacesPage({ searchParams }: PlacesPageProps) {
             </div>
           ) : (
             <div className="rounded-[24px] border border-[#e8dfc8] bg-white p-6 text-sm leading-7 text-slate-700 shadow-sm">
-              No places match those filters yet. Try a different category or place type.
+              No makers match those filters yet. Try a different category or maker type.
             </div>
           )}
         </section>

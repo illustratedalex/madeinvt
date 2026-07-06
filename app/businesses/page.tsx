@@ -48,7 +48,7 @@ export default async function BusinessesPage({ searchParams }: BusinessesPagePro
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
             This is the public directory foundation. Listings can start basic, then get claimed, verified, and improved over time.
           </p>
-          <p className="mt-3 text-sm font-medium text-slate-200/95">Find your business, then choose Claim this listing.</p>
+          <p className="mt-3 text-sm font-medium text-slate-200/95">Find your studio, then choose Claim this listing.</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Badge variant="featured">Not paid placement</Badge>
             <Badge variant="subtle" className="border-white/20 bg-white/10 text-white">Beta directory · details may be incomplete</Badge>
@@ -99,7 +99,7 @@ export default async function BusinessesPage({ searchParams }: BusinessesPagePro
 
             <label className="flex items-center gap-3 rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3 text-sm text-slate-700">
               <input type="checkbox" name="foundingPartner" value="true" defaultChecked={foundingPartnerOnly} className="h-4 w-4" />
-              Founding Partner
+              Founding Maker
             </label>
 
             <button
@@ -115,7 +115,7 @@ export default async function BusinessesPage({ searchParams }: BusinessesPagePro
           <div className="flex flex-wrap items-end justify-between gap-2">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-(--color-pine)">Public Listings</p>
-              <h2 className="mt-2 text-3xl font-semibold text-slate-900">Browse all businesses</h2>
+              <h2 className="mt-2 text-3xl font-semibold text-slate-900">Browse all studios</h2>
             </div>
             <p className="text-sm text-slate-600">{filteredListings.length} result{filteredListings.length === 1 ? "" : "s"}</p>
           </div>
@@ -128,7 +128,7 @@ export default async function BusinessesPage({ searchParams }: BusinessesPagePro
             </div>
           ) : (
             <div className="rounded-[24px] border border-[#e8dfc8] bg-white p-6 text-sm leading-7 text-slate-700 shadow-sm">
-              No business listings match those filters yet.
+              No studio listings match those filters yet.
             </div>
           )}
         </section>

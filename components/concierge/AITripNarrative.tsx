@@ -48,7 +48,7 @@ export function AITripNarrative({ preferences, compassTrip, aiConciergeEnabled }
   if (!aiConciergeEnabled) {
     return (
       <section className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3b2f]">AI concierge</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3b2f]">AI maker finder</p>
         <p className="mt-2 text-sm text-slate-600">AI narration is coming soon. Current results are powered by Compass.</p>
       </section>
     );
@@ -58,8 +58,8 @@ export function AITripNarrative({ preferences, compassTrip, aiConciergeEnabled }
     <section className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3b2f]">AI concierge narration</p>
-          <p className="mt-1 text-sm text-slate-600">Compass selects the itinerary. AI only refines the explanation.</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3b2f]">AI maker finder narration</p>
+          <p className="mt-1 text-sm text-slate-600">Compass selects the discovery set. AI only refines the explanation.</p>
         </div>
         <button
           type="button"
@@ -87,7 +87,7 @@ export function AITripNarrative({ preferences, compassTrip, aiConciergeEnabled }
           </div>
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3b2f]">Why this trip</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3b2f]">Why this discovery set</p>
             <p className="mt-2 text-sm leading-7 text-slate-700">{narrative.whyThisTrip}</p>
           </div>
 

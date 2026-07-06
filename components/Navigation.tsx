@@ -12,7 +12,7 @@ export function Navigation() {
             Explore
           </a>
           <Link className="transition hover:text-white" href="/planner">
-            Trip Planner
+            Gift Finder
           </Link>
           <Link className="transition hover:text-white" href="/passport">
             Passport
@@ -21,7 +21,7 @@ export function Navigation() {
             Map
           </Link>
           <Link className="transition hover:text-white" href="/guides">
-            Guides
+            Stories
           </Link>
           <Link className="transition hover:text-white" href="/events">
             Events
@@ -30,7 +30,7 @@ export function Navigation() {
             Offers
           </a>
           <Link className="rounded-full border border-emerald-500/40 px-4 py-2 text-emerald-300 transition hover:bg-emerald-500/10" href="/planner/new">
-            Plan a trip
+            Find a gift
           </Link>
         </nav>
       </div>

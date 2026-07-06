@@ -20,12 +20,12 @@ const profiles: Record<ExperienceProfile["id"], ExperienceProfile> = {
       { icon: "🛏️", label: "Comfort", score: 4.8 },
       { icon: "🧼", label: "Cleanliness", score: 4.7 },
       { icon: "🤝", label: "Hospitality", score: 4.9 },
-      { icon: "📍", label: "Location", score: 4.8 },
+      { icon: "📍", label: "Studio Setting", score: 4.8 },
       { icon: "💰", label: "Value", score: 4.6 },
     ],
     notes: [
       "The breakfast was fantastic.",
-      "Great base for Hamilton Falls.",
+      "Great base for nearby makers.",
       "Quiet after sunset.",
       "Would absolutely return.",
     ],
@@ -58,11 +58,11 @@ const profiles: Record<ExperienceProfile["id"], ExperienceProfile> = {
     ],
     notes: [
       "Food arrived quickly and tasted fresh.",
-      "Staff helped with local recommendations.",
-      "Easy walk from nearby attractions.",
-      "Would return on a future weekend trip.",
+      "Staff helped with maker recommendations.",
+      "Easy walk from nearby studios.",
+      "Would return on a future weekend visit.",
     ],
-    businessResponse: "Thanks for the thoughtful experience note. Verified traveler feedback helps keep MadeInVT listings practical and useful.",
+    businessResponse: "Thanks for the thoughtful experience note. Verified customer feedback helps keep MadeInVT listings practical and useful.",
   },
 };
 
@@ -115,7 +115,7 @@ export function TravelerExperiences({ listingType, overallRating = 5, verifiedVi
 
   return (
     <section className="rounded-[28px] border border-[#e8dfc8] bg-[#fcfaf6] p-4 shadow-sm sm:p-6">
-      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Traveler Experiences</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Customer Experiences</p>
       <h2 className="mt-2 text-2xl font-semibold text-slate-900">Experience highlights (example preview)</h2>
       <p className="mt-2 text-sm leading-7 text-slate-700">
         These are sample experience signals used during beta preview. Live guest reviews and ratings are not yet enabled.
@@ -129,7 +129,7 @@ export function TravelerExperiences({ listingType, overallRating = 5, verifiedVi
         <div className="hidden h-10 w-px bg-[#ece3cf] sm:block" />
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Based on</p>
-          <p className="mt-1 text-lg font-semibold text-slate-900">{verifiedVisitors} Verified Visitors</p>
+          <p className="mt-1 text-lg font-semibold text-slate-900">{verifiedVisitors} Verified Customers</p>
         </div>
       </div>
 

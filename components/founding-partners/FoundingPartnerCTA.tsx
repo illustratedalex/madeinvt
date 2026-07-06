@@ -23,7 +23,7 @@ export function FoundingPartnerCTA({ primaryHref = "/contact?reason=Founding%20P
           data-ga-partner-surface="founding_partners_page"
           data-ga-href={primaryHref}
         >
-          <Button variant="secondary" size="lg">Become a Founding Partner</Button>
+          <Button variant="secondary" size="lg">Become a Founding Maker</Button>
         </Link>
         <a
           href={secondaryHref}

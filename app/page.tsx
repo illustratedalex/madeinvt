@@ -194,7 +194,7 @@ export default async function Home() {
               className="max-w-2xl space-y-3"
             >
               <label htmlFor="home-search" className="sr-only">
-                Search places, guides, and collections
+                Search makers, stories, and collections
               </label>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Input
@@ -268,7 +268,7 @@ export default async function Home() {
 
       <section className="mx-auto max-w-7xl space-y-9 px-6 py-10 sm:px-8 lg:px-10">
         <EditorialSection
-          eyebrow="Current Issue"
+          eyebrow="New Maker Stories"
           title={weeklyIssue.title}
           description={weeklyIssue.theme}
         >
@@ -298,7 +298,7 @@ export default async function Home() {
                   href="/guides"
                   className="inline-flex h-12 items-center justify-center rounded-full border border-[#d7cbb3] bg-white px-5 text-sm font-semibold text-slate-800 motion-safe:transition motion-safe:hover:bg-[#fcfaf6]"
                 >
-                  Browse guides
+                  Browse stories
                 </Link>
               </div>
             </Card>
@@ -355,7 +355,7 @@ export default async function Home() {
                   href="/guides"
                   className="inline-flex h-11 items-center justify-center rounded-full border border-[#d7cbb3] bg-white px-4 text-sm font-semibold text-slate-800 motion-safe:transition motion-safe:hover:bg-[#fcfaf6]"
                 >
-                  Read guides
+                  Read stories
                 </Link>
               </div>
             </Card>
@@ -365,13 +365,13 @@ export default async function Home() {
         {editorialIntelligenceEnabled ? (
           <EditorialSection
             eyebrow="Editor Only"
-            title="MadeInVT 100 Progress"
-            description="Master publication coverage progress across the MadeInVT 100 catalog."
+            title="Vermont 100 Makers Progress"
+            description="Master publication coverage progress across the Vermont 100 Makers catalog."
           >
             <Card variant="compact" className="p-5">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">MadeInVT 100</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">Vermont 100 Makers</p>
                   <h3 className="mt-2 text-3xl font-semibold text-slate-900">
                     {southernVT100Published} / {southernVT100Destinations.length} Published
                   </h3>
@@ -391,7 +391,7 @@ export default async function Home() {
                   href="/places"
                   className="inline-flex h-11 items-center justify-center rounded-full bg-(--color-forest-green) px-4 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
                 >
-                  Explore places
+                  Explore makers
                 </Link>
               </div>
             </Card>
@@ -421,14 +421,14 @@ export default async function Home() {
         </EditorialSection>
 
         {hamiltonFalls ? (
-          <EditorialSection           eyebrow="Featured Destination" title="Hamilton Falls" description="A flagship Vermont destination in a full magazine-style feature.">
+          <EditorialSection eyebrow="Featured Makers" title="Hamilton Falls" description="A flagship Vermont maker story in a full magazine-style feature.">
             <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
               <div className="overflow-hidden rounded-3xl">
                 <div className="h-64 w-full bg-[linear-gradient(135deg,rgba(20,49,38,0.82),rgba(216,177,93,0.34)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center sm:h-80" />
               </div>
               <Card variant="compact" className="p-5">
                 <MetaText as="p" variant="eyebrow">
-                  Destination Story
+                  Maker Story
                 </MetaText>
                 <h3 className="mt-2 text-2xl font-semibold text-slate-900">Waterfall drama and deep-forest atmosphere</h3>
                 <Prose className="mt-3">
@@ -447,13 +447,13 @@ export default async function Home() {
         ) : null}
 
         <EditorialSection
-          eyebrow="Experience Rails"
+          eyebrow="Customer Experiences"
           title="Curated rails for discovering makers"
           description="Visual rails replace utility lists with richer story-led browsing."
         >
           <div className="space-y-6">
             <div>
-              <h3 className="text-xl font-semibold text-slate-900">Featured Collections</h3>
+              <h3 className="text-xl font-semibold text-slate-900">Gift Guides</h3>
               <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {featuredCollections.map((collection) => (
                   <Link key={collection.id} href={`/collections/${collection.slug}`}>
@@ -470,11 +470,11 @@ export default async function Home() {
             </div>
 
             {[
-              { title: "Hidden Gems", items: hiddenGems },
-              { title: "Today's Adventure", items: todaysAdventureRail },
+              { title: "Featured Makers", items: hiddenGems },
+              { title: "Customer Experiences", items: todaysAdventureRail },
               { title: "Most Photographed", items: mostPhotographed },
               { title: "Dog Friendly", items: dogFriendly },
-              { title: "Weekend Escapes", items: weekendEscapes },
+              { title: "Made This Week", items: weekendEscapes },
             ].map((rail) => (
               <div key={rail.title}>
                 <h3 className="text-xl font-semibold text-slate-900">{rail.title}</h3>
@@ -512,7 +512,7 @@ export default async function Home() {
                 </MetaText>
                 <h3 className="mt-2 text-3xl font-semibold">{seasonalCollection ? seasonalCollection.title : seasonalTitle}</h3>
                 <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-100">
-                  {seasonalCollection ? seasonalCollection.description : "Seasonal routes and stories updated for right-now travel planning."}
+                  {seasonalCollection ? seasonalCollection.description : "Seasonal collections and stories updated for right-now maker discovery."}
                 </p>
                 <Link
                   href={seasonalCollection ? `/collections/${seasonalCollection.slug}` : "/collections"}
@@ -527,7 +527,7 @@ export default async function Home() {
 
         <EditorialSection
           eyebrow="Editor's Picks"
-          title="Five places our editors keep recommending"
+          title="Made This Week"
           description="Curated for first-time visitors and repeat explorers."
         >
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
@@ -548,15 +548,15 @@ export default async function Home() {
         </EditorialSection>
 
         <EditorialSection
-          eyebrow="Local Directory"
-          title="Vermont Studios to Know"
+          eyebrow="Vermont Studios"
+          title="Vermont Studios"
           description={`A foundational directory of Vermont makers and studios. ${businessCount} listings currently published.`}
         >
           <div className="mb-4 flex flex-wrap gap-3">
             <Badge variant="subtle">Basic</Badge>
             <Badge variant="forest">Claimed</Badge>
             <Badge variant="amber">Verified</Badge>
-            <Badge variant="featured">Founding Partner</Badge>
+            <Badge variant="featured">Founding Maker</Badge>
             <Badge variant="subtle">{businessCount} total studios</Badge>
             <Badge variant="subtle">{unclaimedBusinessCount} unclaimed</Badge>
           </div>
@@ -611,9 +611,9 @@ export default async function Home() {
 
         {premiumProfilesEnabled ? (
           <EditorialSection
-            eyebrow="Premium Partners"
-            title="Featured local businesses"
-            description="Verified partners highlighted for planning and booking."
+            eyebrow="Featured Makers"
+            title="Featured Makers"
+            description="Verified makers and studios highlighted for discovery."
           >
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               {premiumPartners.length ? (
@@ -632,7 +632,7 @@ export default async function Home() {
                 ))
               ) : (
                 <Card variant="sidebar" className="p-4 sm:col-span-2 xl:col-span-4">
-                  <p className="text-sm text-slate-600">Featured partners are being updated.</p>
+                  <p className="text-sm text-slate-600">Featured makers are being updated.</p>
                 </Card>
               )}
             </div>

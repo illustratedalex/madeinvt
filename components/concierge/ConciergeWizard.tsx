@@ -78,7 +78,7 @@ export function ConciergeWizard({
       <EditorialSection
         eyebrow="Step 6"
         title="Generate"
-        description="Compass creates a Featured Place, Collection, Guide, Food Stop, optional Event and Deal, plus a suggested timeline."
+        description="Compass creates a Featured Maker, Collection, Story, Studio Stop, optional Event and Deal, plus a suggested timeline."
       >
         <div className="flex flex-wrap items-center gap-3">
           <Link
@@ -86,7 +86,7 @@ export function ConciergeWizard({
             scroll={false}
             data-ga-event="concierge_start"
             data-ga-source="concierge_wizard"
-            data-ga-label="Generate Concierge Plan"
+            data-ga-label="Generate Maker Finder Plan"
             data-ga-mood={selectedMood}
             data-ga-time={selectedTime}
             data-ga-style={selectedStyle}
@@ -99,10 +99,10 @@ export function ConciergeWizard({
             }`}
             aria-disabled={!allInputsSelected}
           >
-            Generate Concierge Plan
+            Generate Maker Finder Plan
           </Link>
           {!allInputsSelected ? (
-            <p className="text-sm text-slate-600">Select mood, time, travel style, and radius first.</p>
+            <p className="text-sm text-slate-600">Select mood, time, discovery style, and radius first.</p>
           ) : null}
         </div>
       </EditorialSection>

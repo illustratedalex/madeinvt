@@ -17,7 +17,7 @@ export function RadiusPicker({ options }: RadiusPickerProps) {
     <EditorialSection
       eyebrow="Step 5"
       title="Driving Radius"
-      description="Set how far you want to travel between stops."
+      description="Set how far you want to go between maker stops."
     >
       <div className="flex flex-wrap gap-2">
         {options.map((option) => (

@@ -28,8 +28,8 @@ export async function generateMetadata({ params }: PlannerTripDetailPageProps): 
 
   if (!trip || trip.status === "archived") {
     return {
-      title: "Trip Not Found | MadeInVT",
-      description: "This itinerary is not currently available.",
+      title: "Gift Finder Not Found | MadeInVT",
+      description: "This discovery plan is not currently available.",
       robots: { index: false, follow: false },
     };
   }
@@ -70,7 +70,7 @@ export default async function PlannerTripDetailPage({ params }: PlannerTripDetai
 
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-linear-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Trip itinerary</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Gift Finder</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">{trip.title}</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">{trip.notes}</p>
         </div>
@@ -81,7 +81,7 @@ export default async function PlannerTripDetailPage({ params }: PlannerTripDetai
           <TripSummary trip={trip} />
 
           <section className="space-y-4">
-            <h2 className="text-2xl font-semibold text-slate-900">Day-by-day itinerary</h2>
+            <h2 className="text-2xl font-semibold text-slate-900">Day-by-day discovery plan</h2>
             {trip.days.map((day) => (
               <TripDayCard
                 key={day.id}
@@ -96,11 +96,11 @@ export default async function PlannerTripDetailPage({ params }: PlannerTripDetai
 
           <section className="rounded-[28px] border border-dashed border-[#d7cbb3] bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-slate-900">Map preview</h2>
-            <p className="mt-2 text-sm leading-7 text-slate-600">A route-aware map canvas will appear here in a future iteration. For now, drive-time hints are included in each itinerary item.</p>
+            <p className="mt-2 text-sm leading-7 text-slate-600">A route-aware map canvas will appear here in a future iteration. For now, drive-time hints are included in each discovery item.</p>
           </section>
 
           <section className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-slate-900">Related places</h2>
+            <h2 className="text-xl font-semibold text-slate-900">Related makers</h2>
             <div className="mt-4 grid gap-3 md:grid-cols-2">
               {relatedPlaces.length ? (
                 relatedPlaces.map((place) => (
@@ -108,12 +108,12 @@ export default async function PlannerTripDetailPage({ params }: PlannerTripDetai
                     <h3 className="text-lg font-semibold text-slate-900">{place.name}</h3>
                     <p className="mt-1 text-sm text-slate-600">{place.city}, {place.state}</p>
                     <Link href={`/places/${place.slug}`} className="mt-3 inline-flex text-sm font-semibold text-[#1f3b2f]">
-                      View place
+                      View maker
                     </Link>
                   </article>
                 ))
               ) : (
-                <p className="text-sm text-slate-600">No related places are attached to this trip yet.</p>
+                <p className="text-sm text-slate-600">No related makers are attached to this discovery plan yet.</p>
               )}
             </div>
           </section>
@@ -122,7 +122,7 @@ export default async function PlannerTripDetailPage({ params }: PlannerTripDetai
         <aside className="space-y-4 lg:sticky lg:top-24 lg:h-fit">
           <section className="rounded-3xl border border-dashed border-[#d7cbb3] bg-white p-5 text-sm text-slate-600 shadow-sm">
             <h2 className="text-base font-semibold text-slate-900">Save trip (coming soon)</h2>
-            <p className="mt-2">Trip persistence controls will connect to authenticated profiles in a future release.</p>
+            <p className="mt-2">Saved discovery controls will connect to authenticated profiles in a future release.</p>
           </section>
 
           <section className="rounded-3xl border border-dashed border-[#d7cbb3] bg-white p-5 text-sm text-slate-600 shadow-sm">
@@ -132,7 +132,7 @@ export default async function PlannerTripDetailPage({ params }: PlannerTripDetai
 
           <section className="rounded-3xl border border-dashed border-[#d7cbb3] bg-white p-5 text-sm text-slate-600 shadow-sm">
             <h2 className="text-base font-semibold text-slate-900">Share link (coming soon)</h2>
-            <p className="mt-2">Sharing controls will support private and public itinerary links later.</p>
+            <p className="mt-2">Sharing controls will support private and public discovery links later.</p>
           </section>
         </aside>
       </section>

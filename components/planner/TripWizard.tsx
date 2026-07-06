@@ -68,9 +68,9 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
   return (
     <div className="space-y-6">
       <header className="rounded-4xl border border-[#e8dfc8] bg-white/80 p-6 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#1f3b2f]">Trip Planner</p>
-        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Build your Vermont itinerary</h1>
-        <p className="mt-2 text-sm leading-7 text-slate-600">Step {step + 1} of 7. Previews are generated from mock Places, Collections, Events, and Guides.</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#1f3b2f]">Gift Finder</p>
+        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Build your Vermont gift and discovery plan</h1>
+        <p className="mt-2 text-sm leading-7 text-slate-600">Step {step + 1} of 7. Previews are generated from mock Makers, Collections, Events, and Stories.</p>
         {!plannerEnabled ? (
           <p className="mt-3 rounded-2xl border border-[#d7cbb3] bg-[#fff7e4] px-4 py-3 text-sm font-medium text-[#6b5a30]">
             AI-powered planning coming soon. This preview uses curated MadeInVT data.
@@ -79,9 +79,9 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
       </header>
 
       <RecommendationRail
-        title="Compass Planner Picks"
+        title="Compass Gift Finder Picks"
         recommendations={compassRecommendations}
-        emptyMessage="Compass planner picks will appear here."
+        emptyMessage="Compass gift finder picks will appear here."
         mapItem={(recommendation) => ({
           id: recommendation.item.id,
           title: recommendation.item.name,
@@ -94,7 +94,7 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
       />
 
       {step === 0 ? (
-        <TripStep title="Home base town" description="Set your base town so the itinerary keeps drive-time reasonable.">
+        <TripStep title="Home base town" description="Set your base town so the discovery set keeps drive-time reasonable.">
           <input
             value={homeBase}
             onChange={(event) => setHomeBase(event.target.value)}
@@ -105,7 +105,7 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
       ) : null}
 
       {step === 1 ? (
-        <TripStep title="How many days?" description="Choose trip length. We’ll spread stops across each day.">
+        <TripStep title="How many days?" description="Choose visit length. We’ll spread stops across each day.">
           <input
             type="number"
             min={1}
@@ -118,7 +118,7 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
       ) : null}
 
       {step === 2 ? (
-        <TripStep title="Who is traveling?" description="Solo, couples, and groups can pace days differently.">
+        <TripStep title="Who is joining?" description="Solo, couples, and groups can pace discovery days differently.">
           <input
             type="number"
             min={1}
@@ -143,7 +143,7 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
       ) : null}
 
       {step === 5 ? (
-        <TripStep title="Trip pace" description="Choose how full each day should feel.">
+        <TripStep title="Discovery pace" description="Choose how full each day should feel.">
           <TripPacePicker value={pace} onChange={setPace} />
         </TripStep>
       ) : null}
@@ -181,7 +181,7 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
           disabled={step === 6}
           className="rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-[#f8f2e4] disabled:opacity-50"
         >
-          {step === 5 ? "Generate Itinerary" : "Next"}
+          {step === 5 ? "Generate Gift Finder" : "Next"}
         </button>
       </div>
     </div>
