@@ -4,12 +4,10 @@ import Navbar from "@/components/Navbar";
 import { BusinessListingCard } from "@/components/public/BusinessListingCard";
 import { Badge, Button, Card, EditorialSection, Input, MetaText, Prose } from "@/components/ui";
 import { getEditorialIntelligenceSummary } from "@/lib/editorial/EditorialIntelligence";
-import { ExperienceService } from "@/lib/experience/ExperienceService";
 import { isFeatureEnabled } from "@/lib/featureFlags";
 import { getBusinessListingsWithLiveClaimStatus } from "@/lib/businessListings.server";
 import { getCollections } from "@/lib/repositories/collectionRepository";
 import { createPageMetadata } from "@/lib/seo";
-import { getPlaces } from "@/repositories/PlaceRepository";
 import { weeklyIssue } from "@/data/weeklyIssue";
 import { vermont100Makers } from "@/data/vermont100Makers";
 
@@ -20,22 +18,28 @@ export const metadata = createPageMetadata({
 });
 
 export default async function Home() {
-  const [feed, editorialIntelligenceEnabled, places, collections] = await Promise.all([
-    ExperienceService.getHomeFeed(6),
+  const [editorialIntelligenceEnabled, collections] = await Promise.all([
     isFeatureEnabled("editorialIntelligence"),
-    getPlaces(),
     getCollections(),
   ]);
 
-  const publishedPlaces = places.filter((place) => place.status === "published");
   const publishedCollections = collections.filter((collection) => collection.status === "published");
 
   const publishedMakerProfiles = vermont100Makers.filter((maker) => maker.editorialStatus === "Published");
   const featuredMakerProfiles = publishedMakerProfiles.slice(0, 4);
   const makerStories = publishedMakerProfiles.slice(0, 3);
   const workshopMakers = vermont100Makers.filter((maker) => maker.workshop || maker.studioVisits).slice(0, 3);
-
-  const todaysAdventure = feed.dailyAdventure.place ?? null;
+  const featuredMaker =
+    publishedMakerProfiles.find((maker) =>
+      [
+        "Bennington Potters",
+        "Simon Pearce",
+        "Danforth Pewter",
+        "Vermont Teddy Bear Company",
+        "ShackletonThomas",
+        "Lake Champlain Chocolates",
+      ].includes(maker.makerName),
+    ) ?? publishedMakerProfiles[0] ?? null;
 
   const featuredCollections = publishedCollections.filter((collection) => collection.featured).slice(0, 3);
   const businessListings = await getBusinessListingsWithLiveClaimStatus();
@@ -45,7 +49,8 @@ export default async function Home() {
     .map((status) => businessListings.find((listing) => listing.status === status))
     .filter((listing): listing is NonNullable<(typeof businessListings)[number]> => Boolean(listing));
 
-  const isFall = feed.season.toLowerCase().includes("fall");
+  const currentMonth = new Date().getMonth();
+  const isFall = currentMonth >= 8 && currentMonth <= 10;
   const seasonalCollection =
     publishedCollections.find((collection) => collection.season === (isFall ? "Fall" : "Summer")) ??
     featuredCollections[0] ??
@@ -186,24 +191,20 @@ export default async function Home() {
               className="w-full max-w-xl border border-[#d9ceb7] bg-white/97 p-6 shadow-xl backdrop-blur-sm sm:p-7"
             >
               <MetaText as="p" variant="eyebrow" className="text-(--color-forest-green)">
-                Featured Maker
+                Meet This Week&apos;s Maker
               </MetaText>
               <h2 className="mt-2 text-2xl font-semibold text-slate-900">
-                {todaysAdventure ? `Maker Feature: ${todaysAdventure.name}` : "Craft stories from Vermont studios"}
+                {featuredMaker ? featuredMaker.makerName : "Vermont Makers"}
               </h2>
               <p className="mt-3 max-w-[34ch] text-sm leading-7 text-slate-700 sm:text-base">
-                {todaysAdventure
-                  ? todaysAdventure.description
-                  : "Start with a featured maker profile, then continue through workshops, collections, and editorial stories."}
+                Explore the story, studio, craft, and collections behind this Vermont maker.
               </p>
-              {todaysAdventure ? (
-                <Link
-                  href={`/places/${todaysAdventure.slug}`}
-                  className="mt-4 inline-flex h-11 items-center rounded-full bg-(--color-maple-gold) px-4 text-sm font-semibold text-(--color-forest-green) motion-safe:transition motion-safe:hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-maple-gold) focus-visible:ring-offset-2"
-                >
-                  View maker profile
-                </Link>
-              ) : null}
+              <Link
+                href={featuredMaker ? `/makers/${featuredMaker.slug}` : "/makers"}
+                className="mt-4 inline-flex h-11 items-center rounded-full bg-(--color-maple-gold) px-4 text-sm font-semibold text-(--color-forest-green) motion-safe:transition motion-safe:hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-maple-gold) focus-visible:ring-offset-2"
+              >
+                View maker profile
+              </Link>
             </Card>
           </div>
         </div>
