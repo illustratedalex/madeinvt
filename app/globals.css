@@ -2,15 +2,15 @@
 @import "mapbox-gl/dist/mapbox-gl.css";
 
 :root {
-  --color-forest-green: #1f3b2f;
-  --color-pine: #3e5b4a;
-  --color-cream: #f8f2e4;
-  --color-warm-linen: #f2e8d6;
-  --color-walnut: #6b4226;
-  --color-copper: #b5673a;
-  --color-charcoal: #2d2d2f;
-  --color-slate: #2e3238;
-  --color-maple-gold: #c8773d;
+  --color-forest-green: #3a2a20;
+  --color-pine: #5d4a3c;
+  --color-cream: #f5efe4;
+  --color-warm-linen: #efe4d2;
+  --color-walnut: #5b3a27;
+  --color-copper: #b46a3f;
+  --color-charcoal: #2b2927;
+  --color-slate: #3a3531;
+  --color-maple-gold: #c8834f;
   --color-autumn-red: #8e3b2f;
   --background: var(--color-cream);
   --foreground: var(--color-charcoal);
@@ -29,9 +29,11 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(180deg, var(--color-warm-linen) 0%, var(--background) 28%, var(--background) 100%);
   color: var(--foreground);
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
 }
@@ -43,6 +45,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-playfair), Georgia, serif;
+  letter-spacing: 0.01em;
 }
 
 ::selection {

@@ -30,13 +30,12 @@ export default async function Home() {
   const publishedPlaces = places.filter((place) => place.status === "published");
   const publishedCollections = collections.filter((collection) => collection.status === "published");
 
-  const featuredMakerProfiles = vermont100Makers.filter((maker) => maker.editorialStatus === "Published").slice(0, 4);
+  const publishedMakerProfiles = vermont100Makers.filter((maker) => maker.editorialStatus === "Published");
+  const featuredMakerProfiles = publishedMakerProfiles.slice(0, 4);
+  const makerStories = publishedMakerProfiles.slice(0, 3);
+  const workshopMakers = vermont100Makers.filter((maker) => maker.workshop || maker.studioVisits).slice(0, 3);
 
-  const featuredPlace = feed.dailyAdventure.place ?? null;
   const todaysAdventure = feed.dailyAdventure.place ?? null;
-  const placesBySlug = new Map(publishedPlaces.map((place) => [place.slug, place]));
-
-  const hamiltonFalls = placesBySlug.get("hamilton-falls") ?? featuredPlace ?? publishedPlaces[0] ?? null;
 
   const featuredCollections = publishedCollections.filter((collection) => collection.featured).slice(0, 3);
   const businessListings = await getBusinessListingsWithLiveClaimStatus();
@@ -45,44 +44,6 @@ export default async function Home() {
   const homeBusinessListings = ["founding_partner", "verified", "claimed", "basic"]
     .map((status) => businessListings.find((listing) => listing.status === status))
     .filter((listing): listing is NonNullable<(typeof businessListings)[number]> => Boolean(listing));
-
-  const hiddenGems = publishedPlaces
-    .filter(
-      (place) =>
-        place.tags.some((tag) => tag.toLowerCase().includes("hidden")) ||
-        place.categories.some((category) => category.toLowerCase().includes("hidden")),
-    )
-    .slice(0, 3);
-
-  const weekendEscapes = publishedPlaces
-    .filter((place) => ["Hotel", "Scenic Overlook", "Trail", "Waterfall"].includes(place.placeType))
-    .slice(0, 3);
-  const workshopVisits = publishedPlaces
-    .filter((place) => {
-      const type = place.placeType.toLowerCase();
-      return type.includes("studio") || type.includes("shop") || type.includes("market") || type.includes("maker");
-    })
-    .slice(0, 3);
-  const todaysAdventureRail = [
-    todaysAdventure,
-    ...publishedPlaces.filter((place) => feed.dailyAdventure.place?.relatedPlaces.includes(place.id)),
-  ].filter((place, index, array): place is NonNullable<typeof todaysAdventure> => {
-    if (!place) {
-      return false;
-    }
-    return array.findIndex((candidate) => candidate?.id === place.id) === index;
-  });
-  const customerFavorites = todaysAdventureRail.slice(0, 3);
-
-  const editorsPicks = [
-    "hamilton-falls",
-    "mount-equinox-skyline-drive",
-    "grafton-inn",
-    "brattleboro-farmers-market",
-    "vermont-country-store",
-  ]
-    .map((slug) => placesBySlug.get(slug))
-    .filter((place): place is NonNullable<(typeof publishedPlaces)[number]> => Boolean(place));
 
   const isFall = feed.season.toLowerCase().includes("fall");
   const seasonalCollection =
@@ -96,46 +57,46 @@ export default async function Home() {
   const intelligenceSummary = getEditorialIntelligenceSummary();
   const vermont100Published = vermont100Makers.filter((maker) => maker.editorialStatus === "Published").length;
 
-  const magazineGrid = [
+  const behindBenchGrid = [
     {
-      key: "magazine-hamilton",
-      title: "Hamilton Falls Photo Journal",
-      subtitle: "Misty mornings, trail textures, and one of the region's most cinematic cascades.",
-      href: "/places/hamilton-falls",
+      key: "bench-hands",
+      title: "Hands at the Bench",
+      subtitle: "A close look at tools, grain, and hand-finished details inside Vermont workshops.",
+      href: featuredMakerProfiles[0] ? `/makers/${featuredMakerProfiles[0].slug}` : "/makers",
       imageClass:
-        "bg-[linear-gradient(145deg,rgba(18,44,34,0.84),rgba(214,177,93,0.32)),url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=80')]",
+        "bg-[linear-gradient(145deg,rgba(34,24,18,0.82),rgba(181,103,58,0.28)),url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1800&q=80')]",
       layoutClass: "lg:col-span-2 lg:row-span-2",
-      badge: "Feature Story",
+      badge: "Studio Story",
     },
     {
-      key: "magazine-equinox",
-      title: "Skyline Drive at Golden Hour",
-      subtitle: "A summit viewpoint where the entire valley opens in layers.",
-      href: "/places/mount-equinox-skyline-drive",
+      key: "bench-clay",
+      title: "Clay, Fire, and Form",
+      subtitle: "Inside pottery studios where utility and heritage meet on the wheel.",
+      href: featuredMakerProfiles[1] ? `/makers/${featuredMakerProfiles[1].slug}` : "/makers",
       imageClass:
-        "bg-[linear-gradient(145deg,rgba(20,49,39,0.83),rgba(198,161,86,0.34)),url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80')]",
+        "bg-[linear-gradient(145deg,rgba(37,28,22,0.84),rgba(181,103,58,0.3)),url('https://images.unsplash.com/photo-1459908676235-d5f02a50184b?auto=format&fit=crop&w=1400&q=80')]",
       layoutClass: "",
-      badge: "Scenic Drive",
+      badge: "Craft Focus",
     },
     {
-      key: "magazine-market",
-      title: "Saturday at the Farmers Market",
-      subtitle: "Seasonal produce, local makers, and downtown rhythm.",
-      href: "/places/brattleboro-farmers-market",
+      key: "bench-metal",
+      title: "Metal and Flame",
+      subtitle: "Forged textures, copper tones, and studio process in motion.",
+      href: featuredMakerProfiles[2] ? `/makers/${featuredMakerProfiles[2].slug}` : "/makers",
       imageClass:
-        "bg-[linear-gradient(145deg,rgba(28,56,43,0.8),rgba(212,164,93,0.38)),url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1400&q=80')]",
+        "bg-[linear-gradient(145deg,rgba(44,34,29,0.82),rgba(181,103,58,0.32)),url('https://images.unsplash.com/photo-1516557070061-c3d1653fa646?auto=format&fit=crop&w=1400&q=80')]",
       layoutClass: "",
-      badge: "Local Flavor",
+      badge: "Workshop",
     },
     {
-      key: "magazine-grafton",
-      title: "Historic Stay: Grafton Inn",
-      subtitle: "A village-center retreat blending heritage and comfort.",
-      href: "/places/grafton-inn",
+      key: "bench-leather",
+      title: "Leather and Glass",
+      subtitle: "Material-led stories shaped by makers, studios, and slow craftsmanship.",
+      href: featuredMakerProfiles[3] ? `/makers/${featuredMakerProfiles[3].slug}` : "/makers",
       imageClass:
-        "bg-[linear-gradient(145deg,rgba(22,43,34,0.86),rgba(207,169,94,0.31)),url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1700&q=80')]",
+        "bg-[linear-gradient(145deg,rgba(38,28,24,0.84),rgba(181,103,58,0.28)),url('https://images.unsplash.com/photo-1449247709967-d4461a6a6103?auto=format&fit=crop&w=1700&q=80')]",
       layoutClass: "lg:col-span-2",
-      badge: "Stay",
+      badge: "Heritage",
     },
   ];
 
@@ -144,7 +105,7 @@ export default async function Home() {
       <Navbar />
 
       <section className="relative overflow-hidden border-b border-[#d7cbb3] bg-[#10261e] text-[#f8f2e4]">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(7,18,14,0.52),rgba(8,22,17,0.24))]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,rgba(4,12,9,0.3)_100%)]" />
         <div className="absolute inset-y-0 left-0 w-full bg-[linear-gradient(95deg,rgba(8,31,24,0.86),rgba(8,31,24,0.72)_42%,rgba(8,31,24,0.24)_72%,transparent)] lg:w-[62%]" />
@@ -228,12 +189,12 @@ export default async function Home() {
                 Featured Maker
               </MetaText>
               <h2 className="mt-2 text-2xl font-semibold text-slate-900">
-                {todaysAdventure ? `Explore ${todaysAdventure.name}` : "Discover Vermont craftsmanship today"}
+                {todaysAdventure ? `Maker Feature: ${todaysAdventure.name}` : "Craft stories from Vermont studios"}
               </h2>
               <p className="mt-3 max-w-[34ch] text-sm leading-7 text-slate-700 sm:text-base">
                 {todaysAdventure
                   ? todaysAdventure.description
-                  : "Start with a featured maker, then explore nearby studios, galleries, and artisan markets."}
+                  : "Start with a featured maker profile, then continue through workshops, collections, and editorial stories."}
               </p>
               {todaysAdventure ? (
                 <Link
@@ -251,8 +212,8 @@ export default async function Home() {
       <section className="mx-auto max-w-7xl space-y-9 px-6 py-10 sm:px-8 lg:px-10">
         <EditorialSection
           eyebrow="New Maker Stories"
-          title={weeklyIssue.title}
-          description={weeklyIssue.theme}
+          title="Maker Stories"
+          description="Original editorial stories centered on craft heritage, process, and Vermont makers."
         >
           <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
             <Card variant="compact" className="p-5">
@@ -262,19 +223,19 @@ export default async function Home() {
                   {weeklyIssue.currentStage}
                 </span>
               </div>
-              <h3 className="mt-4 text-2xl font-semibold text-slate-900">Help us showcase Vermont craftsmanship.</h3>
+              <h3 className="mt-4 text-2xl font-semibold text-slate-900">Handmade work, studio process, and maker heritage.</h3>
               <Prose size="sm" className="mt-3">
                 <p>
-                  Hamilton Falls leads the issue with a large summer feature, while Jamaica State Park, Lye Brook Falls,
-                  West River recreation, and a river safety guide round out the week.
+                  This week&apos;s issue follows makers at the bench, in the kiln, and at the worktable—highlighting
+                  how materials, tools, and tradition shape each finished piece.
                 </p>
               </Prose>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Link
-                  href={weeklyIssue.coverStory.href}
+                  href="/guides"
                   className="inline-flex h-12 items-center justify-center rounded-full bg-(--color-forest-green) px-5 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
                 >
-                  Read the Feature
+                  Read Maker Stories
                 </Link>
                 <Link
                   href="/guides"
@@ -289,13 +250,26 @@ export default async function Home() {
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">Newsletter Preview</p>
-                  <h3 className="mt-2 text-2xl font-semibold text-slate-900">{weeklyIssue.newsletterPreview.subject}</h3>
+                  <h3 className="mt-2 text-2xl font-semibold text-slate-900">What Makers Are Building This Week</h3>
                 </div>
                 <Badge variant="forest">Example</Badge>
               </div>
 
               <div className="mt-4 space-y-3">
-                {weeklyIssue.newsletterPreview.sections.map((section) => (
+                {[
+                  {
+                    title: "Studio Notes",
+                    summary: "Bench-level process, material choices, and craft techniques from Vermont workshops.",
+                  },
+                  {
+                    title: "Maker Stories",
+                    summary: "Profiles that center heritage, process, and the creators behind handmade work.",
+                  },
+                  {
+                    title: "Gift Collections",
+                    summary: "Seasonal curation built around artisan-made goods for thoughtful gifting.",
+                  },
+                ].map((section) => (
                   <div key={section.title} className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-4">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">{section.title}</p>
                     <p className="mt-2 text-sm leading-7 text-slate-600">{section.summary}</p>
@@ -379,12 +353,12 @@ export default async function Home() {
         ) : null}
 
         <EditorialSection
-          eyebrow="Magazine Grid"
-          title="Editorial highlights from around Vermont"
-          description="An alternating visual grid of standout makers and stories."
+          eyebrow="Craft Process"
+          title="Behind the Bench"
+          description="Photography-led maker stories from studios, workbenches, and artisan workshops."
         >
           <div className="grid gap-4 lg:grid-cols-3 lg:auto-rows-[210px]">
-            {magazineGrid.map((item) => (
+            {behindBenchGrid.map((item) => (
               <Link key={item.key} href={item.href} className={`group relative overflow-hidden rounded-[26px] ${item.layoutClass}`}>
                 <div className={`absolute inset-0 bg-cover bg-center motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-105 ${item.imageClass}`} />
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent" />
@@ -400,98 +374,59 @@ export default async function Home() {
           </div>
         </EditorialSection>
 
-        {hamiltonFalls ? (
-          <EditorialSection eyebrow="Featured Makers" title="Hamilton Falls" description="A flagship Vermont maker story in a full magazine-style feature.">
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-              <div className="overflow-hidden rounded-3xl">
-                <div className="h-64 w-full bg-[linear-gradient(135deg,rgba(20,49,38,0.82),rgba(216,177,93,0.34)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center sm:h-80" />
-              </div>
-              <Card variant="compact" className="p-5">
-                <MetaText as="p" variant="eyebrow">
-                  Maker Story
-                </MetaText>
-                <h3 className="mt-2 text-2xl font-semibold text-slate-900">Waterfall drama and deep-forest atmosphere</h3>
-                <Prose className="mt-3">
-                  <p>{hamiltonFalls.description}</p>
-        <p>Plan a slow morning visit, then pair it with a village lunch or studio tour for a complete Vermont day.</p>
-                </Prose>
-                <Link
-                  href={`/places/${hamiltonFalls.slug}`}
-                  className="mt-4 inline-flex text-sm font-semibold text-(--color-forest-green) underline underline-offset-4"
-                >
-                  Read More
-                </Link>
-              </Card>
-            </div>
-          </EditorialSection>
-        ) : null}
-
         <EditorialSection
-          eyebrow="Customer Experiences"
-          title="Curated rails for discovering makers"
-          description="Visual rails replace utility lists with richer story-led browsing."
+          eyebrow="Collections"
+          title="New Collections"
+          description="Freshly curated collections built around craft, heritage, and handmade discovery."
         >
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-semibold text-slate-900">Gift Guides</h3>
-              <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {featuredCollections.map((collection) => (
-                  <Link key={collection.id} href={`/collections/${collection.slug}`}>
-                    <Card variant="compact" className="h-full p-4">
-                      <MetaText as="p" variant="eyebrow">
-                        {collection.season}
-                      </MetaText>
-                      <h4 className="mt-2 text-lg font-semibold text-slate-900">{collection.title}</h4>
-                      <p className="mt-2 text-sm leading-7 text-slate-600">{collection.subtitle}</p>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {[
-              { title: "Featured Makers", items: hiddenGems },
-              { title: "Customer Favorites", items: customerFavorites },
-              { title: "Workshop Visits", items: workshopVisits },
-              { title: "Made This Week", items: weekendEscapes },
-            ].map((rail) => (
-              <div key={rail.title}>
-                <h3 className="text-xl font-semibold text-slate-900">{rail.title}</h3>
-                <div className="mt-3 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                  {rail.items.length ? (
-                    rail.items.map((place) => (
-                      <Link key={place.id} href={`/places/${place.slug}`}>
-                        <Card variant="compact" className="h-full p-4">
-                          <MetaText as="p" variant="eyebrow">
-                            {place.placeType}
-                          </MetaText>
-                          <h4 className="mt-2 text-lg font-semibold text-slate-900">{place.name}</h4>
-                          <p className="mt-2 text-sm leading-7 text-slate-600">{place.description}</p>
-                        </Card>
-                      </Link>
-                    ))
-                  ) : (
-                    <Card variant="compact" className="p-4 sm:col-span-2 xl:col-span-3">
-                      <p className="text-sm text-slate-600">This rail is warming up with fresh recommendations.</p>
-                    </Card>
-                  )}
-                </div>
-              </div>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {featuredCollections.map((collection) => (
+              <Link key={collection.id} href={`/collections/${collection.slug}`}>
+                <Card variant="compact" className="h-full p-4">
+                  <MetaText as="p" variant="eyebrow">
+                    {collection.season}
+                  </MetaText>
+                  <h4 className="mt-2 text-lg font-semibold text-slate-900">{collection.title}</h4>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">{collection.subtitle}</p>
+                </Card>
+              </Link>
             ))}
           </div>
         </EditorialSection>
 
-        <EditorialSection eyebrow="Seasonal Feature" title={seasonalTitle} description={seasonalSubtitle}>
+        <EditorialSection
+          eyebrow="Studio Access"
+          title="Visit the Workshop"
+          description="Meet makers in their working studios and discover where craft comes to life."
+        >
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {workshopMakers.map((maker) => (
+              <Link key={maker.id} href={`/makers/${maker.slug}`}>
+                <Card variant="compact" className="h-full p-4">
+                  <MetaText as="p" variant="eyebrow">
+                    {maker.category}
+                  </MetaText>
+                  <h4 className="mt-2 text-lg font-semibold text-slate-900">{maker.makerName}</h4>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">
+                    {maker.studio || "Studio profile in progress"} {maker.town ? `· ${maker.town}` : ""}
+                  </p>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </EditorialSection>
+
+        <EditorialSection eyebrow="Seasonal Collection" title="Seasonal Gift Guide" description={seasonalSubtitle}>
           <Card variant="hero" className="overflow-hidden">
             <div className="relative h-64">
-              <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(20,50,38,0.88),rgba(216,177,93,0.28)),url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center" />
+              <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(36,28,22,0.88),rgba(181,103,58,0.26)),url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center" />
               <div className="relative flex h-full flex-col justify-end p-6 text-(--color-cream)">
                 <MetaText as="p" variant="eyebrow" className="text-(--color-maple-gold)">
-                  Seasonal Spotlight
+                  Seasonal Gift Guide
                 </MetaText>
                 <h3 className="mt-2 text-3xl font-semibold">{seasonalCollection ? seasonalCollection.title : seasonalTitle}</h3>
                 <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-100">
-                  {seasonalCollection ? seasonalCollection.description : "Seasonal collections and stories updated for right-now maker discovery."}
+                  {seasonalCollection ? seasonalCollection.description : "Seasonal gift collections shaped around Vermont makers and handcrafted products."}
                 </p>
                 <Link
                   href={seasonalCollection ? `/collections/${seasonalCollection.slug}` : "/collections"}
@@ -505,20 +440,20 @@ export default async function Home() {
         </EditorialSection>
 
         <EditorialSection
-          eyebrow="Editor's Picks"
-          title="Made This Week"
-          description="Curated for first-time visitors and repeat explorers."
+          eyebrow="Story Desk"
+          title="Maker Story Notes"
+          description="Short reads from the editorial desk while full profiles are in production."
         >
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-            {editorsPicks.map((place) => (
-              <Link key={place.id} href={`/places/${place.slug}`}>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {makerStories.map((maker) => (
+              <Link key={maker.id} href={`/makers/${maker.slug}`}>
                 <Card variant="sidebar" className="h-full p-4">
                   <MetaText as="p" variant="eyebrow">
-                    {place.placeType}
+                    {maker.category}
                   </MetaText>
-                  <h3 className="mt-2 text-base font-semibold text-slate-900">{place.name}</h3>
+                  <h3 className="mt-2 text-base font-semibold text-slate-900">{maker.makerName}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {place.city}, {place.state}
+                    {maker.studio || "Studio profile in progress"}
                   </p>
                 </Card>
               </Link>
