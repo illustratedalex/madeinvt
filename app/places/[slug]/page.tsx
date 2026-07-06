@@ -17,7 +17,7 @@ import { HeroImage } from "@/components/public/HeroImage";
 import { PublicCTA } from "@/components/public/PublicCTA";
 import { QuickFacts } from "@/components/public/QuickFacts";
 import { ReviewList } from "@/components/public/ReviewList";
-import { PlaceDNACard } from "@/components/public/PlaceDNACard";
+import { MakerDNA } from "@/components/makers/MakerDNA";
 import { BestTimeSection } from "@/components/story/BestTimeSection";
 import { HistorySection } from "@/components/story/HistorySection";
 import { LocalSecrets } from "@/components/story/LocalSecrets";
@@ -38,7 +38,6 @@ import { getPlaceLayoutProfile } from "@/lib/places/placeLayoutProfiles";
 import { getSuggestedNextStopsForPlace } from "@/lib/graph/RelationshipQueries";
 import { getCoverageBadgeForPlace } from "@/lib/editorial/CoveragePolicy";
 import { createPageMetadata, createPlaceMetadata } from "@/lib/seo";
-import { getPlaceDNA } from "@/lib/repositories/PlaceDNARepository";
 import { getCollections } from "@/lib/repositories/collectionRepository";
 import { getArticles } from "@/repositories/ArticleRepository";
 import { getDeals } from "@/repositories/DealRepository";
@@ -47,6 +46,7 @@ import { getPlaceBySlug, getPlaces } from "@/repositories/PlaceRepository";
 import { getApprovedReviewsByPlaceId } from "@/repositories/ReviewRepository";
 import { getStoryByPlace } from "@/repositories/StoryRepository";
 import type { Place } from "@/types/Place";
+import type { MakerDNA as MakerDNAType } from "@/types/MakerDNA";
 import type { Story } from "@/types/Story";
 import { PlacePassportCTA } from "@/components/public/PlacePassportCTA";
 import { PlacePlanningCTA } from "@/components/public/PlacePlanningCTA";
@@ -58,6 +58,68 @@ import { getVerificationByPlaceId } from "@/lib/repositories/VerificationReposit
 interface PlaceDetailPageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ upgrade?: string }>;
+}
+
+const MATERIAL_HINTS = [
+  "wood",
+  "maple",
+  "metal",
+  "glass",
+  "leather",
+  "textile",
+  "fiber",
+  "ceramic",
+  "clay",
+  "stone",
+];
+
+function unique(values: string[]): string[] {
+  return [...new Set(values.filter(Boolean).map((value) => value.trim()).filter(Boolean))];
+}
+
+function inferMaterials(place: Place): string[] {
+  const source = [...place.tags, ...place.categories, ...place.amenities];
+  return unique(source.filter((value) => MATERIAL_HINTS.some((hint) => value.toLowerCase().includes(hint)))).slice(0, 8);
+}
+
+function buildMakerDNA(params: {
+  place: Place;
+  story: Story;
+  customerExperiences: { title: string; body: string }[];
+  collections: { id: string; title: string; slug: string }[];
+  events: { id: string; title: string; slug: string }[];
+  relationships: Place[];
+}): MakerDNAType {
+  const { place, story, customerExperiences, collections, events, relationships } = params;
+  const materials = inferMaterials(place);
+  const products = unique(
+    [
+      ...(place.metadata.shop?.products ? place.metadata.shop.products.split(",") : []),
+      ...place.categories,
+      ...place.tags.filter((tag) => tag.length <= 28),
+    ].map((item) => item.trim()),
+  ).slice(0, 8);
+  const techniques = unique([...story.photographyTips, ...story.visitorTips, ...place.tags]).slice(0, 8);
+
+  return {
+    maker: place.name,
+    craft: place.placeType,
+    specialties: unique([...place.categories, ...place.tags]).slice(0, 8),
+    materials,
+    techniques,
+    ships: place.metadata.shop?.shippingAvailable ?? false,
+    workshopVisits: place.placeType === "Maker Studio" || place.placeType === "Shop",
+    customOrders: place.tags.some((tag) => tag.toLowerCase().includes("custom")) || place.categories.some((category) => category.toLowerCase().includes("custom")),
+    apprentices: null,
+    yearsCrafting: null,
+    story: story.summary,
+    products,
+    gallery: unique([place.featuredImage, ...place.gallery]).slice(0, 8),
+    customerExperiences: customerExperiences.map((experience) => experience.title).slice(0, 6),
+    collections: collections.map((collection) => ({ id: collection.id, title: collection.title, href: `/collections/${collection.slug}` })),
+    events: events.map((event) => ({ id: event.id, title: event.title, href: `/events/${event.slug}` })),
+    relationships: relationships.map((related) => ({ label: related.name, href: `/places/${related.slug}` })),
+  };
 }
 
 export async function generateStaticParams() {
@@ -135,7 +197,6 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
     allArticles,
     allEvents,
     allDeals,
-    placeDNA,
   ] = await Promise.all([
     isFeatureEnabled("reviews"),
     isFeatureEnabled("businessPortal"),
@@ -156,7 +217,6 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
     getArticles(),
     getEvents(),
     getDeals(),
-    getPlaceDNA(place.id),
   ]);
 
   const story = storyRecord ?? createFallbackStory(place);
@@ -169,6 +229,14 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
     .filter((candidate, index, arr) => candidate.placeType === "Hotel" && arr.findIndex((value) => value.id === candidate.id) === index)
     .slice(0, 4);
   const nearbyPlaces = relatedPlaces.slice(0, 4);
+  const makerDNA = buildMakerDNA({
+    place,
+    story,
+    customerExperiences: approvedReviews,
+    collections: relatedCollections,
+    events: nearbyEvents,
+    relationships: nearbyPlaces,
+  });
 
   const featuredCollectionNames = ["Summer Swimming Holes", "Hidden Waterfalls", "Photography Adventures"];
   const featuredCollectionEntries = featuredCollectionNames.map((name) => {
@@ -420,7 +488,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
 
         <QuickFacts facts={layoutProfile.quickFacts} />
 
-        <PlaceDNACard dna={placeDNA} />
+        <MakerDNA dna={makerDNA} />
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
           <article className="space-y-6">
