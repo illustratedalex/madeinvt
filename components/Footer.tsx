@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="max-w-2xl">
           <p className="text-xl font-semibold text-(--color-cream)">{SITE_NAME}</p>
           <p className="mt-3 text-base leading-8 text-slate-400">
-            MadeInVT celebrates Vermont&apos;s artisans, makers, workshops, and handcrafted products through editorial storytelling and beautiful photography.
+            MadeInVT celebrates Vermont artisans, workshops, studios, and handcrafted goods through editorial storytelling and beautiful photography.
           </p>
         </div>
 

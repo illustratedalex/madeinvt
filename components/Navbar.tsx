@@ -6,7 +6,7 @@ import { publicNavigationGroups } from "@/lib/navigation";
 export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-(--color-pine)/15 bg-(--color-cream)/90 backdrop-blur">
-      <Container className="flex items-center justify-between py-3 sm:py-4">
+      <Container className="flex items-center justify-between gap-3 py-3 sm:py-4">
         <Link href="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--color-forest-green) text-sm font-semibold uppercase tracking-[0.24em] text-(--color-cream)">
             MV
@@ -19,12 +19,12 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 whitespace-nowrap lg:flex">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 whitespace-nowrap lg:flex">
           {publicNavigationGroups.map((group) => (
             <div key={group.label} className="group relative">
               <Link
                 href={group.href}
-                className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-(--color-forest-green)"
+                className="inline-flex items-center gap-1 rounded-full px-2.5 py-2 text-[13px] font-semibold text-slate-700 transition hover:bg-white hover:text-(--color-forest-green) xl:px-3 xl:text-sm"
               >
                 {group.label}
                 <svg className="h-3 w-3 text-slate-500" viewBox="0 0 10 6" fill="none" aria-hidden>
@@ -48,7 +48,7 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <details className="relative lg:hidden">
             <summary className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[#d8c9ad] bg-[#fcfaf6] text-[#1f3b2f] marker:content-none">
               <svg className="h-5 w-5" viewBox="0 0 20 20" fill="none" aria-hidden>
