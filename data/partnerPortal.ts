@@ -3,7 +3,7 @@ import type { BusinessOwner, PartnerDashboardStats, PartnerPortalActivityItem } 
 export const mockCurrentBusinessOwner: BusinessOwner = {
   id: "owner-local-partner",
   name: "Local Partner",
-  email: "partner@southernvt.com",
+  email: "partner@madeinvt.com",
   businessPlaceIds: ["place-grafton-inn"],
   role: "owner",
   createdAt: "2026-06-01T09:00:00.000Z",

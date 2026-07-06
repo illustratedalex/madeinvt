@@ -197,7 +197,7 @@ export const mockTrips: Trip[] = [
   },
   {
     id: "trip-family-southern-vermont",
-    title: "Family Southern Vermont Trip",
+    title: "Family Vermont Trip",
     status: "draft",
     startDate: "2026-08-01",
     endDate: "2026-08-03",

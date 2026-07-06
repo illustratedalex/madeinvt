@@ -128,7 +128,7 @@ export function getBusinessListingStatusLabel(status: BusinessListingStatus) {
     case "claimed":
       return "Claimed by Owner";
     case "verified":
-      return "Verified by SouthernVT";
+      return "Verified by MadeInVT";
     case "founding_partner":
       return "Founding Partner";
     case "premium":
@@ -154,13 +154,13 @@ export function getBusinessListingClaimLabel(claimStatus: BusinessListingClaimSt
 export function getBusinessListingDescription(status: BusinessListingStatus) {
   switch (status) {
     case "basic":
-      return "Created by SouthernVT from publicly available or submitted information. May be incomplete.";
+      return "Created by MadeInVT from publicly available or submitted information. May be incomplete.";
     case "claimed":
       return "Business owner has claimed the profile.";
     case "verified":
-      return "SouthernVT has reviewed or verified key details.";
+      return "MadeInVT has reviewed or verified key details.";
     case "founding_partner":
-      return "Business is helping support SouthernVT during beta.";
+      return "Business is helping support MadeInVT during beta.";
     case "premium":
       return "Premium directory profile.";
     default:

@@ -20,14 +20,14 @@ export async function generateMetadata({ params }: BusinessUpgradePageProps): Pr
 
   if (!listing) {
     return {
-      title: "Upgrade Listing | SouthernVT",
-      description: "Listing upgrade options for SouthernVT businesses.",
+      title: "Upgrade Listing | MadeInVT",
+      description: "Listing upgrade options for MadeInVT studios.",
       robots: { index: false, follow: false },
     };
   }
 
   return createPageMetadata({
-    title: `Upgrade ${listing.name} | SouthernVT`,
+    title: `Upgrade ${listing.name} | MadeInVT`,
     description: `View listing upgrade options for ${listing.name}.`,
     path: `/businesses/${listing.slug}/upgrade`,
   });
@@ -61,13 +61,13 @@ export default async function BusinessUpgradePage({ params }: BusinessUpgradePag
             Current plan: <span className="font-semibold text-slate-900">{currentPlan}</span>
           </p>
           <p className="mt-2 text-sm leading-7 text-slate-700">
-            Paid business listing upgrades do not purchase editorial recommendations, verification, rankings, or SouthernVT Recommended status.
+            Paid business listing upgrades do not purchase editorial recommendations, verification, rankings, or MadeInVT Recommended status.
           </p>
           {!squareStatus.configured ? (
             <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm leading-7 text-amber-900">
               Online checkout is coming soon. Contact{" "}
-              <a href="mailto:partners@southernvt.com" className="font-semibold underline underline-offset-2">
-                partners@southernvt.com
+              <a href="mailto:partners@madeinvt.com" className="font-semibold underline underline-offset-2">
+                partners@madeinvt.com
               </a>{" "}
               to activate this plan.
             </div>
@@ -80,8 +80,8 @@ export default async function BusinessUpgradePage({ params }: BusinessUpgradePag
             <Link href={`/claim-listing?listing=${encodeURIComponent(listing.slug)}`} className="rounded-full bg-[#1f3b2f] px-5 py-3 text-sm font-semibold text-[#f8f2e4]">
               Claim this listing
             </Link>
-            <a href="mailto:partners@southernvt.com" className="rounded-full border border-[#d7cbb3] bg-[#fcfaf6] px-5 py-3 text-sm font-semibold text-slate-700">
-              Email partners@southernvt.com
+            <a href="mailto:partners@madeinvt.com" className="rounded-full border border-[#d7cbb3] bg-[#fcfaf6] px-5 py-3 text-sm font-semibold text-slate-700">
+              Email partners@madeinvt.com
             </a>
           </div>
         </article>
@@ -104,7 +104,7 @@ export default async function BusinessUpgradePage({ params }: BusinessUpgradePag
                   />
                 ) : plan.purchasable ? (
                   <a
-                    href="mailto:partners@southernvt.com"
+                    href="mailto:partners@madeinvt.com"
                     className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4] hover:bg-[#2d5242] transition"
                   >
                     Contact us to upgrade

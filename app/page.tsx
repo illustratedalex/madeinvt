@@ -14,8 +14,8 @@ import { weeklyIssue } from "@/data/weeklyIssue";
 import { southernVT100Destinations } from "@/data/southernvt100";
 
 export const metadata = createPageMetadata({
-  title: "Southern Vermont | Travel & Adventure",
-  description: "Discover Southern Vermont with curated guides, local events, scenic adventures, and partner offers.",
+  title: "MadeInVT | Vermont Makers, Artisans & Handcrafted Goods",
+  description: "Explore handcrafted goods, artisan workshops, local creators, and the stories behind Vermont craftsmanship.",
   path: "/",
 });
 
@@ -107,10 +107,10 @@ export default async function Home() {
     publishedCollections.find((collection) => collection.season === (isFall ? "Fall" : "Summer")) ??
     featuredCollections[0] ??
     null;
-  const seasonalTitle = isFall ? "Fall Foliage in Southern Vermont" : "Summer in Southern Vermont";
+  const seasonalTitle = isFall ? "Fall Crafts in Vermont" : "Summer Studios in Vermont";
   const seasonalSubtitle = isFall
-    ? "Scenic drives, mountain overlooks, and village stops tuned for peak color."
-    : "Waterfalls, riverside trails, and fresh-air weekends made for long days outside.";
+    ? "Artisan markets, studio open houses, and handcrafted gifts for the season."
+    : "Open studios, outdoor markets, and handmade goods made for warm Vermont days.";
   const intelligenceSummary = getEditorialIntelligenceSummary();
   const southernVT100Published = southernVT100Destinations.filter((destination) => destination.editorialStatus === "Published").length;
 
@@ -170,14 +170,14 @@ export default async function Home() {
         <div className="relative mx-auto grid max-w-7xl gap-8 px-6 py-14 sm:px-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] lg:px-10 lg:py-20">
           <div className="space-y-6">
             <MetaText as="p" variant="eyebrow" className="text-(--color-maple-gold)">
-              Southern Vermont Travel Magazine
+              MadeInVT — Vermont Makers Magazine
             </MetaText>
             <h1 className="max-w-5xl text-3xl font-semibold leading-tight text-[#fff9ee] drop-shadow-[0_8px_22px_rgba(0,0,0,0.45)] sm:text-4xl md:text-6xl">
-              Discover Southern Vermont Like a Local
+              Discover Vermont&apos;s Makers
             </h1>
             <div className="max-w-2xl rounded-2xl border border-white/20 bg-black/30 p-4 text-white shadow-[0_12px_36px_rgba(0,0,0,0.35)] backdrop-blur-[2px]">
               <ul className="space-y-2 text-base font-medium leading-7 text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)]">
-                {["Hidden waterfalls.", "Historic villages.", "Scenic drives.", "Original stories."].map((line) => (
+                {["Handcrafted goods.", "Artisan workshops.", "Vermont studios.", "Original stories."].map((line) => (
                   <li key={line} className="flex items-center gap-3">
                     <span className="h-2.5 w-2.5 rounded-full border border-white/30 bg-white/20" aria-hidden />
                     <span>{line}</span>
@@ -200,7 +200,7 @@ export default async function Home() {
                 <Input
                   id="home-search"
                   name="q"
-                  placeholder="Search waterfalls, scenic drives, villages..."
+                  placeholder="Search makers, studios, collections..."
                   className="h-16 border-white/35 bg-white/96 text-slate-900 placeholder:text-slate-500"
                 />
                 <Button type="submit" size="lg" className="h-16 bg-(--color-forest-green) px-8 uppercase tracking-[0.12em] text-(--color-cream) shadow-lg motion-safe:hover:bg-(--color-pine)">
@@ -214,19 +214,25 @@ export default async function Home() {
                 href="/places"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-(--color-forest-green) px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
               >
-                Explore Places
+                Explore Makers
               </Link>
               <Link
-                href="/concierge"
+                href="/collections"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/40 bg-transparent px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-white/12"
               >
-                I&apos;m Feeling Adventurous
+                Gift Guides
               </Link>
               <Link
-                href="/concierge"
+                href="/guides"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-(--color-maple-gold)/60 bg-(--color-maple-gold)/18 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-maple-gold)/28"
               >
-                Plan My Day
+                Meet the Makers
+              </Link>
+              <Link
+                href="/collections"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 bg-white/8 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-white/15"
+              >
+                Find Handmade
               </Link>
             </div>
           </div>
@@ -237,22 +243,22 @@ export default async function Home() {
               className="w-full max-w-xl border border-[#d9ceb7] bg-white/97 p-6 shadow-xl backdrop-blur-sm sm:p-7"
             >
               <MetaText as="p" variant="eyebrow" className="text-(--color-forest-green)">
-                Today&apos;s Adventure
+                Featured Maker
               </MetaText>
               <h2 className="mt-2 text-2xl font-semibold text-slate-900">
-                {todaysAdventure ? `Route anchored at ${todaysAdventure.name}` : "Build your day from local signals"}
+                {todaysAdventure ? `Explore ${todaysAdventure.name}` : "Discover Vermont craftsmanship today"}
               </h2>
               <p className="mt-3 max-w-[34ch] text-sm leading-7 text-slate-700 sm:text-base">
                 {todaysAdventure
                   ? todaysAdventure.description
-                  : "Start with the strongest recommendation, then add food, views, and an evening stop nearby."}
+                  : "Start with a featured maker, then explore nearby studios, galleries, and artisan markets."}
               </p>
               {todaysAdventure ? (
                 <Link
                   href={`/places/${todaysAdventure.slug}`}
                   className="mt-4 inline-flex h-11 items-center rounded-full bg-(--color-maple-gold) px-4 text-sm font-semibold text-(--color-forest-green) motion-safe:transition motion-safe:hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-maple-gold) focus-visible:ring-offset-2"
                 >
-                  Open today&apos;s route
+                  View maker profile
                 </Link>
               ) : null}
             </Card>
@@ -274,7 +280,7 @@ export default async function Home() {
                   {weeklyIssue.currentStage}
                 </span>
               </div>
-              <h3 className="mt-4 text-2xl font-semibold text-slate-900">Help build a guide to cooler summer days.</h3>
+              <h3 className="mt-4 text-2xl font-semibold text-slate-900">Help us showcase Vermont craftsmanship.</h3>
               <Prose size="sm" className="mt-3">
                 <p>
                   Hamilton Falls leads the issue with a large summer feature, while Jamaica State Park, Lye Brook Falls,
@@ -359,13 +365,13 @@ export default async function Home() {
         {editorialIntelligenceEnabled ? (
           <EditorialSection
             eyebrow="Editor Only"
-            title="SouthernVT 100 Progress"
-            description="Master publication coverage progress across the SouthernVT 100 catalog."
+            title="MadeInVT 100 Progress"
+            description="Master publication coverage progress across the MadeInVT 100 catalog."
           >
             <Card variant="compact" className="p-5">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">SouthernVT 100</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">MadeInVT 100</p>
                   <h3 className="mt-2 text-3xl font-semibold text-slate-900">
                     {southernVT100Published} / {southernVT100Destinations.length} Published
                   </h3>
@@ -394,8 +400,8 @@ export default async function Home() {
 
         <EditorialSection
           eyebrow="Magazine Grid"
-          title="Editorial highlights from around Southern Vermont"
-          description="An alternating visual grid of standout places and stories."
+          title="Editorial highlights from around Vermont"
+          description="An alternating visual grid of standout makers and stories."
         >
           <div className="grid gap-4 lg:grid-cols-3 lg:auto-rows-[210px]">
             {magazineGrid.map((item) => (
@@ -415,7 +421,7 @@ export default async function Home() {
         </EditorialSection>
 
         {hamiltonFalls ? (
-          <EditorialSection eyebrow="Featured Destination" title="Hamilton Falls" description="A flagship Southern Vermont destination in a full magazine-style feature.">
+          <EditorialSection           eyebrow="Featured Destination" title="Hamilton Falls" description="A flagship Vermont destination in a full magazine-style feature.">
             <div className="grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
               <div className="overflow-hidden rounded-3xl">
                 <div className="h-64 w-full bg-[linear-gradient(135deg,rgba(20,49,38,0.82),rgba(216,177,93,0.34)),url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center sm:h-80" />
@@ -427,7 +433,7 @@ export default async function Home() {
                 <h3 className="mt-2 text-2xl font-semibold text-slate-900">Waterfall drama and deep-forest atmosphere</h3>
                 <Prose className="mt-3">
                   <p>{hamiltonFalls.description}</p>
-                  <p>Plan a slow morning hike, then pair it with a village lunch or scenic drive for a complete Southern Vermont day.</p>
+        <p>Plan a slow morning visit, then pair it with a village lunch or studio tour for a complete Vermont day.</p>
                 </Prose>
                 <Link
                   href={`/places/${hamiltonFalls.slug}`}
@@ -442,7 +448,7 @@ export default async function Home() {
 
         <EditorialSection
           eyebrow="Experience Rails"
-          title="Curated rails for trip planning"
+          title="Curated rails for discovering makers"
           description="Visual rails replace utility lists with richer story-led browsing."
         >
           <div className="space-y-6">
@@ -543,15 +549,15 @@ export default async function Home() {
 
         <EditorialSection
           eyebrow="Local Directory"
-          title="Local Businesses to Know"
-          description={`A foundational business directory shaped for discovery, accuracy, and future owner updates. ${businessCount} listings currently published.`}
+          title="Vermont Studios to Know"
+          description={`A foundational directory of Vermont makers and studios. ${businessCount} listings currently published.`}
         >
           <div className="mb-4 flex flex-wrap gap-3">
             <Badge variant="subtle">Basic</Badge>
             <Badge variant="forest">Claimed</Badge>
             <Badge variant="amber">Verified</Badge>
             <Badge variant="featured">Founding Partner</Badge>
-            <Badge variant="subtle">{businessCount} total businesses</Badge>
+            <Badge variant="subtle">{businessCount} total studios</Badge>
             <Badge variant="subtle">{unclaimedBusinessCount} unclaimed</Badge>
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -563,18 +569,18 @@ export default async function Home() {
             href="/businesses"
             className="mt-5 inline-flex rounded-full border border-[#d7cbb3] bg-white px-5 py-3 text-sm font-semibold text-slate-800 motion-safe:transition motion-safe:hover:bg-[#fcfaf6]"
           >
-            Browse all business listings
+            Browse all studio listings
           </Link>
         </EditorialSection>
 
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
           <EditorialSection
             eyebrow="Trust"
-            title="Built to help travelers decide with confidence"
-            description="Every page is shaped for useful, local-first trip planning."
+            title="Built to help people discover with confidence"
+            description="Every page is shaped for useful, local-first maker discovery."
           >
             <div className="grid gap-3 sm:grid-cols-2">
-              {["Original Photography", "Local Recommendations", "Verified Places", "Built in Vermont"].map((item) => (
+              {["Original Photography", "Local Recommendations", "Verified Makers", "Built in Vermont"].map((item) => (
                 <Card key={item} variant="compact" className="p-4">
                   <Badge variant="forest" className="text-[10px] tracking-[0.16em]">
                     Compass Standard
@@ -587,8 +593,8 @@ export default async function Home() {
 
           <EditorialSection
             eyebrow="Newsletter"
-            title="Get one thoughtful weekend idea each week"
-            description="Scenic routes, seasonal picks, and local stories. No spam."
+            title="Get one featured Vermont maker each week"
+            description="Studio stories, seasonal collections, and handcrafted finds. No spam."
             className="h-fit"
           >
             <form action="/updates" method="get" data-ga-event="newsletter_signup" data-ga-source="home_newsletter" className="space-y-3">
@@ -635,8 +641,8 @@ export default async function Home() {
 
         <EditorialSection
           eyebrow="Footer"
-          title="Plan your next Southern Vermont weekend"
-          description="Save routes, browse destination stories, and explore trusted local recommendations."
+          title="Explore Vermont's maker community"
+          description="Browse studios, discover collections, and find handcrafted goods from Vermont artisans."
           className="bg-[#f9f4e8]"
         >
           <div className="flex flex-wrap gap-3">
@@ -644,7 +650,7 @@ export default async function Home() {
               href="/places"
               className="inline-flex h-11 items-center justify-center rounded-full bg-(--color-forest-green) px-5 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
             >
-              Browse places
+              Explore makers
             </Link>
             <Link
               href="/collections"
@@ -656,7 +662,7 @@ export default async function Home() {
               href="/guides"
               className="inline-flex h-11 items-center justify-center rounded-full border border-(--color-pine)/20 px-5 text-sm font-semibold text-(--color-forest-green) motion-safe:transition motion-safe:hover:bg-white"
             >
-              Read guides
+              Read stories
             </Link>
           </div>
         </EditorialSection>

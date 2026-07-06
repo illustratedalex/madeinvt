@@ -10,8 +10,8 @@ import { getPlaces } from "@/repositories/PlaceRepository";
 import { getMembers, getRewards, getStampsByMemberId } from "@/repositories/PassportRepository";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "SouthernVT Adventure Passport",
-  description: "Collect Southern Vermont passport stamps and unlock local rewards.",
+  title: "MadeInVT Adventure Passport",
+  description: "Collect Vermont passport stamps and unlock local rewards.",
   path: "/passport",
 });
 
@@ -46,7 +46,7 @@ export default async function PassportPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Adventure Passport</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Collect stamps. Unlock local rewards.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
-            Explore participating Southern Vermont places and earn reward milestones in this beta preview passport experience.
+            Explore participating Vermont places and earn reward milestones in this beta preview passport experience.
           </p>
           {!passportEnabled ? (
             <p className="mt-5 inline-flex rounded-full border border-[#d7cbb3] bg-[#fff7e4] px-4 py-2 text-sm font-semibold text-[#6b5a30]">

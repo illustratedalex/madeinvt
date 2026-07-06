@@ -19,9 +19,9 @@ export function ItineraryPreview({ trip, dayPlans, placesById, collectionsById }
     <section className="space-y-5 rounded-[28px] border border-[#e8dfc8] bg-white/85 p-6 shadow-sm">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Suggested itinerary</p>
-        <h2 className="mt-2 text-2xl font-semibold text-slate-900">{trip.title || "Your Southern Vermont weekend"}</h2>
+        <h2 className="mt-2 text-2xl font-semibold text-slate-900">{trip.title || "Your Vermont weekend"}</h2>
         <p className="mt-2 text-sm text-slate-600">
-          {trip.days.length} day trip from {trip.homeBase || "Southern Vermont"} for {trip.travelers} traveler{trip.travelers === 1 ? "" : "s"}.
+          {trip.days.length} day trip from {trip.homeBase || "Vermont"} for {trip.travelers} traveler{trip.travelers === 1 ? "" : "s"}.
         </p>
       </div>
 

@@ -62,7 +62,7 @@ export type WeeklyIssue = {
 export const weeklyIssue: WeeklyIssue = {
   issueNumber: 1,
   title: "Summer Swimming Holes",
-  theme: "Cool off in Southern Vermont",
+  theme: "Cool off in Vermont",
   publicationDate: "2026-07-10",
   completionPercent: 71,
   currentStage: "Copy Desk",
@@ -153,7 +153,7 @@ export const weeklyIssue: WeeklyIssue = {
     { title: "Homepage issue link live", detail: "Current issue card points to Hamilton Falls", complete: true },
   ],
   newsletterPreview: {
-    subject: "This Weekend in Southern Vermont: Swimming Holes Edition",
+    subject: "This Weekend in Vermont: Swimming Holes Edition",
     sections: [
       { title: "Cover Story", summary: "Hamilton Falls takes the lead with the issue's main summer day-out story.", href: "/places/hamilton-falls" },
       { title: "Hidden Gem", summary: "A quieter river stop tucked into the week's supporting coverage.", href: "/explorer" },

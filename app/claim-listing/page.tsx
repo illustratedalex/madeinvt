@@ -56,7 +56,7 @@ export async function generateMetadata({ searchParams }: ClaimListingPageProps):
 
   if (!slug) {
     return {
-      title: "Claim Listing | SouthernVT",
+      title: "Claim Listing | MadeInVT",
       description: "Business ownership claim form.",
       robots: { index: false, follow: false },
     };
@@ -65,14 +65,14 @@ export async function generateMetadata({ searchParams }: ClaimListingPageProps):
   const listing = await resolveClaimListing(slug);
   if (!listing) {
     return {
-      title: "Claim Listing | SouthernVT",
+      title: "Claim Listing | MadeInVT",
       description: "Business ownership claim form.",
       robots: { index: false, follow: false },
     };
   }
 
   return createPageMetadata({
-    title: `Claim ${listing.name} | SouthernVT`,
+    title: `Claim ${listing.name} | MadeInVT`,
     description: `Request ownership access for the ${listing.name} listing.`,
     path: `/claim-listing?listing=${encodeURIComponent(listing.slug)}`,
   });
@@ -102,7 +102,7 @@ export default async function ClaimListingPage({ searchParams }: ClaimListingPag
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Business Portal</p>
           <h1 className="mt-2 text-3xl font-semibold text-slate-900">Claim {listing.name}</h1>
           <p className="mt-3 text-sm leading-7 text-slate-700">
-            Claiming is currently free. Submit your request and SouthernVT will manually review it before granting edit access.
+            Claiming is currently free. Submit your request and MadeInVT will manually review it before granting edit access.
           </p>
           <div className="mt-4 text-sm text-slate-600">
             <p>{listing.address}</p>

@@ -8,8 +8,8 @@ import { ExperienceService } from "@/lib/experience/ExperienceService";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Explorer Mode | SouthernVT",
-  description: "Tap into a curated Southern Vermont surprise adventure with places, food, guides, deals, and optional events.",
+  title: "Explorer Mode | MadeInVT",
+  description: "Tap into a curated Vermont surprise adventure with places, food, guides, deals, and optional events.",
   path: "/explorer",
 });
 

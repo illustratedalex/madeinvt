@@ -6,15 +6,15 @@ import { coverageBadgeExamples } from "@/lib/editorial/CoveragePolicy";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Our Coverage | SouthernVT",
-  description: "How SouthernVT chooses the places, stories, and businesses we feature.",
+  title: "Our Coverage | MadeInVT",
+  description: "How MadeInVT chooses the makers, stories, and studios we feature.",
   path: "/our-coverage",
 });
 
 const coreRegions = [
   { title: "Windham County", detail: "Brattleboro, West River Valley, Mount Snow corridor, village centers, and local story routes." },
   { title: "Bennington County", detail: "Bennington region, Manchester area, mountain drives, heritage villages, and editorial field coverage." },
-  { title: "Southern Windsor County", detail: "Ludlow and nearby southern Windsor connections that naturally shape Southern Vermont itineraries." },
+  { title: "Southern Windsor County", detail: "Ludlow and nearby southern Windsor connections that naturally shape Vermont maker itineraries." },
 ];
 
 const regionalFeatures = [
@@ -39,15 +39,15 @@ export default function OurCoveragePage() {
             Editorial Policy
           </Badge>
           <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight text-[#fff9ee] sm:text-4xl md:text-6xl">Our Coverage</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-[#eee5d6]">How SouthernVT chooses the places, stories, and businesses we feature.</p>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-[#eee5d6]">How MadeInVT chooses the makers, stories, and studios we feature.</p>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl space-y-8 px-6 py-10 sm:px-8 lg:px-10">
-        <EditorialSection eyebrow="Section 1" title="Our Philosophy" description="SouthernVT is not trying to list every location.">
+        <EditorialSection eyebrow="Section 1" title="Our Philosophy" description="MadeInVT is not trying to list every maker.">
           <Prose>
             <p>
-              Our goal is to curate the most memorable Southern Vermont experiences through trusted editorial recommendations.
+            Our goal is to curate the most compelling Vermont maker stories through trusted editorial recommendations.
             </p>
             <p>
               We prioritize quality, context, and traveler usefulness over large unfiltered directories.
@@ -58,7 +58,7 @@ export default function OurCoveragePage() {
           </Prose>
         </EditorialSection>
 
-        <EditorialSection eyebrow="Section 2" title="Core Southern Vermont" description="Our primary editorial coverage area.">
+        <EditorialSection eyebrow="Section 2" title="Core Vermont Coverage" description="Our primary editorial coverage area.">
           <div className="grid gap-4 md:grid-cols-3">
             {coreRegions.map((region) => (
               <article key={region.title} className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-5">
@@ -70,11 +70,11 @@ export default function OurCoveragePage() {
           </div>
         </EditorialSection>
 
-        <EditorialSection eyebrow="Section 3" title="Worth the Drive" description="Exceptional destinations just outside core coverage that enhance a Southern Vermont trip.">
+        <EditorialSection eyebrow="Section 3" title="Worth the Visit" description="Exceptional destinations just outside core coverage that complement a Vermont maker trip.">
           <div className="rounded-2xl border border-[#e8dfc8] bg-white p-5">
             <Badge variant="featured">🚗 Worth the Drive</Badge>
             <p className="mt-3 text-sm leading-7 text-slate-700">
-              Some exceptional destinations just outside our core coverage naturally enhance a Southern Vermont trip. These are clearly labeled so readers understand context and travel expectations.
+              Some exceptional destinations just outside our core coverage naturally complement a Vermont maker trip. These are clearly labeled so readers understand context and travel expectations.
             </p>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2 text-sm text-slate-700">
               {["Dorset Quarry", "Hildene", "Mount Greylock", "Okemo", "Keene (selected)"].map((item) => (
@@ -97,7 +97,7 @@ export default function OurCoveragePage() {
           </div>
         </EditorialSection>
 
-        <EditorialSection eyebrow="Section 5" title="Editorial Promise" description="What guides SouthernVT recommendations.">
+        <EditorialSection eyebrow="Section 5" title="Editorial Promise" description="What guides MadeInVT recommendations.">
           <div className="grid gap-4 md:grid-cols-2">
             <article className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-5">
               <ul className="space-y-2 text-sm text-slate-700">
@@ -109,7 +109,7 @@ export default function OurCoveragePage() {
             <article className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3b2f]">Businesses cannot buy</p>
               <ul className="mt-2 space-y-2 text-sm text-slate-700">
-                {["Recommendations", "Verification", "Editorial rankings", "SouthernVT Recommended status"].map((item) => (
+                {["Recommendations", "Verification", "Editorial rankings", "MadeInVT Recommended status"].map((item) => (
                   <li key={item}>• {item}</li>
                 ))}
               </ul>
@@ -145,10 +145,10 @@ export default function OurCoveragePage() {
           </ol>
         </EditorialSection>
 
-        <EditorialSection eyebrow="Section 8" title="Help Us Discover Places" description="Know a destination we should review next?">
+        <EditorialSection         eyebrow="Section 8" title="Help Us Discover Makers" description="Know a Vermont artisan we should feature next?">
           <div className="flex flex-wrap gap-3">
             <Link href="/feedback?category=Missing%20Place">
-              <Button variant="secondary" size="lg">Suggest a Place</Button>
+              <Button variant="secondary" size="lg">Suggest a Maker</Button>
             </Link>
           </div>
         </EditorialSection>

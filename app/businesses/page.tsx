@@ -22,8 +22,8 @@ interface BusinessesPageProps {
 }
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Southern Vermont Businesses | SouthernVT",
-  description: "Browse Southern Vermont business listings that owners can claim and improve over time.",
+  title: "Vermont Studios & Makers | MadeInVT",
+  description: "Browse Vermont maker studios, artisan workshops, and craft businesses that owners can claim and improve over time.",
   path: "/businesses",
 });
 
@@ -43,8 +43,8 @@ export default async function BusinessesPage({ searchParams }: BusinessesPagePro
 
       <section className="border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#405d4c] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">SouthernVT Directory</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Local businesses across Southern Vermont.</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">MadeInVT Directory</p>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Vermont studios and makers.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
             This is the public directory foundation. Listings can start basic, then get claimed, verified, and improved over time.
           </p>

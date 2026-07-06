@@ -69,11 +69,11 @@ export function TripWizard({ plannerEnabled, places, collections, events, articl
     <div className="space-y-6">
       <header className="rounded-4xl border border-[#e8dfc8] bg-white/80 p-6 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#1f3b2f]">Trip Planner</p>
-        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Build your Southern Vermont itinerary</h1>
+        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Build your Vermont itinerary</h1>
         <p className="mt-2 text-sm leading-7 text-slate-600">Step {step + 1} of 7. Previews are generated from mock Places, Collections, Events, and Guides.</p>
         {!plannerEnabled ? (
           <p className="mt-3 rounded-2xl border border-[#d7cbb3] bg-[#fff7e4] px-4 py-3 text-sm font-medium text-[#6b5a30]">
-            AI-powered planning coming soon. This preview uses curated SouthernVT data.
+            AI-powered planning coming soon. This preview uses curated MadeInVT data.
           </p>
         ) : null}
       </header>

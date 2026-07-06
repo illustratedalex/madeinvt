@@ -5,7 +5,7 @@ export function Navigation() {
     <header className="sticky top-0 z-20 border-b border-white/10 bg-stone-950/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
         <Link href="/" className="text-lg font-semibold tracking-[0.24em] text-white uppercase">
-          SouthernVT
+          MadeInVT
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-stone-300 md:flex">
           <a className="transition hover:text-white" href="#explore">

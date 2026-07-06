@@ -2,8 +2,8 @@ import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Owner Sign Up | SouthernVT",
-  description: "Create a SouthernVT owner account to access approved business listings.",
+  title: "Owner Sign Up | MadeInVT",
+  description: "Create a MadeInVT owner account to access approved business listings.",
   path: "/signup",
 });
 

@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: CollectionPublicPageProps): P
 
   if (!collection || collection.status !== "published") {
     return {
-      title: "Collection Not Found | SouthernVT",
+      title: "Collection Not Found | MadeInVT",
       description: "This collection is not currently available.",
       robots: { index: false, follow: false },
     };
@@ -234,7 +234,7 @@ export default async function CollectionPublicPage({ params }: CollectionPublicP
             <PublicCTA
               eyebrow="Ready to go"
               title="Plan this trip"
-              description="Save this collection and build your Southern Vermont itinerary with local stops, meals, and scenic moments."
+              description="Save this collection and build your Vermont itinerary with local stops, meals, and scenic moments."
               href="/planner/new"
               label="Plan this trip"
             />
@@ -250,7 +250,7 @@ export default async function CollectionPublicPage({ params }: CollectionPublicP
 function createFallbackCollectionStory(collection: Collection): Story {
   return {
     id: `story-fallback-${collection.id}`,
-    title: `${collection.title}: A Southern Vermont Route Story`,
+    title: `${collection.title}: A Vermont Route Story`,
     subtitle: collection.subtitle,
     body: collection.description,
     summary: collection.description,
@@ -259,7 +259,7 @@ function createFallbackCollectionStory(collection: Collection): Story {
     difficulty: "Easy",
     season: collection.season,
     history: [
-      "This route evolved from repeat local travel patterns in Southern Vermont.",
+      "This route evolved from repeat local travel patterns in Vermont.",
       "Stops were selected to balance scenery, pacing, and practical logistics.",
       "Seasonal updates keep the sequence fresh while preserving the core experience.",
     ],

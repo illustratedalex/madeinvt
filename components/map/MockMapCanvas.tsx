@@ -47,7 +47,7 @@ export function MockMapCanvas({ places, selectedPlaceId, onSelectPlace }: MockMa
       <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.3),transparent_42%,rgba(31,59,47,0.08)_100%)]" />
 
       <div className="absolute left-6 top-6 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#1f3b2f]">
-        Southern Vermont Mock Map
+        Vermont Mock Map
       </div>
 
       <div className="absolute inset-0">

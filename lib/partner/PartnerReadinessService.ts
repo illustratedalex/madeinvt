@@ -66,17 +66,17 @@ const criteriaConfig: Record<ReadinessCriteria, { label: string; description: st
   },
   collections: {
     label: "Collections",
-    description: "Featured in SouthernVT collections",
+    description: "Featured in MadeInVT collections",
     weight: 5,
   },
   guides: {
     label: "Guides",
-    description: "Mentioned in SouthernVT guides",
+    description: "Mentioned in MadeInVT guides",
     weight: 5,
   },
   verification: {
     label: "Verification",
-    description: "Verified by SouthernVT",
+    description: "Verified by MadeInVT",
     weight: 9,
   },
   photos: {

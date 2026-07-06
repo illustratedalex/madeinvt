@@ -10,7 +10,7 @@ const levelLabels: Record<VerificationLevel, string> = {
   location_verified: "📍 Location Verified",
   photo_verified: "📸 Photo Verified",
   personally_visited: "🥾 Personally Visited",
-  southernvt_recommended: "⭐ SouthernVT Recommended",
+  southernvt_recommended: "⭐ MadeInVT Recommended",
 };
 
 const statusLabels: Record<VerificationStatus, string> = {

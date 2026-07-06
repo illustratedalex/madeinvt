@@ -5,8 +5,8 @@ import { Badge, Button, EditorialSection, Prose } from "@/components/ui";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Why Trust SouthernVT? | Verification Promise",
-  description: "Learn how SouthernVT verifies places through editorial standards, field checks, photography, and ongoing review.",
+  title: "Why Trust MadeInVT? | Verification Promise",
+  description: "Learn how MadeInVT verifies makers through editorial standards, studio visits, photography, and ongoing review.",
   path: "/why-trust-southernvt",
 });
 
@@ -24,12 +24,12 @@ const verificationLevels = [
   {
     icon: "🥾",
     title: "Personally Visited",
-    description: "A SouthernVT team member has directly visited and validated on-the-ground experience details.",
+  description: "A MadeInVT team member has directly visited and validated on-the-ground studio or workshop details.",
   },
   {
     icon: "⭐",
-    title: "SouthernVT Recommended",
-    description: "Top editorial confidence based on quality, consistency, and verified local traveler value.",
+  title: "MadeInVT Recommended",
+  description: "Top editorial confidence based on quality, consistency, and verified local maker value.",
   },
 ];
 
@@ -46,7 +46,7 @@ export default function WhyTrustSouthernVTPage() {
           <Badge variant="featured" className="text-[10px] tracking-[0.18em]">
             Trust & Verification
           </Badge>
-          <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight text-[#fff9ee] sm:text-4xl md:text-6xl">Why Trust SouthernVT?</h1>
+          <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight text-[#fff9ee] sm:text-4xl md:text-6xl">Why Trust MadeInVT?</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-[#eee5d6]">
             We don&apos;t sell rankings. We verify, photograph, and tell the story.
           </p>
@@ -57,7 +57,7 @@ export default function WhyTrustSouthernVTPage() {
         <EditorialSection
           eyebrow="Brand Promise"
           title="Our recommendations are editorial, not pay-to-play"
-          description="SouthernVT is built around trust signals that are earned through process, not purchased through placement."
+          description="MadeInVT is built around trust signals that are earned through process, not purchased through placement."
         >
           <Prose>
             <p>We focus on quality over quantity so each recommended stop is useful in the real world.</p>
@@ -68,8 +68,8 @@ export default function WhyTrustSouthernVTPage() {
 
         <EditorialSection
           eyebrow="Verification Levels"
-          title="How places earn trust signals"
-          description="Each level adds confidence and reflects the depth of SouthernVT review."
+          title="How makers earn trust signals"
+          description="Each level adds confidence and reflects the depth of MadeInVT review."
         >
           <div className="grid gap-4 md:grid-cols-2">
             {verificationLevels.map((level) => (
@@ -100,28 +100,28 @@ export default function WhyTrustSouthernVTPage() {
 
         <EditorialSection
           eyebrow="Editorial Integrity"
-          title="Editorial Places vs Business Listings"
-          description="How SouthernVT separates editorial destination coverage from commercial business listing tools."
+          title="Editorial Makers vs Studio Listings"
+          description="How MadeInVT separates editorial maker coverage from commercial studio listing tools."
         >
           <Prose>
             <p>
-              SouthernVT treats destinations and businesses differently. Places, trails, parks, waterfalls, covered bridges, scenic drives, and editorial destinations cannot be upgraded or purchased. They are selected, written, and organized through SouthernVT&apos;s editorial process.
+              MadeInVT treats makers and studios differently. Artisans, workshops, craft studios, and editorial makers cannot be upgraded or purchased. They are selected, written, and organized through MadeInVT&apos;s editorial process.
             </p>
             <p>
-              Businesses may claim or upgrade their business listings, but paid upgrades do not purchase editorial recommendations, rankings, verification, or SouthernVT Recommended status.
+              Studios may claim or upgrade their business listings, but paid upgrades do not purchase editorial recommendations, rankings, verification, or MadeInVT Recommended status.
             </p>
           </Prose>
         </EditorialSection>
 
         <EditorialSection
           eyebrow="Next Actions"
-          title="Explore trusted places or suggest one we should verify"
-          description="Help shape a stronger local-first guide for Southern Vermont travelers."
+          title="Explore trusted makers or suggest one we should verify"
+          description="Help shape a stronger maker-first guide for Vermont craftsmanship."
           className="bg-[#f9f4e8]"
         >
           <div className="flex flex-wrap gap-3">
             <Link href="/places">
-              <Button variant="secondary" size="lg">Explore Verified Places</Button>
+              <Button variant="secondary" size="lg">Explore Verified Makers</Button>
             </Link>
             <Link href="/feedback?category=Missing%20Place">
               <Button variant="ghost" size="lg" className="border border-(--color-forest-green)/20 bg-white text-(--color-forest-green) motion-safe:hover:bg-[#f4efe1]">

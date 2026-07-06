@@ -25,7 +25,7 @@ export async function sendClaimReceivedEmail(claim: BusinessClaim): Promise<void
     ${eyebrow("Claim Request")}
     ${h1(`We received your claim for ${claim.businessName}.`)}
     ${p(`Hi ${claim.contactName}, thanks for reaching out. Your request is now in our review queue and we'll take a look shortly.`)}
-    ${p("Claiming is free. Once your request is reviewed and approved, you'll be able to update your listing's details through the SouthernVT Partner Portal.")}
+    ${p("Claiming is free. Once your request is reviewed and approved, you'll be able to update your listing's details through the MadeInVT Partner Portal.")}
     ${calloutBox(`
       ${p("<strong>What happens next</strong>")}
       ${p("We review every request manually — usually within a few business days. If we have questions or need additional verification, we'll reply to this email.")}
@@ -47,7 +47,7 @@ export async function sendClaimReceivedEmail(claim: BusinessClaim): Promise<void
     `We received your claim request for ${claim.businessName}.`,
     "Your request is now in our review queue.",
     "",
-    "Claiming is free. Once approved, you'll be able to update your listing through the SouthernVT Partner Portal.",
+    "Claiming is free. Once approved, you'll be able to update your listing through the MadeInVT Partner Portal.",
     "",
     "What happens next:",
     "We review every request manually — usually within a few business days.",
@@ -59,7 +59,7 @@ export async function sendClaimReceivedEmail(claim: BusinessClaim): Promise<void
     "",
     "No action needed right now. Reply to this email to add context.",
     "",
-    "— The SouthernVT team",
+    "— The MadeInVT team",
   ].join("\n");
 
   await sendEmail(
@@ -81,11 +81,11 @@ export async function sendClaimReceivedEmail(claim: BusinessClaim): Promise<void
 export async function sendClaimAdminNotificationEmail(claim: BusinessClaim): Promise<void> {
   const { resendApiKey, emailFrom, adminEmail } = requireEmailEnv();
 
-  const reviewUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://southernvt.com"}/basecamp/claims`;
+  const reviewUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://madeinvt.com"}/basecamp/claims`;
 
   const html = emailHtmlWrapper(`
     ${eyebrow("Basecamp — New Claim")}
-    ${h1(`New SouthernVT Claim Request: ${claim.businessName}`)}
+    ${h1(`New MadeInVT Claim Request: ${claim.businessName}`)}
     ${p("A business owner has submitted a claim request. Review it in Basecamp and approve or reject.")}
     ${metaTable([
       ["Business", claim.businessName],
@@ -104,7 +104,7 @@ export async function sendClaimAdminNotificationEmail(claim: BusinessClaim): Pro
   `);
 
   const text = [
-    `New SouthernVT Claim Request: ${claim.businessName}`,
+    `New MadeInVT Claim Request: ${claim.businessName}`,
     "",
     `Business: ${claim.businessName}`,
     `Listing URL: ${claim.listingUrl}`,
@@ -129,7 +129,7 @@ export async function sendClaimAdminNotificationEmail(claim: BusinessClaim): Pro
     {
       from: emailFrom,
       to: adminEmail,
-      subject: `New SouthernVT Claim Request: ${claim.businessName}`,
+      subject: `New MadeInVT Claim Request: ${claim.businessName}`,
       html,
       text,
     },
@@ -144,8 +144,8 @@ export async function sendClaimAdminNotificationEmail(claim: BusinessClaim): Pro
 export async function sendClaimApprovedEmail(claim: BusinessClaim): Promise<void> {
   const { resendApiKey, emailFrom } = requireEmailEnv();
 
-  const portalUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://southernvt.com"}/partner-portal`;
-  const listingUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://southernvt.com"}/businesses/${claim.businessSlug}`;
+  const portalUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://madeinvt.com"}/partner-portal`;
+  const listingUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://madeinvt.com"}/businesses/${claim.businessSlug}`;
 
   const html = emailHtmlWrapper(`
     ${eyebrow("Claim Approved")}
@@ -153,7 +153,7 @@ export async function sendClaimApprovedEmail(claim: BusinessClaim): Promise<void
     ${p(`Hi ${claim.contactName}, good news — we've reviewed and approved your claim for ${claim.businessName}. You now have owner access.`)}
     ${calloutBox(`
       ${p("<strong>What you can do now</strong>")}
-      ${p("Log in to the Partner Portal to update your listing's description, website, phone, and more. Any changes you submit are reviewed by SouthernVT before going live.")}
+      ${p("Log in to the Partner Portal to update your listing's description, website, phone, and more. Any changes you submit are reviewed by MadeInVT before going live.")}
     `)}
     ${primaryButton("Open Partner Portal", portalUrl)}
     ${metaTable([
@@ -162,7 +162,7 @@ export async function sendClaimApprovedEmail(claim: BusinessClaim): Promise<void
       ["Reference", claim.id],
     ])}
     ${divider()}
-    ${p("A note on verification: SouthernVT's <em>Verified</em> badge is separate from ownership. Verification is earned through editorial review and cannot be purchased.")}
+    ${p("A note on verification: MadeInVT's <em>Verified</em> badge is separate from ownership. Verification is earned through editorial review and cannot be purchased.")}
     ${p("If you have questions, reply to this email.")}
     ${sign()}
   `);
@@ -174,16 +174,16 @@ export async function sendClaimApprovedEmail(claim: BusinessClaim): Promise<void
     "You now have owner access to your listing.",
     "",
     "Log in to the Partner Portal to update your listing's details.",
-    "Any changes you submit are reviewed by SouthernVT before going live.",
+    "Any changes you submit are reviewed by MadeInVT before going live.",
     "",
     `Partner Portal: ${portalUrl}`,
     `Your listing: ${listingUrl}`,
     `Reference: ${claim.id}`,
     "",
-    "Note: SouthernVT's Verified badge is separate from ownership.",
+    "Note: MadeInVT's Verified badge is separate from ownership.",
     "Verification is earned through editorial review and cannot be purchased.",
     "",
-    "— The SouthernVT team",
+    "— The MadeInVT team",
   ].join("\n");
 
   await sendEmail(
@@ -219,7 +219,7 @@ export async function sendClaimRejectedEmail(claim: BusinessClaim): Promise<void
       ["Reference", claim.id],
     ])}
     ${divider()}
-    ${p("The listing remains live on SouthernVT. You're always welcome to reapply with additional context.")}
+    ${p("The listing remains live on MadeInVT. You're always welcome to reapply with additional context.")}
     ${sign()}
   `);
 
@@ -236,9 +236,9 @@ export async function sendClaimRejectedEmail(claim: BusinessClaim): Promise<void
     `Business: ${claim.businessName}`,
     `Reference: ${claim.id}`,
     "",
-    "The listing remains live on SouthernVT.",
+    "The listing remains live on MadeInVT.",
     "",
-    "— The SouthernVT team",
+    "— The MadeInVT team",
   ].join("\n");
 
   await sendEmail(
@@ -264,17 +264,17 @@ export async function sendBusinessFeaturedEmail(
 ): Promise<void> {
   const { resendApiKey, emailFrom } = requireEmailEnv();
 
-  const listingUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://southernvt.com"}/businesses/${listing.slug}`;
-  const portalUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://southernvt.com"}/partner-portal`;
+  const listingUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://madeinvt.com"}/businesses/${listing.slug}`;
+  const portalUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://madeinvt.com"}/partner-portal`;
 
   const html = emailHtmlWrapper(`
-    ${eyebrow("SouthernVT — Featured Listing")}
-    ${h1(`${listing.name} is now featured on SouthernVT.`)}
-    ${p(`Hi ${ownerName}, we're pleased to let you know that ${listing.name} has been selected as a featured listing on SouthernVT.`)}
+    ${eyebrow("MadeInVT — Featured Listing")}
+    ${h1(`${listing.name} is now featured on MadeInVT.`)}
+    ${p(`Hi ${ownerName}, we're pleased to let you know that ${listing.name} has been selected as a featured listing on MadeInVT.`)}
     ${p("Featured listings appear in curated discovery surfaces across the site — including category highlights, seasonal collections, and our editorial picks.")}
     ${calloutBox(`
       ${p("<strong>What being featured means</strong>")}
-      ${p("SouthernVT features a small number of businesses we think are genuinely worth knowing about in Southern Vermont. Featured status is based on editorial judgment — not payment.")}
+      ${p("MadeInVT features a small number of businesses we think are genuinely worth knowing about in Vermont. Featured status is based on editorial judgment — not payment.")}
     `)}
     ${primaryButton("View your listing", listingUrl)}
     ${metaTable([
@@ -286,14 +286,14 @@ export async function sendBusinessFeaturedEmail(
     ${divider()}
     ${p("If you've claimed your listing, you can keep it up to date through the Partner Portal.")}
     ${p("If you haven't claimed it yet, you can do so for free at the link below. Keeping your listing accurate helps visitors find and trust your business.")}
-    ${primaryButton("Claim your listing", `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://southernvt.com"}/claim-listing?listing=${encodeURIComponent(listing.slug)}`)}
+    ${primaryButton("Claim your listing", `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://madeinvt.com"}/claim-listing?listing=${encodeURIComponent(listing.slug)}`)}
     ${sign()}
   `);
 
   const text = [
     `Hi ${ownerName},`,
     "",
-    `${listing.name} has been selected as a featured listing on SouthernVT.`,
+    `${listing.name} has been selected as a featured listing on MadeInVT.`,
     "",
     "Featured listings appear in curated discovery surfaces across the site,",
     "including category highlights, seasonal collections, and our editorial picks.",
@@ -306,16 +306,16 @@ export async function sendBusinessFeaturedEmail(
     `Partner Portal: ${portalUrl}`,
     "",
     "If you haven't claimed it yet, you can do so for free:",
-    `Claim: ${process.env.NEXT_PUBLIC_SITE_URL ?? "https://southernvt.com"}/claim-listing?listing=${encodeURIComponent(listing.slug)}`,
+    `Claim: ${process.env.NEXT_PUBLIC_SITE_URL ?? "https://madeinvt.com"}/claim-listing?listing=${encodeURIComponent(listing.slug)}`,
     "",
-    "— The SouthernVT team",
+    "— The MadeInVT team",
   ].join("\n");
 
   await sendEmail(
     {
       from: emailFrom,
       to: ownerEmail,
-      subject: `${listing.name} is now featured on SouthernVT`,
+      subject: `${listing.name} is now featured on MadeInVT`,
       html,
       text,
     },

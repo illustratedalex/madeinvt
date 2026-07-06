@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: PlaceDetailPageProps): Promis
 
   if (!place || place.status !== "published") {
     return {
-      title: "Place Not Found | SouthernVT",
+      title: "Maker Not Found | MadeInVT",
       description: "This place is not currently available.",
       robots: { index: false, follow: false },
     };
@@ -83,9 +83,9 @@ export async function generateMetadata({ params }: PlaceDetailPageProps): Promis
 
   if (place.slug === "hamilton-falls") {
     return createPageMetadata({
-      title: "Hamilton Falls, Vermont: Flagship Waterfall Guide | SouthernVT",
+      title: "Hamilton Falls, Vermont: Flagship Waterfall Guide | MadeInVT",
       description:
-        "Plan Hamilton Falls like a local: hidden trail approach, seasonal water flow, swimming notes, photography windows, and nearby adventures for a complete Southern Vermont day.",
+        "Plan Hamilton Falls like a local: hidden trail approach, seasonal water flow, swimming notes, photography windows, and nearby adventures for a complete Vermont day.",
       path: `/places/${place.slug}`,
       image: place.featuredImage,
       type: "article",
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: PlaceDetailPageProps): Promis
 
   if (place.slug === "jamaica-state-park") {
     return createPageMetadata({
-      title: "Jamaica State Park, Vermont: Camping, Swimming & River Guide | SouthernVT",
+      title: "Jamaica State Park, Vermont: Camping, Swimming & River Guide | MadeInVT",
       description:
         "Discover Jamaica State Park's riverside basecamp: camping, swimming holes, picnic areas, West River trails, and direct access to Hamilton Falls for complete Southern Vermont family days.",
       path: `/places/${place.slug}`,
@@ -213,7 +213,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
           ...place,
           seoTitle: "Hamilton Falls, Vermont: Hidden Waterfall Hike, Swimming Notes, and Day Trip Guide",
           seoDescription:
-            "Explore Hamilton Falls with clear trailhead details, parking strategy, seasonal water flow guidance, safety notes, nearby food and lodging, and a complete Southern Vermont day-trip plan.",
+            "Explore Hamilton Falls with clear trailhead details, parking strategy, seasonal water flow guidance, safety notes, nearby food and lodging, and a complete Vermont day-trip plan.",
           gallery: scoringGallery.length >= 8 ? scoringGallery : [...scoringGallery, ...Array.from({ length: 8 - scoringGallery.length }, () => place.featuredImage)],
           relatedPlaces: Array.from(new Set([...place.relatedPlaces, ...nearbyAdventureFeed.map((candidate) => candidate.id)])).slice(0, 8),
         }
@@ -325,7 +325,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
         badges={[
           place.featured ? "Flagship" : "Featured",
           ...layoutProfile.heroBadges,
-          ...(isRecommendedBySouthernVT ? ["SouthernVT Recommended"] : []),
+          ...(isRecommendedBySouthernVT ? ["MadeInVT Recommended"] : []),
           ...(showPremiumProfile ? ["Premium Partner"] : []),
         ]}
       >
@@ -415,7 +415,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
         <VerificationPanel record={verificationRecord} />
 
         {isUnverified ? (
-          <div className="rounded-2xl border border-[#e8dfc8] bg-white px-4 py-3 text-sm text-slate-600">Details are being reviewed by SouthernVT.</div>
+          <div className="rounded-2xl border border-[#e8dfc8] bg-white px-4 py-3 text-sm text-slate-600">Details are being reviewed by MadeInVT.</div>
         ) : null}
 
         <QuickFacts facts={layoutProfile.quickFacts} />
@@ -429,7 +429,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
             <ContentSection
               title={`Why Visit ${place.name}`}
               eyebrow={isWaterfallLayout || isParkLayout ? "Flagship Standard" : "Destination Highlights"}
-              description={isWaterfallLayout || isParkLayout ? "This is the benchmark destination experience for future SouthernVT place pages." : layoutProfile.contentLabels.storyDescription}
+              description={isWaterfallLayout || isParkLayout ? "This is the benchmark destination experience for future MadeInVT maker pages." : layoutProfile.contentLabels.storyDescription}
             >
               {isWaterfallLayout ? (
                 <ul className="space-y-3 text-sm leading-7 text-slate-700">
@@ -454,7 +454,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
             <ContentSection
               title="Story"
               eyebrow="Editorial Field Notes"
-              description={isWaterfallLayout ? "Hamilton Falls is the benchmark for how Southern Vermont stories should feel: grounded, specific, and useful in the field." : isParkLayout ? "Jamaica State Park is the benchmark for flexibility and accessibility in destination planning." : layoutProfile.contentLabels.storyDescription}
+              description={isWaterfallLayout ? "Hamilton Falls is the benchmark for how Vermont maker stories should feel: grounded, specific, and useful in the field." : isParkLayout ? "Jamaica State Park is the benchmark for flexibility and accessibility in destination planning." : layoutProfile.contentLabels.storyDescription}
             >
               {isWaterfallLayout ? (
                 <div className="space-y-4 text-base leading-8 text-slate-700">
@@ -476,7 +476,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
               ) : isParkLayout ? (
                 <div className="space-y-4 text-base leading-8 text-slate-700">
                   <p>
-                    Jamaica State Park is where many Southern Vermont weekends settle into rhythm. The West River corridor gives you shade, water access, and enough room to spread out without feeling remote. It is the kind of place locals return to each season because the day can stay flexible: swim in the morning, walk a trail at midday, picnic when you&apos;re hungry, then head into nearby towns for dinner.
+                    Jamaica State Park is where many Vermont weekends settle into rhythm. The West River corridor gives you shade, water access, and enough room to spread out without feeling remote. It is the kind of place locals return to each season because the day can stay flexible: swim in the morning, walk a trail at midday, picnic when you&apos;re hungry, then head into nearby towns for dinner.
                   </p>
                   <p>
                     The park sits in a fold of the West River Valley where the water moves at a pace that feels negotiable—fast enough for visual interest, slow enough for swimming and riverside exploration. The campground and day-use picnic areas give you multiple anchors, which means you can plan a full day without choosing just one activity. Families come for the sandy entry points and shallow pools. Photographers find morning light on the water and fall foliage reflected in quiet sections. Hikers use it as a basecamp for nearby trails, especially the short walk to nearby Hamilton Falls or longer routes through the river corridor.
@@ -561,10 +561,10 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
               <ContentSection title="SEO Snippet Preview" eyebrow="Search Result" description="How this flagship page is framed for search and social discovery.">
                 <div className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-4">
                   <p className="text-sm font-semibold text-[#1a0dab]">Hamilton Falls, Vermont: Hidden Waterfall Hike, Swimming Notes, and Day Trip Guide</p>
-                  <p className="mt-1 text-xs text-[#006621]">southernvt.com/places/hamilton-falls</p>
+                  <p className="mt-1 text-xs text-[#006621]">madeinvt.com/places/hamilton-falls</p>
                   <p className="mt-2 text-sm leading-6 text-slate-700">
                     Explore Hamilton Falls with clear trailhead details, parking strategy, seasonal water flow guidance, safety notes, nearby food and lodging,
-                    and a complete Southern Vermont day-trip plan.
+                    and a complete Vermont day-trip plan.
                   </p>
                 </div>
               </ContentSection>
@@ -796,11 +796,11 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
 
       <section className="mx-auto max-w-7xl space-y-4 px-6 pb-12 sm:px-8 lg:px-10">
         <article className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">SouthernVT Editorial Review</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">MadeInVT Editorial Review</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {verificationRecord?.levels.includes("personally_visited") ? <Badge variant="forest">Personally Visited</Badge> : null}
             {verificationRecord?.levels.includes("photo_verified") ? <Badge variant="amber">Photo Verified</Badge> : null}
-            {verificationRecord?.levels.includes("southernvt_recommended") ? <Badge variant="featured">SouthernVT Recommended</Badge> : null}
+            {verificationRecord?.levels.includes("southernvt_recommended") ? <Badge variant="featured">MadeInVT Recommended</Badge> : null}
             {!verificationRecord ? <Badge variant="subtle">Verification in progress</Badge> : null}
           </div>
         </article>
@@ -816,7 +816,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
 function createFallbackStory(place: Place): Story {
   return {
     id: `story-fallback-${place.id}`,
-    title: `${place.name}: A Southern Vermont Story`,
+    title: `${place.name}: A Vermont Maker Story`,
     subtitle: `${place.placeType} in ${place.city}, ${place.state}`,
     body: `${place.description}\n\nThis stop works best when paired with nearby routes, local food, and one additional destination before sunset.`,
     summary: place.description,
@@ -825,7 +825,7 @@ function createFallbackStory(place: Place): Story {
     difficulty: "Easy",
     season: "Year-Round",
     history: [
-      `${place.name} has become a dependable stop in Southern Vermont itineraries.`,
+      `${place.name} has become a dependable stop in Vermont itineraries.`,
       "Local trip planning often links this destination with nearby villages and seasonal events.",
       "Recent updates have improved discoverability through collections and guide coverage.",
     ],
@@ -845,7 +845,7 @@ function createFallbackStory(place: Place): Story {
       "Pairing this location with a short walk improves the overall route rhythm.",
     ],
     bestTimeToVisit: "Year-round, with seasonal highlights depending on weather and local event calendars.",
-    featuredQuote: "The best Southern Vermont stops always feel like a story, not just a pin on a map.",
+    featuredQuote: "The best Vermont stops always feel like a story, not just a pin on a map.",
     createdAt: place.createdAt,
     updatedAt: place.updatedAt,
   };

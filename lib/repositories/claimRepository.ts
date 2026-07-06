@@ -34,7 +34,7 @@ export async function submitClaim(input: BusinessClaimInput): Promise<BusinessCl
   // Surface the 503 "not configured" message explicitly so the UI can render it clearly
   if (response.status === 503) {
     const payload = (await response.json()) as ApiErrorPayload;
-    throw new Error(payload.error ?? "Claim submissions are not enabled yet. Please email partners@southernvt.com.");
+    throw new Error(payload.error ?? "Claim submissions are not enabled yet. Please email partners@madeinvt.com.");
   }
 
   const payload = await parseJsonResponse<{ claim?: BusinessClaim; blocked?: boolean }>(response);

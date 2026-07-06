@@ -20,7 +20,7 @@ export function ComingSoon({ title, description, eyebrow = "Coming Soon" }: Comi
               href="/"
               className="rounded-full bg-(--color-maple-gold) px-5 py-3 text-sm font-semibold text-(--color-forest-green) transition hover:opacity-90"
             >
-              Explore SouthernVT
+              Explore MadeInVT
             </Link>
             <Link
               href="/collections"

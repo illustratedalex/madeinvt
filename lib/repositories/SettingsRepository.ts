@@ -2,7 +2,7 @@ import { GeneralSettings, FeatureFlags, ApiStatusConfig, EnvironmentType, ApiSta
 import { hasSupabaseConfig } from "@/lib/supabase/config";
 
 const generalSettings: GeneralSettings = {
-  siteName: "SouthernVT",
+  siteName: "MadeInVT",
   theme: "light",
   editorial: {
     defaultVerificationRequired: true,

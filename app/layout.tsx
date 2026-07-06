@@ -24,8 +24,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Southern Vermont | Travel & Adventure",
-  description: "Discover Southern Vermont with curated guides, local events, scenic adventures, and partner offers.",
+  title: "MadeInVT | Makers, Artisans & Handcrafted Vermont",
+  description: "Explore handcrafted goods, artisan workshops, local creators, and the stories behind Vermont craftsmanship.",
 };
 
 export default function RootLayout({

@@ -27,7 +27,7 @@ export function PartnerValueSummary({ businessName, insights }: PartnerValueSumm
 
   return (
     <section className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
-      <h2 className="text-2xl font-semibold text-slate-900">Your Value on SouthernVT</h2>
+      <h2 className="text-2xl font-semibold text-slate-900">Your Value on MadeInVT</h2>
       <p className="mt-2 text-sm text-slate-600">
         {businessName} is already helping visitors discover your business. Here&apos;s how you&apos;re performing.
       </p>
@@ -70,7 +70,7 @@ export function PartnerValueSummary({ businessName, insights }: PartnerValueSumm
       ) : null}
 
       <p className="mt-6 rounded-2xl border border-[#e8dfc8] bg-[#fff7e4] p-3 text-sm text-[#6b5a30]">
-        ✓ Partner tools are free during the SouthernVT beta. Thank you for helping us build a better guide to Southern Vermont.
+        ✓ Partner tools are free during the MadeInVT beta. Thank you for helping us build a better guide to Vermont.
       </p>
     </section>
   );

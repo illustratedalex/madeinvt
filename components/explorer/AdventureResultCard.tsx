@@ -9,7 +9,7 @@ export function AdventureResultCard({ details }: AdventureResultCardProps) {
   if (!details || !details.primaryPlace) {
     return (
       <section className="rounded-[26px] border border-[#e8dfc8] bg-white p-6 shadow-[0_16px_52px_rgba(31,59,47,0.08)]">
-        <p className="text-sm text-slate-600">Tap the adventure button to generate a curated Southern Vermont surprise.</p>
+        <p className="text-sm text-slate-600">Tap the adventure button to generate a curated Vermont surprise.</p>
       </section>
     );
   }

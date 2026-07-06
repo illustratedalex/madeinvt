@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       {
         success: false,
         error:
-          "Claim submissions are not enabled yet. Please email partners@southernvt.com to claim your listing.",
+          "Claim submissions are not enabled yet. Please email partners@madeinvt.com to claim your listing.",
         notConfigured: true,
       },
       { status: 503 },
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: false,
-        error: "Claim email notifications are not enabled yet. Please email partners@southernvt.com to submit your claim.",
+        error: "Claim email notifications are not enabled yet. Please email partners@madeinvt.com to submit your claim.",
         notConfigured: true,
       },
       { status: 503 },

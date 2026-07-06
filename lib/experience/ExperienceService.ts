@@ -223,13 +223,13 @@ export const ExperienceService = {
         {
           key: "daily_adventure",
           title: "Daily Adventure",
-          description: "Your daily anchor for building a Southern Vermont route.",
+          description: "Your daily anchor for building a Vermont route.",
           recommendations: dailyAdventureRail,
         },
         {
           key: "seasonal_engine",
           title: `${season} Seasonal Engine`,
-          description: "Season-aware recommendations tuned for right-now Southern Vermont conditions.",
+          description: "Season-aware recommendations tuned for right-now Vermont conditions.",
           recommendations: seasonalEngine,
         },
         {
@@ -253,7 +253,7 @@ export const ExperienceService = {
         {
           key: "recently_added",
           title: "Recently Added",
-          description: "New places added to the Southern Vermont discovery graph.",
+          description: "New places added to the Vermont discovery graph.",
           recommendations: recentlyAdded,
         },
         {

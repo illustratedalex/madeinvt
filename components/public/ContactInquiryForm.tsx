@@ -20,18 +20,18 @@ const partnerReasons: InquiryReason[] = ["Founding Partner Inquiry", "Claim a Bu
 
 function destinationForReason(reason: InquiryReason | "") {
   if (partnerReasons.includes(reason as InquiryReason)) {
-    return "partners@southernvt.com";
+    return "partners@madeinvt.com";
   }
 
   if (reason === "Press / Media") {
-    return "press@southernvt.com";
+    return "press@madeinvt.com";
   }
 
   if (helloReasons.includes(reason as InquiryReason)) {
-    return "hello@southernvt.com";
+    return "hello@madeinvt.com";
   }
 
-  return "hello@southernvt.com";
+  return "hello@madeinvt.com";
 }
 
 const inputClass = "h-12 w-full rounded-2xl border border-[#d7cbb3] bg-[#fcfaf6] px-4 outline-none focus:border-[#d8b15d] focus:ring-2 focus:ring-[#d8b15d]/20 transition";
@@ -91,7 +91,7 @@ export default function ContactInquiryForm() {
       {submitted ? (
         <div className="mt-6 rounded-2xl border border-[#cde8d6] bg-[#ecf8f0] p-5 text-sm leading-7 text-[#1f5a3d]">
           <p className="font-semibold">Message sent.</p>
-          <p className="mt-1">Thank you for contacting SouthernVT. We&apos;ll be in touch soon.</p>
+          <p className="mt-1">Thank you for contacting MadeInVT. We&apos;ll be in touch soon.</p>
         </div>
       ) : (
         <form className="mt-6 space-y-4" onSubmit={(event) => { void handleSubmit(event); }}>

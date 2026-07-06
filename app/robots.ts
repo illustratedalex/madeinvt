@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/basecamp", "/api", "/admin"],
     },
-    sitemap: "https://www.southernvt.com/sitemap.xml",
+    sitemap: "https://www.madeinvt.com/sitemap.xml",
   };
 }

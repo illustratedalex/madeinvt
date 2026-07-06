@@ -107,7 +107,7 @@ export function TripBuilder({ places, collections, hiddenGems }: TripBuilderProp
       <aside className="rounded-[30px] border border-[#e8dfc8] bg-white/90 p-6 shadow-[0_20px_70px_rgba(31,59,47,0.12)]">
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Trip Builder</p>
         <h1 className="mt-2 text-3xl font-semibold text-slate-900">Create your custom route</h1>
-        <p className="mt-2 text-sm leading-7 text-slate-600">Answer a few questions and generate a day-by-day Southern Vermont itinerary.</p>
+        <p className="mt-2 text-sm leading-7 text-slate-600">Answer a few questions and generate a day-by-day Vermont itinerary.</p>
 
         <div className="mt-6 space-y-5">
           <QuestionBlock label="Where are you staying?">

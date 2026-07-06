@@ -9,13 +9,13 @@ export default function Navbar() {
       <Container className="flex items-center justify-between py-3 sm:py-4">
         <Link href="/" className="flex items-center gap-3">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-(--color-forest-green) text-sm font-semibold uppercase tracking-[0.24em] text-(--color-cream)">
-            SV
+            MV
           </div>
           <div className="min-w-0">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-(--color-forest-green)">
-              SouthernVT
+              MadeInVT
             </p>
-            <p className="hidden text-xs text-slate-600 sm:block">Travel guide</p>
+            <p className="hidden text-xs text-slate-600 sm:block">Vermont makers &amp; artisans</p>
           </div>
         </Link>
 
@@ -77,7 +77,7 @@ export default function Navbar() {
             href="/concierge"
             className="hidden rounded-full bg-(--color-forest-green) px-4 py-2 text-sm font-semibold whitespace-nowrap text-(--color-cream) transition hover:bg-(--color-pine) sm:inline-flex"
           >
-            Plan a trip
+            Find a Maker
           </Link>
         </div>
       </Container>

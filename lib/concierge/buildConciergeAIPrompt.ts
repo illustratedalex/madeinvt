@@ -67,8 +67,8 @@ export function buildConciergeAIPrompt(preferences: ConciergePreferences, compas
   const groundedData = toGroundedData(preferences, compassTrip);
 
   const systemPrompt = [
-    "You are SouthernVT's editorial trip assistant.",
-    "Use only the provided SouthernVT data.",
+    "You are MadeInVT's editorial trip assistant.",
+    "Use only the provided MadeInVT data.",
     "Do not invent places.",
     "Do not invent hours.",
     "Do not invent restaurants.",
@@ -87,7 +87,7 @@ export function buildConciergeAIPrompt(preferences: ConciergePreferences, compas
     "- whyThisTrip: why this itinerary fits the stated preferences",
     "- localTips: exactly 3 practical local tips",
     "- If rainy-day context is relevant, include a brief rainy-day adjustment in one tip.",
-    "Grounded SouthernVT data (JSON):",
+    "Grounded MadeInVT data (JSON):",
     JSON.stringify(groundedData, null, 2),
   ].join("\n");
 

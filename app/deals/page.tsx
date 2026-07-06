@@ -10,8 +10,8 @@ interface DealsPageProps {
 }
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Southern Vermont Deals",
-  description: "Browse active Southern Vermont partner discounts, packages, and seasonal offers.",
+  title: "Vermont Deals",
+  description: "Browse active Vermont partner discounts, packages, and seasonal offers.",
   path: "/deals",
 });
 
@@ -44,7 +44,7 @@ export default async function DealsPage({ searchParams }: DealsPageProps) {
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-linear-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Partner offers</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Deals across Southern Vermont.</h1>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Deals across Vermont.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">Find active discounts, packages, and curated local offers from trusted partners.</p>
         </div>
       </section>

@@ -6,8 +6,8 @@ import { foundingPartnerPublicSlots } from "@/data/foundingPartners";
 import { FoundingPartnerBenefits, FoundingPartnerCTA, FoundingPartnerHero, FoundingPartnerPromise, FoundingPartnerSlots } from "@/components/founding-partners";
 
 export const metadata = createPageMetadata({
-  title: "SouthernVT Founding Partners",
-  description: "A small founding partner program for local businesses that want to support SouthernVT's early growth.",
+  title: "MadeInVT Founding Partners",
+  description: "A small founding partner program for local businesses that want to support MadeInVT's early growth.",
   path: "/founding-partners",
 });
 
@@ -18,18 +18,18 @@ export default function FoundingPartnersPage() {
 
       <section className="mx-auto max-w-6xl space-y-8 px-6 py-10 sm:px-8 lg:px-10">
         <FoundingPartnerHero
-          title="SouthernVT Founding Partners"
-          headline="Help Build the Guide to Southern Vermont"
-          subheadline="We’re inviting a small group of local businesses to help shape SouthernVT from the beginning."
+          title="MadeInVT Founding Partners"
+          headline="Help Build the Guide to Vermont"
+          subheadline="We’re inviting a small group of local businesses to help shape MadeInVT from the beginning."
         />
 
         <EditorialSection
           eyebrow="What it is"
           title="A local support program for early growth"
-          description="SouthernVT is a locally built travel publication. Founding Partners help support early growth, with the goal of better stories, better visibility, and better tools for local businesses."
+          description="MadeInVT is a locally built travel publication. Founding Partners help support early growth, with the goal of better stories, better visibility, and better tools for local businesses."
         >
           <Prose>
-            <p>We’re building SouthernVT with the same care we want to bring to every place we feature.</p>
+            <p>We’re building MadeInVT with the same care we want to bring to every place we feature.</p>
             <p>Founding Partners help fund the first stages of that work and stay close to the product while it grows.</p>
           </Prose>
         </EditorialSection>
@@ -47,7 +47,7 @@ export default function FoundingPartnersPage() {
             <article className="rounded-3xl border border-[#e8dfc8] bg-[#fcfaf6] p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1f5a3d]">Monthly</p>
               <p className="mt-2 text-3xl font-semibold text-slate-900">$50</p>
-              <p className="mt-2 text-sm leading-7 text-slate-600">A simple way to support SouthernVT during beta with a predictable monthly contribution.</p>
+              <p className="mt-2 text-sm leading-7 text-slate-600">A simple way to support MadeInVT during beta with a predictable monthly contribution.</p>
             </article>
             <article className="rounded-3xl border border-[#e8dfc8] bg-[#fcfaf6] p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1f5a3d]">Annual</p>

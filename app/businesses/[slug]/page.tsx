@@ -26,7 +26,7 @@ interface BusinessPageProps {
 async function buildBusinessMetadataDescription(slug: string) {
   const listing = await getBusinessListingBySlugWithLiveClaimStatus(slug);
   if (!listing) {
-    return "Basic SouthernVT business listing.";
+    return "Basic MadeInVT studio listing.";
   }
 
   if (listing.status === "basic") {
@@ -42,14 +42,14 @@ export async function generateMetadata({ params }: BusinessPageProps): Promise<M
 
   if (!listing) {
     return createPageMetadata({
-      title: "Business Listing | SouthernVT",
-      description: "SouthernVT business listing.",
+      title: "Studio Listing | MadeInVT",
+      description: "MadeInVT studio listing.",
       path: `/businesses/${slug}`,
     });
   }
 
   return createPageMetadata({
-    title: `${listing.name} | SouthernVT Businesses`,
+    title: `${listing.name} | MadeInVT Studios`,
     description: await buildBusinessMetadataDescription(slug),
     path: `/businesses/${listing.slug}`,
   });
@@ -66,7 +66,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
   const claimMessage = listing.claimStatus === "unclaimed"
     ? "Own this business? Claim this listing to help keep your information current and unlock partner tools."
     : listing.claimStatus === "pending"
-      ? "A claim request is already in review. Owners can still contact SouthernVT if details need correction."
+      ? "A claim request is already in review. Owners can still contact MadeInVT if details need correction."
       : "This listing has already been claimed by the business owner.";
   const relationshipSnapshot = getBusinessRelationshipSnapshot(listing.slug);
 
@@ -88,7 +88,7 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
           <div className="mt-5 flex flex-wrap gap-2">
             <Badge variant={getBusinessListingStatusTone(listing.status)}>{getBusinessListingStatusLabel(listing.status)}</Badge>
             <Badge variant="subtle">{getBusinessListingClaimLabel(listing.claimStatus)}</Badge>
-            {listing.isVerified ? <Badge variant="amber">Verified by SouthernVT</Badge> : null}
+            {listing.isVerified ? <Badge variant="amber">Verified by MadeInVT</Badge> : null}
             {listing.isFoundingPartner ? <Badge variant="featured">Founding Partner</Badge> : null}
           </div>
 
@@ -187,10 +187,10 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
           <article className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Status Language</p>
             <div className="mt-4 space-y-3 text-sm leading-7 text-slate-700">
-              <p><span className="font-semibold text-slate-900">Basic Listing:</span> Created by SouthernVT from publicly available or submitted information. May be incomplete.</p>
+              <p><span className="font-semibold text-slate-900">Basic Listing:</span> Created by MadeInVT from publicly available or submitted information. May be incomplete.</p>
               <p><span className="font-semibold text-slate-900">Claimed by Owner:</span> Business owner has claimed the profile.</p>
-              <p><span className="font-semibold text-slate-900">Verified by SouthernVT:</span> SouthernVT has reviewed or verified key details.</p>
-              <p><span className="font-semibold text-slate-900">Founding Partner:</span> Business is helping support SouthernVT during beta.</p>
+              <p><span className="font-semibold text-slate-900">Verified by MadeInVT:</span> MadeInVT has reviewed or verified key details.</p>
+              <p><span className="font-semibold text-slate-900">Founding Partner:</span> Business is helping support MadeInVT during beta.</p>
             </div>
           </article>
 
@@ -236,9 +236,9 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
 
           {listing.isVerified ? (
             <article className="rounded-[28px] border border-[#d7cba7] bg-[#fff7df] p-6 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#7c5b13]">Verified by SouthernVT</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#7c5b13]">Verified by MadeInVT</p>
               <p className="mt-3 text-sm leading-7 text-slate-700">
-                SouthernVT has reviewed or verified key details for this listing. Verification cannot be bought.
+                MadeInVT has reviewed or verified key details for this listing. Verification cannot be bought.
               </p>
             </article>
           ) : null}
@@ -274,11 +274,11 @@ export default async function BusinessPage({ params }: BusinessPageProps) {
 
       <section className="mx-auto max-w-6xl space-y-4 px-6 pb-10 sm:px-8 lg:px-10">
         <article className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">SouthernVT Editorial Review</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">MadeInVT Editorial Review</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {listing.isVerified ? <Badge variant="forest">Personally Visited</Badge> : null}
             {listing.isVerified ? <Badge variant="amber">Photo Verified</Badge> : null}
-            {listing.isVerified ? <Badge variant="featured">SouthernVT Recommended</Badge> : null}
+            {listing.isVerified ? <Badge variant="featured">MadeInVT Recommended</Badge> : null}
             {!listing.isVerified ? <Badge variant="subtle">Verification in progress</Badge> : null}
           </div>
         </article>

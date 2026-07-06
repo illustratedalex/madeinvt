@@ -282,7 +282,7 @@ export const CompassEngine = {
 
     if (place.featured) {
       score += 8;
-      reasons.push(reason("Featured by SouthernVT editors.", "featured", 8));
+      reasons.push(reason("Featured by MadeInVT editors.", "featured", 8));
     }
 
     if ((await premiumProfilesEnabled()) && place.isPremium) {
@@ -295,7 +295,7 @@ export const CompassEngine = {
       const trustScore = verificationBoost(verification.levels);
       if (trustScore > 0) {
         score += trustScore;
-        reasons.push(reason("Verified by SouthernVT trust signals.", "verification", trustScore));
+        reasons.push(reason("Verified by MadeInVT trust signals.", "verification", trustScore));
       }
     }
 

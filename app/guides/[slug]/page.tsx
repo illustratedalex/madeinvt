@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: GuideDetailPageProps): Promis
 
   if (!article || article.status !== "published") {
     return {
-      title: "Guide Not Found | SouthernVT",
+      title: "Guide Not Found | MadeInVT",
       description: "This guide is not currently available.",
       robots: { index: false, follow: false },
     };
@@ -88,7 +88,7 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Guides", href: "/guides" }, { label: article.title }]} />
 
       <HeroImage
-        eyebrow="SouthernVT Guide Story"
+        eyebrow="MadeInVT Guide Story"
         title={article.title}
         subtitle={story.summary}
         image={article.featuredImage}
@@ -104,7 +104,7 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
       <section className="mx-auto max-w-7xl space-y-6 px-6 py-10 sm:px-8 lg:px-10">
         <QuickFacts
           facts={[
-            { label: "Author", value: article.author, detail: "Original SouthernVT editorial voice." },
+            { label: "Author", value: article.author, detail: "Original MadeInVT editorial voice." },
             { label: "Published", value: new Date(article.publishedAt || article.updatedAt).toLocaleDateString(), detail: "Last updated in the public guide library." },
             { label: "Type", value: article.articleType, detail: article.status },
             { label: "Reading", value: story.readingTime, detail: `Story season: ${story.season}` },
@@ -189,7 +189,7 @@ export default async function GuideDetailPage({ params }: GuideDetailPageProps) 
             <PublicCTA
               eyebrow="Build from this guide"
               title="Plan a trip from this story"
-              description="Turn the places, collections, events, and deals in this guide into a Southern Vermont itinerary."
+              description="Turn the places, collections, events, and deals in this guide into a Vermont itinerary."
               href="/planner/new"
               label="Build a trip"
             />
@@ -214,7 +214,7 @@ function articleToStory(article: Article): Story {
     difficulty: "Easy",
     season: "Year-Round",
     history: [
-      "This guide is part of the expanding Southern Vermont editorial library.",
+      "This guide is part of the expanding Vermont editorial library.",
       "It is periodically updated as relationships between places and collections improve.",
       "Local partner updates influence guide quality across seasons.",
     ],

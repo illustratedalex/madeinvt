@@ -6,7 +6,7 @@ const benefits = [
   { title: "Featured partner section", description: "A dedicated area for early supporters inside the partner experience." },
   { title: "Events and deals", description: "A practical place to surface timely offers, events, and seasonal announcements." },
   { title: "Partner insights", description: "Early reporting on engagement, interest, and content interactions." },
-  { title: "Early access to new tools", description: "Get a first look at new partner utilities as SouthernVT grows." },
+  { title: "Early access to new tools", description: "Get a first look at new partner utilities as MadeInVT grows." },
   { title: "Input into the platform", description: "Help shape the tools and workflows that matter to local businesses." },
 ];
 

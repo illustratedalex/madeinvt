@@ -14,13 +14,13 @@ export default function Hero() {
       <Container className="relative flex min-h-[88vh] flex-col justify-center py-24">
         <div className="max-w-3xl">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-(--color-maple-gold)">
-            Premium Vermont travel guide
+            Vermont artisans &amp; makers
           </p>
           <h1 className="text-4xl font-semibold leading-tight sm:text-6xl">
-            Discover Southern Vermont at the pace you love.
+            Discover Vermont&apos;s Makers
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200 sm:text-xl">
-            Follow forest trails, sip local cider, and linger in mountain towns with thoughtful recommendations for every kind of escape.
+            Explore handcrafted goods, artisan workshops, local creators, and the stories behind Vermont craftsmanship.
           </p>
         </div>
 
@@ -28,7 +28,7 @@ export default function Hero() {
           <div className="flex flex-col gap-3 rounded-[1.35rem] bg-[#14261f]/90 p-3 sm:flex-row sm:items-center">
             <Input
               type="text"
-              placeholder="Search hikes, inns, food, and events"
+              placeholder="Search makers, studios, collections, and events"
               className="border-slate-700 bg-[#101a15] text-(--color-cream) placeholder:text-slate-400"
             />
             <Button variant="primary" size="lg" className="h-14">

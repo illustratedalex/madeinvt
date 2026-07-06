@@ -79,7 +79,7 @@ export default async function UpdatesPage() {
       <section className="mx-auto max-w-5xl space-y-6 px-6 py-10 sm:px-8 lg:px-10">
         <header className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Updates</p>
-          <h1 className="mt-2 text-3xl font-semibold text-slate-900">SouthernVT Changelog</h1>
+          <h1 className="mt-2 text-3xl font-semibold text-slate-900">MadeInVT Changelog</h1>
         </header>
 
         <div className="space-y-4">

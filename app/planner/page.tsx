@@ -10,8 +10,8 @@ import { isFeatureEnabled } from "@/lib/featureFlags";
 import { getTrips } from "@/repositories/TripRepository";
 
 export const metadata: Metadata = {
-  title: "Southern Vermont Trip Planner",
-  description: "Build and preview Southern Vermont itinerary plans using curated places, collections, events, and guides.",
+  title: "Vermont Gift Finder",
+  description: "Build and preview Vermont itinerary plans using curated places, collections, events, and guides.",
 };
 
 export default async function PlannerLandingPage() {
@@ -35,8 +35,8 @@ export default async function PlannerLandingPage() {
 
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-18 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Trip Planner</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Plan a Southern Vermont weekend.</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Gift Finder</p>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Find Vermont handmade gifts.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
             Build itinerary previews from curated Places, Collections, Events, and Guides.
           </p>
@@ -52,7 +52,7 @@ export default async function PlannerLandingPage() {
       <section className="mx-auto max-w-7xl space-y-10 px-6 py-10 sm:px-8 lg:px-10">
         {!plannerEnabled ? (
           <section className="rounded-[24px] border border-[#d7cbb3] bg-[#fff7e4] px-5 py-4 text-sm font-semibold text-[#6b5a30]">
-            AI-powered planning coming soon. This preview uses curated SouthernVT data.
+            AI-powered planning coming soon. This preview uses curated MadeInVT data.
           </section>
         ) : null}
 

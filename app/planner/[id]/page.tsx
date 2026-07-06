@@ -28,14 +28,14 @@ export async function generateMetadata({ params }: PlannerTripDetailPageProps): 
 
   if (!trip || trip.status === "archived") {
     return {
-      title: "Trip Not Found | SouthernVT",
+      title: "Trip Not Found | MadeInVT",
       description: "This itinerary is not currently available.",
       robots: { index: false, follow: false },
     };
   }
 
   return createPageMetadata({
-    title: `${trip.title} | SouthernVT Trip Planner`,
+    title: `${trip.title} | MadeInVT Gift Finder`,
     description: trip.notes,
     path: `/planner/${trip.id}`,
   });

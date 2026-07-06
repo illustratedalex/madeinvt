@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: EventDetailPageProps): Promis
 
   if (!event || event.status !== "published") {
     return {
-      title: "Event Not Found | SouthernVT",
+      title: "Event Not Found | MadeInVT",
       description: "This event is not currently available.",
       robots: { index: false, follow: false },
     };
@@ -61,7 +61,7 @@ export default async function EventDetailPage({ params }: EventDetailPageProps) 
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Events", href: "/events" }, { label: event.title }]} />
 
       <HeroImage
-        eyebrow="SouthernVT Event"
+        eyebrow="MadeInVT Event"
         title={event.title}
         subtitle={event.description}
         image={event.featuredImage}

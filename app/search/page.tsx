@@ -32,8 +32,8 @@ const resultTypeLabels: Record<SearchResultType, string> = {
 };
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Search SouthernVT | Places, businesses, stays, and guides",
-  description: "Search Southern Vermont places, local businesses, stays, collections, guides, and events.",
+  title: "Search MadeInVT | Places, businesses, stays, and guides",
+  description: "Search Vermont places, local businesses, stays, collections, guides, and events.",
   path: "/search",
 });
 
@@ -56,7 +56,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
       <section className="border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#405d4c] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Search SouthernVT</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Search MadeInVT</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-5xl">Find places, businesses, stays, guides, and events.</h1>
           <form action="/search" method="get" className="mt-6 max-w-3xl">
             <div className="flex flex-col gap-3 sm:flex-row">

@@ -6,8 +6,8 @@ import { createPageMetadata } from "@/lib/seo";
 import { getPlaces } from "@/repositories/PlaceRepository";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Interactive Map of Southern Vermont",
-  description: "Explore waterfalls, restaurants, lodging, trails, events, and hidden gems across Southern Vermont.",
+  title: "Interactive Map of Vermont",
+  description: "Explore waterfalls, restaurants, lodging, trails, events, and hidden gems across Vermont.",
   path: "/map",
 });
 

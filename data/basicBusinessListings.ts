@@ -1,7 +1,7 @@
 import type { BusinessListing } from "@/types/BusinessListing";
 
 const BASIC_DESCRIPTION =
-  "Basic SouthernVT listing. Details may be incomplete. Business owners can claim this page to update information.";
+  "Basic MadeInVT listing. Details may be incomplete. Business owners can claim this page to update information.";
 
 type BasicListingSeed = {
   name: string;
@@ -149,7 +149,7 @@ const seedsByTown: Record<string, BasicListingSeed[]> = {
     { name: "Lye Brook Falls Trail", slug: "lye-brook-falls-trail-manchester", category: "Attraction", town: "Manchester", county: "Bennington County", completenessScore: 43 },
     { name: "Manchester Designer Outlets", slug: "manchester-designer-outlets", category: "Shopping", town: "Manchester", county: "Bennington County", completenessScore: 50 },
     { name: "Northshire Bookstore", slug: "northshire-bookstore-manchester", category: "Shopping", town: "Manchester", county: "Bennington County", completenessScore: 53 },
-    { name: "Southern Vermont Arts Center", slug: "southern-vermont-arts-center-business", category: "Gallery", town: "Manchester", county: "Bennington County", completenessScore: 52 },
+    { name: "Vermont Arts Center", slug: "southern-vermont-arts-center-business", category: "Gallery", town: "Manchester", county: "Bennington County", completenessScore: 52 },
     { name: "The Crooked Ram", slug: "the-crooked-ram-manchester", category: "Restaurant", town: "Manchester", county: "Bennington County", completenessScore: 46 },
     { name: "The Equinox Golf Resort & Spa", slug: "the-equinox-golf-resort-and-spa-manchester", category: "Lodging", town: "Manchester", county: "Bennington County", completenessScore: 46 },
     { name: "Wilburton Inn", slug: "wilburton-inn-manchester", category: "Lodging", town: "Manchester", county: "Bennington County", completenessScore: 48 },

@@ -101,7 +101,7 @@ export function ClaimForm({ listing }: ClaimFormProps) {
       pushToast({
         tone: "success",
         title: "Claim submitted",
-        description: "Your claim request has been submitted. SouthernVT will review it before granting access.",
+        description: "Your claim request has been submitted. MadeInVT will review it before granting access.",
       });
     } catch (error) {
       pushToast({
@@ -120,7 +120,7 @@ export function ClaimForm({ listing }: ClaimFormProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f5a3d]">Request received</p>
         <h2 className="mt-2 text-2xl font-semibold text-slate-900">Success</h2>
         <p className="mt-3 text-sm leading-7 text-slate-700">
-          Your claim request has been submitted. SouthernVT will review it before granting access.
+          Your claim request has been submitted. MadeInVT will review it before granting access.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link href={listing.publicHref} className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-3 text-sm font-semibold text-[#f8f2e4]">
@@ -206,7 +206,7 @@ export function ClaimForm({ listing }: ClaimFormProps) {
           value={state.verificationNotes}
           onChange={(event) => update("verificationNotes", event.target.value)}
           className="min-h-28 w-full rounded-2xl border border-(--color-pine)/25 bg-white px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-(--color-maple-gold) focus:ring-2 focus:ring-(--color-maple-gold)/20"
-          placeholder="Provide proof or context to help SouthernVT verify ownership."
+          placeholder="Provide proof or context to help MadeInVT verify ownership."
         />
       </label>
 

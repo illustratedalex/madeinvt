@@ -37,9 +37,9 @@ const partnerReasons = ["Founding Partner Inquiry", "Claim a Business"];
 
 function getContactDestinations() {
   return {
-    general: process.env.GENERAL_EMAIL_TO?.trim() || "hello@southernvt.com",
-    partners: process.env.PARTNERS_EMAIL_TO?.trim() || "partners@southernvt.com",
-    press: process.env.PRESS_EMAIL_TO?.trim() || "press@southernvt.com",
+    general: process.env.GENERAL_EMAIL_TO?.trim() || "hello@madeinvt.com",
+    partners: process.env.PARTNERS_EMAIL_TO?.trim() || "partners@madeinvt.com",
+    press: process.env.PRESS_EMAIL_TO?.trim() || "press@madeinvt.com",
   };
 }
 
@@ -66,14 +66,14 @@ export async function sendContactEmail(input: ContactEmailInput): Promise<void> 
     .replace(/\n/g, "<br />");
 
   const html = emailHtmlWrapper(`
-    ${eyebrow("Contact Form — southernvt.com/contact")}
+    ${eyebrow("Contact Form — madeinvt.com/contact")}
     ${h1(`New message: ${input.reason}`)}
     ${metaTable([
       ["From", input.name],
       ["Email", input.email],
       ["Reason", input.reason],
       ["Submitted", new Date(input.submittedAt).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "America/New_York" })],
-      ["Source", "southernvt.com/contact"],
+      ["Source", "madeinvt.com/contact"],
     ])}
     ${divider()}
     ${calloutBox(`
@@ -85,13 +85,13 @@ export async function sendContactEmail(input: ContactEmailInput): Promise<void> 
   `);
 
   const text = [
-    `New contact form message — southernvt.com/contact`,
+    `New contact form message — madeinvt.com/contact`,
     "",
     `From: ${input.name}`,
     `Email: ${input.email}`,
     `Reason: ${input.reason}`,
     `Submitted: ${new Date(input.submittedAt).toLocaleString("en-US", { timeZone: "America/New_York" })}`,
-    `Source: southernvt.com/contact`,
+    `Source: madeinvt.com/contact`,
     "",
     "Message:",
     "----------",
@@ -105,7 +105,7 @@ export async function sendContactEmail(input: ContactEmailInput): Promise<void> 
     {
       from: emailFrom,
       to,
-      subject: `SouthernVT Contact: ${input.reason}`,
+      subject: `MadeInVT Contact: ${input.reason}`,
       html,
       text,
     },

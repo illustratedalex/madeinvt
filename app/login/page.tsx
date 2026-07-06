@@ -2,8 +2,8 @@ import Link from "next/link";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Owner Login | SouthernVT",
-  description: "Business owner login for SouthernVT listing claiming and partner portal access.",
+  title: "Owner Login | MadeInVT",
+  description: "Business owner login for MadeInVT listing claiming and partner portal access.",
   path: "/login",
 });
 
@@ -37,7 +37,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Business Owner Access</p>
         <h1 className="mt-2 text-3xl font-semibold text-slate-900">Login</h1>
         <p className="mt-2 text-sm leading-7 text-slate-700">
-          Sign in to manage your approved SouthernVT business listings.
+          Sign in to manage your approved MadeInVT business listings.
         </p>
       </header>
 

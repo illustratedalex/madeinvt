@@ -12,11 +12,11 @@ export interface ImageService {
 
 class MockImageService implements ImageService {
   getPlaceholderImage(title: string): ImageDescriptor {
-    const seed = encodeURIComponent(title || "Southern Vermont");
+    const seed = encodeURIComponent(title || "Vermont");
     return {
       id: `image-${seed}`,
       url: `https://placehold.co/1600x900/png?text=${seed}`,
-      alt: `${title || "Southern Vermont"} placeholder image`,
+      alt: `${title || "Vermont"} placeholder image`,
       title,
     };
   }

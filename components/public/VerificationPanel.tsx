@@ -17,7 +17,7 @@ export function VerificationPanel({ record }: VerificationPanelProps) {
     return (
       <section className="rounded-[26px] border border-[#e8dfc8] bg-white p-5 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1f3b2f]">Verification</p>
-        <p className="mt-3 text-sm leading-7 text-slate-600">Details are being reviewed by SouthernVT.</p>
+        <p className="mt-3 text-sm leading-7 text-slate-600">Details are being reviewed by MadeInVT.</p>
       </section>
     );
   }
@@ -25,7 +25,7 @@ export function VerificationPanel({ record }: VerificationPanelProps) {
   return (
     <section className="rounded-[26px] border border-[#e8dfc8] bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1f3b2f]">Verified by SouthernVT</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#1f3b2f]">Verified by MadeInVT</p>
         <VerificationBadge status={record.status} />
       </div>
 

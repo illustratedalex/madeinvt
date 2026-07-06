@@ -12,7 +12,7 @@ import { isFeatureEnabled } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
   title: "New Trip Itinerary",
-  description: "Generate a day-by-day Southern Vermont itinerary preview from curated places, collections, events, and guides.",
+  description: "Generate a day-by-day Vermont itinerary preview from curated places, collections, events, and guides.",
 };
 
 export default async function NewTripPlanPage() {

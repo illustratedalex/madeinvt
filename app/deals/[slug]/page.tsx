@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: DealDetailPageProps): Promise
 
   if (!deal || deal.status !== "published") {
     return {
-      title: "Deal Not Found | SouthernVT",
+      title: "Deal Not Found | MadeInVT",
       description: "This offer is not currently available.",
       robots: { index: false, follow: false },
     };
@@ -87,7 +87,7 @@ export default async function DealDetailPage({ params }: DealDetailPageProps) {
         subtitle={deal.shortDescription}
         image={deal.featuredImage}
         alt={deal.title}
-        badges={[deal.dealType, `${deal.startDate} - ${deal.endDate}`, place?.name ?? "Southern Vermont"]}
+        badges={[deal.dealType, `${deal.startDate} - ${deal.endDate}`, place?.name ?? "Vermont"]}
       >
         <div className="space-y-3 text-sm leading-7 text-slate-200">
           <p>{place?.name ?? "Related place unavailable"}</p>
@@ -169,7 +169,7 @@ export default async function DealDetailPage({ params }: DealDetailPageProps) {
             <PublicCTA
               eyebrow="Claim deal"
               title="Use this offer"
-              description="Online redemption tools are coming soon. Contact the partner directly or email partners@southernvt.com for help redeeming this offer."
+              description="Online redemption tools are coming soon. Contact the partner directly or email partners@madeinvt.com for help redeeming this offer."
               href={ctaHref}
               label={ctaText}
             />

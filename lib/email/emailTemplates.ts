@@ -1,5 +1,5 @@
 /**
- * Shared HTML email wrapper — SouthernVT brand.
+ * Shared HTML email wrapper — MadeInVT brand.
  *
  * Inline styles only (email client compatibility).
  * Colors: cream #f7efe1, forest green #1f3b2f, gold #d8b15d, slate #334155.
@@ -20,8 +20,8 @@ export function emailHtmlWrapper(bodyHtml: string): string {
           <!-- Header -->
           <tr>
             <td style="background-color:#1f3b2f;border-radius:16px 16px 0 0;padding:24px 32px;">
-              <p style="margin:0;font-size:11px;font-weight:bold;letter-spacing:0.2em;text-transform:uppercase;color:#d8b15d;">SouthernVT</p>
-              <p style="margin:4px 0 0;font-size:13px;color:#eee5d6;letter-spacing:0.06em;">Southern Vermont's independent local guide</p>
+              <p style="margin:0;font-size:11px;font-weight:bold;letter-spacing:0.2em;text-transform:uppercase;color:#d8b15d;">MadeInVT</p>
+              <p style="margin:4px 0 0;font-size:13px;color:#eee5d6;letter-spacing:0.06em;">Vermont's independent local guide</p>
             </td>
           </tr>
 
@@ -36,7 +36,7 @@ export function emailHtmlWrapper(bodyHtml: string): string {
           <tr>
             <td style="background-color:#f7efe1;border-radius:0 0 16px 16px;border:1px solid #e8dfc8;border-top:none;padding:20px 32px;">
               <p style="margin:0;font-size:12px;color:#7a6a55;line-height:1.6;">
-                SouthernVT &mdash; an independent guide to Southern Vermont.<br />
+                MadeInVT &mdash; an independent guide to Vermont.<br />
                 Questions? Reply to this email and we'll be in touch.
               </p>
             </td>
@@ -102,5 +102,5 @@ export function metaTable(rows: Array<[string, string]>): string {
 }
 
 export function sign(): string {
-  return p("— The SouthernVT team");
+  return p("— The MadeInVT team");
 }

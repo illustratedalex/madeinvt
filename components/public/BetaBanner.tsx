@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSyncExternalStore, useState } from "react";
 
-const DISMISS_KEY = "southernvt-beta-banner-dismissed";
+const DISMISS_KEY = "madeinvt-beta-banner-dismissed";
 
 function isPublicPath(pathname: string): boolean {
   return !pathname.startsWith("/basecamp") && !pathname.startsWith("/partner-portal") && !pathname.startsWith("/admin");
@@ -43,7 +43,7 @@ export function BetaBanner() {
     <div className="border-b border-[#d7cbb3] bg-[#f7efe1] px-4 py-2 text-sm text-slate-700 sm:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
         <p className="leading-6">
-          SouthernVT is currently in public beta. We&apos;re adding new destinations every week. Found an error or have a suggestion?{" "}
+          MadeInVT is currently in Public Beta. We&apos;re adding new makers every week. Know an artisan we should feature?{" "}
           <Link href="/feedback" className="font-semibold text-[#1f3b2f] underline">
             Let us know.
           </Link>

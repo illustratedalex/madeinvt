@@ -32,14 +32,14 @@ export function SquareCheckoutButton({
       const data = (await response.json()) as { success: boolean; checkoutUrl?: string; error?: string };
 
       if (!data.success || !data.checkoutUrl) {
-        setError(data.error ?? "Could not create checkout session. Please try again or contact partners@southernvt.com.");
+        setError(data.error ?? "Could not create checkout session. Please try again or contact partners@madeinvt.com.");
         setLoading(false);
         return;
       }
 
       window.location.href = data.checkoutUrl;
     } catch {
-      setError("Network error. Please try again or contact partners@southernvt.com.");
+      setError("Network error. Please try again or contact partners@madeinvt.com.");
       setLoading(false);
     }
   }

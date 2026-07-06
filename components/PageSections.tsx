@@ -56,7 +56,7 @@ export function HeroSection() {
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 py-24 sm:px-8 lg:px-12">
         <div className="max-w-3xl">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.4em] text-emerald-300">
-            Southern Vermont • Curated escapes
+            Vermont • Curated escapes
           </p>
           <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
             Discover the quiet magic of New England adventures.
@@ -114,7 +114,7 @@ export function ExploreSection() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
         <SectionHeading
           eyebrow="Plan your next escape"
-          title="Explore Southern Vermont your way"
+          title="Explore Vermont your way"
           description="Choose from slow mornings, spontaneous drives, and outdoor adventures that fit your pace."
         />
 
@@ -191,7 +191,7 @@ export function EventsSection() {
       <SectionHeading
         eyebrow="What’s happening"
         title="Featured events worth planning around"
-        description="From seasonal festivals to intimate evenings, Southern Vermont keeps the calendar full."
+        description="From seasonal festivals to intimate evenings, Vermont keeps the calendar full."
       />
 
       <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -261,7 +261,7 @@ export function FooterSection() {
     <footer className="border-t border-stone-200 bg-stone-950 px-6 py-12 text-stone-300 sm:px-8 lg:px-12">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <p className="text-2xl font-semibold text-white">Southern Vermont</p>
+          <p className="text-2xl font-semibold text-white">Vermont</p>
           <p className="mt-3 max-w-xl text-base leading-7 text-stone-400">
             Discover the slower side of New England with scenic routes, local flavor, and memorable stays.
           </p>

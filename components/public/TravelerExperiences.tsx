@@ -62,7 +62,7 @@ const profiles: Record<ExperienceProfile["id"], ExperienceProfile> = {
       "Easy walk from nearby attractions.",
       "Would return on a future weekend trip.",
     ],
-    businessResponse: "Thanks for the thoughtful experience note. Verified traveler feedback helps keep SouthernVT listings practical and useful.",
+    businessResponse: "Thanks for the thoughtful experience note. Verified traveler feedback helps keep MadeInVT listings practical and useful.",
   },
 };
 

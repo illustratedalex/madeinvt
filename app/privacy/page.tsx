@@ -3,8 +3,8 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — SouthernVT",
-  description: "How SouthernVT collects, uses, and protects information submitted through our platform.",
+  title: "Privacy Policy — MadeInVT",
+  description: "How MadeInVT collects, uses, and protects information submitted through our platform.",
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -33,12 +33,12 @@ export default function PrivacyPage() {
 
           <Section title="Who We Are">
             <p>
-              SouthernVT is a regional travel publication and planning platform focused on Southern Vermont. We help visitors discover places, businesses, and experiences across Windham, Bennington, and Southern Windsor counties.
+              MadeInVT is a Vermont editorial platform celebrating the state&apos;s artisans, makers, workshops, and handcrafted products. We help people discover makers, studios, and craft stories across Vermont.
             </p>
             <p>
-              Our website is located at <strong>southernvt.com</strong>. For questions about this policy, contact us at{" "}
-              <a href="mailto:hello@southernvt.com" className="text-[#1f3b2f] underline underline-offset-2">
-                hello@southernvt.com
+              Our website is located at <strong>madeinvt.com</strong>. For questions about this policy, contact us at{" "}
+              <a href="mailto:hello@madeinvt.com" className="text-[#1f3b2f] underline underline-offset-2">
+                hello@madeinvt.com
               </a>
               .
             </p>
@@ -56,12 +56,12 @@ export default function PrivacyPage() {
               <li>Listing information submitted by business owners</li>
             </ul>
             <p>
-              We do not require account registration to browse SouthernVT. Information is only collected when you voluntarily submit a form or interact with a feature that requires it.
+              We do not require account registration to browse MadeInVT. Information is only collected when you voluntarily submit a form or interact with a feature that requires it.
             </p>
           </Section>
 
           <Section title="How We Use Information">
-            <p>Information collected through SouthernVT may be used to:</p>
+            <p>Information collected through MadeInVT may be used to:</p>
             <ul className="ml-4 list-disc space-y-1">
               <li>Respond to contact inquiries</li>
               <li>Review and process business listing claim requests</li>
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
           </Section>
 
           <Section title="Analytics Tools">
-            <p>SouthernVT uses analytics and performance monitoring tools to understand how visitors use the site. These may include:</p>
+            <p>MadeInVT uses analytics and performance monitoring tools to understand how visitors use the site. These may include:</p>
             <ul className="ml-4 list-disc space-y-1">
               <li>
                 <strong>Google Analytics</strong> — tracks page views, sessions, and visitor behavior
@@ -92,41 +92,41 @@ export default function PrivacyPage() {
 
           <Section title="Business Listings and Claims">
             <p>
-              SouthernVT maintains a directory of local businesses and places. Some listings are created by our editorial team using publicly available information. Business owners may submit a claim request to take ownership of their listing.
+              MadeInVT maintains a directory of local makers and studios. Some listings are created by our editorial team using publicly available information. Studio owners may submit a claim request to take ownership of their listing.
             </p>
             <p>
-              When a claim is submitted, SouthernVT reviews it before granting access. Approved owners may update their listing information. All changes are subject to editorial review and may be modified or rejected at SouthernVT&apos;s discretion.
+              When a claim is submitted, MadeInVT reviews it before granting access. Approved owners may update their listing information. All changes are subject to editorial review and may be modified or rejected at MadeInVT&apos;s discretion.
             </p>
           </Section>
 
           <Section title="Payments">
             <p>
-              SouthernVT may offer paid listing upgrades or Founding Partner contributions in the future. If enabled, payments would be processed by a third-party payment provider such as Stripe. SouthernVT does not store credit card or payment information directly.
+              MadeInVT may offer paid listing upgrades or Founding Partner contributions in the future. If enabled, payments would be processed by a third-party payment provider such as Stripe. MadeInVT does not store credit card or payment information directly.
             </p>
             <p>At this time, all listing claims and basic listings are free of charge.</p>
           </Section>
 
           <Section title="Email Communication">
             <p>
-              Messages submitted through our contact form are routed to the SouthernVT team based on the reason selected:
+              Messages submitted through our contact form are routed to the MadeInVT team based on the reason selected:
             </p>
             <ul className="ml-4 list-disc space-y-1">
               <li>
                 General inquiries, listing corrections, and suggestions →{" "}
-                <a href="mailto:hello@southernvt.com" className="text-[#1f3b2f] underline underline-offset-2">
-                  hello@southernvt.com
+                <a href="mailto:hello@madeinvt.com" className="text-[#1f3b2f] underline underline-offset-2">
+                  hello@madeinvt.com
                 </a>
               </li>
               <li>
                 Business claims and partner inquiries →{" "}
-                <a href="mailto:partners@southernvt.com" className="text-[#1f3b2f] underline underline-offset-2">
-                  partners@southernvt.com
+                <a href="mailto:partners@madeinvt.com" className="text-[#1f3b2f] underline underline-offset-2">
+                  partners@madeinvt.com
                 </a>
               </li>
               <li>
                 Press and media inquiries →{" "}
-                <a href="mailto:press@southernvt.com" className="text-[#1f3b2f] underline underline-offset-2">
-                  press@southernvt.com
+                <a href="mailto:press@madeinvt.com" className="text-[#1f3b2f] underline underline-offset-2">
+                  press@madeinvt.com
                 </a>
               </li>
             </ul>
@@ -134,19 +134,19 @@ export default function PrivacyPage() {
 
           <Section title="Data Sharing">
             <p>
-              SouthernVT does not sell personal information to third parties.
+              MadeInVT does not sell personal information to third parties.
             </p>
             <p>
               We may share limited information with service providers necessary to operate the platform — such as email delivery services, analytics providers, and hosting infrastructure. These providers are only given access to information needed to perform their function.
             </p>
             <p>
-              We may disclose information if required by law or to protect the rights, safety, or property of SouthernVT, our users, or the public.
+              We may disclose information if required by law or to protect the rights, safety, or property of MadeInVT, our users, or the public.
             </p>
           </Section>
 
           <Section title="Cookies">
             <p>
-              SouthernVT uses cookies and similar technologies for analytics and performance monitoring. These cookies help us understand how visitors use the site so we can improve the experience.
+              MadeInVT uses cookies and similar technologies for analytics and performance monitoring. These cookies help us understand how visitors use the site so we can improve the experience.
             </p>
             <p>
               You can configure your browser to refuse cookies or alert you when cookies are being sent. Some features of the site may not function properly if cookies are disabled.
@@ -155,12 +155,12 @@ export default function PrivacyPage() {
 
           <Section title="Data Retention">
             <p>
-              We retain submitted information for as long as necessary to operate SouthernVT, respond to requests, comply with legal obligations, or maintain records of business listing claims and communications.
+              We retain submitted information for as long as necessary to operate MadeInVT, respond to requests, comply with legal obligations, or maintain records of business listing claims and communications.
             </p>
             <p>
               If you would like to request deletion or correction of information you have submitted, contact us at{" "}
-              <a href="mailto:hello@southernvt.com" className="text-[#1f3b2f] underline underline-offset-2">
-                hello@southernvt.com
+              <a href="mailto:hello@madeinvt.com" className="text-[#1f3b2f] underline underline-offset-2">
+                hello@madeinvt.com
               </a>
               .
             </p>
@@ -168,12 +168,12 @@ export default function PrivacyPage() {
 
           <Section title="Children">
             <p>
-              SouthernVT is not intended for children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has submitted information through our platform, please contact us so we can remove it.
+              MadeInVT is not intended for children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has submitted information through our platform, please contact us so we can remove it.
             </p>
           </Section>
 
           <Section title="Your Choices">
-            <p>You can contact SouthernVT at any time to:</p>
+            <p>You can contact MadeInVT at any time to:</p>
             <ul className="ml-4 list-disc space-y-1">
               <li>Request an update or correction to information you have submitted</li>
               <li>Request removal of a contact form submission or claim request</li>
@@ -181,8 +181,8 @@ export default function PrivacyPage() {
             </ul>
             <p>
               Reach us at{" "}
-              <a href="mailto:hello@southernvt.com" className="text-[#1f3b2f] underline underline-offset-2">
-                hello@southernvt.com
+              <a href="mailto:hello@madeinvt.com" className="text-[#1f3b2f] underline underline-offset-2">
+                hello@madeinvt.com
               </a>
               .
             </p>
@@ -190,23 +190,23 @@ export default function PrivacyPage() {
 
           <Section title="Changes to This Policy">
             <p>
-              We may update this privacy policy from time to time. When we do, we will update the effective date at the top of this page. Continued use of SouthernVT after changes are posted constitutes acceptance of the updated policy.
+              We may update this privacy policy from time to time. When we do, we will update the effective date at the top of this page. Continued use of MadeInVT after changes are posted constitutes acceptance of the updated policy.
             </p>
           </Section>
 
           <Section title="Contact">
             <p>
-              For questions, concerns, or requests related to this privacy policy, contact SouthernVT at:
+              For questions, concerns, or requests related to this privacy policy, contact MadeInVT at:
             </p>
             <p>
-              <a href="mailto:hello@southernvt.com" className="font-semibold text-[#1f3b2f] underline underline-offset-2">
-                hello@southernvt.com
+              <a href="mailto:hello@madeinvt.com" className="font-semibold text-[#1f3b2f] underline underline-offset-2">
+                hello@madeinvt.com
               </a>
             </p>
           </Section>
 
           <div className="mt-10 border-t border-[#e8dfc8] pt-6 text-xs leading-6 text-slate-400">
-            SouthernVT · Southern Vermont · Effective July 2026
+            MadeInVT · Vermont Makers &amp; Artisans · Effective July 2026
           </div>
         </article>
       </section>

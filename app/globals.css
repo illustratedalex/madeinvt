@@ -5,11 +5,15 @@
   --color-forest-green: #1f3b2f;
   --color-pine: #3e5b4a;
   --color-cream: #f8f2e4;
-  --color-slate: #243238;
-  --color-maple-gold: #d8b15d;
+  --color-warm-linen: #f2e8d6;
+  --color-walnut: #6b4226;
+  --color-copper: #b5673a;
+  --color-charcoal: #2d2d2f;
+  --color-slate: #2e3238;
+  --color-maple-gold: #c8773d;
   --color-autumn-red: #8e3b2f;
   --background: var(--color-cream);
-  --foreground: var(--color-slate);
+  --foreground: var(--color-charcoal);
 }
 
 @theme inline {

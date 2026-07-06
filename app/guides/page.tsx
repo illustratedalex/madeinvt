@@ -10,8 +10,8 @@ interface GuidesPageProps {
 }
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Southern Vermont Guides",
-  description: "Browse editorial guides, lists, and itineraries across Southern Vermont.",
+  title: "Vermont Guides",
+  description: "Browse editorial guides, lists, and itineraries across Vermont.",
   path: "/guides",
 });
 
@@ -42,8 +42,8 @@ export default async function GuidesPage({ searchParams }: GuidesPageProps) {
 
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">SouthernVT Guides</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Editorial guides for Southern Vermont travel.</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">MadeInVT Guides</p>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Editorial guides for Vermont travel.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">Find trip ideas, local stories, and practical itineraries curated by the Trailhead editorial team.</p>
         </div>
       </section>

@@ -10,7 +10,7 @@ type CheckoutRequestBody = {
 };
 
 const TRUST_LANGUAGE =
-  "Paid business listing upgrades do not purchase editorial recommendations, verification, rankings, or SouthernVT Recommended status.";
+  "Paid business listing upgrades do not purchase editorial recommendations, verification, rankings, or MadeInVT Recommended status.";
 
 export async function POST(request: Request) {
   const payload = (await request.json()) as CheckoutRequestBody;
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         success: false,
-        error: "Square checkout is not configured yet. Contact partners@southernvt.com to activate this plan.",
+        error: "Square checkout is not configured yet. Contact partners@madeinvt.com to activate this plan.",
         trustLanguage: TRUST_LANGUAGE,
         listing: { slug: listing.slug, name: listing.name },
         plan: { id: plan.id, name: plan.name },
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
   try {
     const client = getSquareClient();
     const locationId = getSquareLocationId();
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.southernvt.com";
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.madeinvt.com";
 
     const response = await client.checkout.paymentLinks.create({
       idempotencyKey: `${businessSlug}-${planId}-${billingCadence}-${Date.now()}`,
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
         referenceId: `svt-${businessSlug}-${planId}-${billingCadence}`,
         lineItems: [
           {
-            name: `SouthernVT ${plan.name} (${billingCadence})`,
+            name: `MadeInVT ${plan.name} (${billingCadence})`,
             quantity: "1",
             basePriceMoney: {
               amount: BigInt(plan.price * 100),
@@ -103,9 +103,9 @@ export async function POST(request: Request) {
       checkoutOptions: {
         redirectUrl: `${appUrl}/businesses/${businessSlug}/upgrade?checkout=success`,
         askForShippingAddress: false,
-        merchantSupportEmail: "partners@southernvt.com",
+        merchantSupportEmail: "partners@madeinvt.com",
       },
-      paymentNote: `SouthernVT listing upgrade — ${listing.name} (${plan.name}, ${billingCadence})`,
+      paymentNote: `MadeInVT listing upgrade — ${listing.name} (${plan.name}, ${billingCadence})`,
     });
 
     const paymentLink = response.paymentLink;

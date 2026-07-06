@@ -20,7 +20,7 @@ export function GeneratedTripPreview({ trip, placesById, collectionsById, events
     <section className="space-y-5">
       {!plannerEnabled ? (
         <div className="rounded-2xl border border-[#d7cbb3] bg-[#fff7e4] p-4 text-sm font-medium text-[#6b5a30]">
-          AI-powered planning coming soon. This preview uses curated SouthernVT data.
+          AI-powered planning coming soon. This preview uses curated MadeInVT data.
         </div>
       ) : null}
 

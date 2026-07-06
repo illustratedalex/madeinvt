@@ -38,7 +38,7 @@ export function PlaceInfoCards({ place }: PlaceInfoCardsProps) {
               </span>
             ))
           ) : (
-            <p className="text-sm text-slate-600">Amenities are being updated by the SouthernVT editorial team.</p>
+            <p className="text-sm text-slate-600">Amenities are being updated by the MadeInVT editorial team.</p>
           )}
         </div>
       </article>

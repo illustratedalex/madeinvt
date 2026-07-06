@@ -504,7 +504,7 @@ export function getPlaceLayoutProfile(place: Place): PlaceLayoutProfile {
           storyEyebrow: "Scenic Story",
           storyDescription: "View quality, seasonal timing, and route context.",
           nearbyDescription: "Connect this overlook to food, lodging, and nearby attractions.",
-          guidesDescription: "Use guides to sequence scenic drives across Southern Vermont.",
+          guidesDescription: "Use guides to sequence scenic drives across Vermont.",
           safetyTitle: "Road note",
           safetyDescription: "Mountain weather can change quickly; drive cautiously.",
         },
@@ -541,7 +541,7 @@ export function getPlaceLayoutProfile(place: Place): PlaceLayoutProfile {
           secondaryLabel: "Save place",
         },
         secondaryCTA: {
-          title: "Keep exploring Southern Vermont",
+          title: "Keep exploring Vermont",
           description: "Use discovery and map tools to expand your route.",
           href: "/explorer",
           label: "Explorer Mode",

@@ -9,38 +9,45 @@ export const publicNavigationGroups: NavigationGroup[] = [
     label: "Explore",
     href: "/places",
     items: [
-      { label: "Places", href: "/places" },
+      { label: "Makers", href: "/places" },
       { label: "Collections", href: "/collections" },
       { label: "Events", href: "/events" },
-      { label: "Deals", href: "/deals" },
     ],
   },
   {
-    label: "Plan",
-    href: "/concierge",
+    label: "Gift Guides",
+    href: "/collections",
     items: [
-      { label: "Concierge", href: "/concierge" },
-      { label: "Passport", href: "/passport" },
+      { label: "Gift Guides", href: "/collections" },
+      { label: "Maker Finder", href: "/concierge" },
     ],
   },
   {
     label: "Stories",
     href: "/guides",
     items: [
-      { label: "Guides", href: "/guides" },
+      { label: "Stories", href: "/guides" },
       { label: "Current Issue", href: "/updates" },
-      { label: "Why Trust SouthernVT", href: "/why-trust-southernvt" },
+      { label: "Why Trust MadeInVT", href: "/why-trust-southernvt" },
       { label: "Our Coverage", href: "/our-coverage" },
     ],
   },
   {
-    label: "Businesses",
+    label: "Studios",
     href: "/businesses",
     items: [
-      { label: "Businesses", href: "/businesses" },
+      { label: "Studios", href: "/businesses" },
       { label: "Claim a Listing", href: "/businesses" },
       { label: "Founding Partners", href: "/founding-partners" },
       { label: "Partner Portal", href: "/partner-portal" },
+    ],
+  },
+  {
+    label: "Shop",
+    href: "/collections",
+    items: [
+      { label: "Find Handmade", href: "/collections" },
+      { label: "Gift Finder", href: "/concierge" },
     ],
   },
 ];
@@ -48,7 +55,7 @@ export const publicNavigationGroups: NavigationGroup[] = [
 export const footerLinks = [
   { label: "About", href: "/about" },
   { label: "Our Coverage", href: "/our-coverage" },
-  { label: "Why Trust SouthernVT?", href: "/why-trust-southernvt" },
+  { label: "Why Trust MadeInVT?", href: "/why-trust-southernvt" },
   { label: "Founding Partners", href: "/founding-partners" },
   { label: "Contact", href: "/contact" },
   { label: "Updates", href: "/updates" },

@@ -88,7 +88,7 @@ export function ExplorerExperience({ detailedResults, compassRecommendations, mo
     <section className="mx-auto max-w-7xl space-y-6 px-6 py-10 sm:px-8 lg:px-10">
       <ExplorerHero
         title="I'm Feeling Adventurous"
-        subtitle="Skip the filters and let Compass spin up a polished surprise route through Southern Vermont."
+        subtitle="Skip the filters and let Compass spin up a polished surprise route through Vermont."
       />
 
       <MoodPicker moods={moods} selectedMood={selectedMood} onSelectMood={setSelectedMood} />

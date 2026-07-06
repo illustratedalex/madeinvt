@@ -22,8 +22,8 @@ import type {
 } from "@/types/Concierge";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Compass Concierge | Guided Day Planning",
-  description: "Use Compass Concierge to build a calm, guided day plan across Southern Vermont using verified local recommendations.",
+  title: "Compass Maker Finder | Guided Day Planning",
+  description: "Use Compass Maker Finder to build a calm, guided day plan across Vermont using verified local recommendations.",
   path: "/concierge",
 });
 

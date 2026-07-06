@@ -15,7 +15,7 @@ export default function FeedbackPage() {
       <section className="mx-auto max-w-3xl px-6 py-10 sm:px-8 lg:px-10">
         <div className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Feedback</p>
-          <h1 className="mt-2 text-3xl font-semibold text-slate-900">Help Improve SouthernVT</h1>
+          <h1 className="mt-2 text-3xl font-semibold text-slate-900">Help Improve MadeInVT</h1>
           <p className="mt-2 text-sm leading-7 text-slate-600">
             Feedback submissions are reviewed manually during beta. We use this queue to improve listings, coverage, and planning tools.
           </p>

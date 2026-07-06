@@ -1,48 +1,48 @@
-export const SITE_NAME = "Southern Vermont";
-export const SITE_TAGLINE = "Premium travel guide for scenic adventures and local escapes";
+export const SITE_NAME = "MadeInVT";
+export const SITE_TAGLINE = "Made by Vermonters. Shared with the World.";
 
-export const heroHighlights = ["Waterfalls", "Scenic drives", "Farm dinners", "Mountain stays"];
+export const heroHighlights = ["Woodworkers", "Pottery", "Maple", "Jewelry", "Textiles", "Artisan Food"];
 
 export const categoryCards = [
   {
-    title: "Waterfalls & trails",
-    description: "Follow forest paths to cascading viewpoints and quiet overlooks.",
-    badge: "Outdoors",
+    title: "Woodworkers & Furniture",
+    description: "Explore studios crafting heirloom pieces from Vermont hardwoods.",
+    badge: "Wood",
   },
   {
-    title: "Cozy stays",
-    description: "Book a historic inn, cedar cabin, or boutique lodge with warm hospitality.",
-    badge: "Stay",
+    title: "Pottery & Ceramics",
+    description: "Discover wheel-thrown and hand-built ceramics from Vermont kilns.",
+    badge: "Pottery",
   },
   {
-    title: "Local flavors",
-    description: "Discover cider houses, bakeries, and farm-to-table dining.",
+    title: "Maple & Food Makers",
+    description: "From sugar houses to artisan kitchens — Vermont's finest edible crafts.",
     badge: "Food",
   },
   {
-    title: "Scenic drives",
-    description: "Plan a gentle route through covered bridges and meadow-lined roads.",
-    badge: "Drive",
+    title: "Textiles & Fiber Arts",
+    description: "Handwoven, knit, and dyed by Vermont fiber artists and small mills.",
+    badge: "Textiles",
   },
 ];
 
 export const weekendEvents = [
   {
-    title: "Summer music on the green",
-    detail: "Friday • Brattleboro • Live sets and riverfront dining",
+    title: "Open Studio Weekend",
+    detail: "Friday • Brattleboro • Meet makers and see work in progress",
   },
   {
-    title: "Farmers market morning",
-    detail: "Saturday • Manchester • Fresh pastries and artisan goods",
+    title: "Artisan Market Morning",
+    detail: "Saturday • Manchester • Handcrafted goods and local makers",
   },
   {
-    title: "Moonlight trail walk",
-    detail: "Sunday • Bennington • Guided evening stroll with lanterns",
+    title: "Craft Workshop",
+    detail: "Sunday • Bennington • Hands-on session with a Vermont artisan",
   },
 ];
 
 export const partnerOffers = [
-  "15% off mountain cabin stays this week",
-  "Free tasting flight at a local cidery",
-  "Two-for-one kayak rentals on the river",
+  "Free workshop tour at a Vermont woodworking studio",
+  "10% off handmade ceramics this weekend",
+  "Behind-the-scenes at a Vermont maple sugarhouse",
 ];

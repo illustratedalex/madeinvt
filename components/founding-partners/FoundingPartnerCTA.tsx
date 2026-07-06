@@ -6,7 +6,7 @@ type FoundingPartnerCTAProps = {
   secondaryHref?: string;
 };
 
-export function FoundingPartnerCTA({ primaryHref = "/contact?reason=Founding%20Partner%20Inquiry#contact-form", secondaryHref = "mailto:partners@southernvt.com?subject=SouthernVT%20Founding%20Partner%20Interest" }: FoundingPartnerCTAProps) {
+export function FoundingPartnerCTA({ primaryHref = "/contact?reason=Founding%20Partner%20Inquiry#contact-form", secondaryHref = "mailto:partners@madeinvt.com?subject=MadeInVT%20Founding%20Partner%20Interest" }: FoundingPartnerCTAProps) {
   return (
     <EditorialSection
       eyebrow="Next step"
