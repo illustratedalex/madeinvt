@@ -6,7 +6,7 @@ type NearbyPlacesRailProps = {
   title?: string;
 };
 
-export function NearbyPlacesRail({ places, title = "Nearby Places" }: NearbyPlacesRailProps) {
+export function NearbyPlacesRail({ places, title = "Related Makers" }: NearbyPlacesRailProps) {
   return (
     <RelatedContentRail
       title={title}
@@ -17,8 +17,8 @@ export function NearbyPlacesRail({ places, title = "Nearby Places" }: NearbyPlac
         href: `/places/${place.slug}`,
         badge: place.featured ? "Featured" : undefined,
       }))}
-      emptyTitle="No nearby places yet"
-      emptyDescription="Nearby matches will appear as more destination relationships are mapped."
+      emptyTitle="No related makers yet"
+      emptyDescription="Related makers will appear as more maker relationships are mapped."
     />
   );
 }

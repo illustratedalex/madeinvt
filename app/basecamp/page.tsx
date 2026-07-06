@@ -3,7 +3,7 @@ import { Sidebar } from "@/components/admin";
 import { MorningBriefingNote } from "@/components/basecamp/MorningBriefingNote";
 import { foundingPartners } from "@/data/foundingPartners";
 import { copyDeskStories, morningPriorities, photoDeskNeeds, publishTodayItems, weatherPlaceholder } from "@/data/morningBriefing";
-import { southernVT100Destinations } from "@/data/southernvt100";
+import { vermont100Makers } from "@/data/vermont100Makers";
 import { weeklyIssue } from "@/data/weeklyIssue";
 import { findMissingRelationships, findWeakStories } from "@/lib/editorial/EditorialIntelligence";
 
@@ -12,6 +12,7 @@ const navItems = [
   { label: "Newsroom", href: "/basecamp/content" },
   { label: "Editorial Studio", href: "/basecamp/content" },
   { label: "Editorial Issue", href: "/basecamp/editorial-issue" },
+  { label: "Vermont 100 Makers", href: "/basecamp/vermont-100-makers" },
   { label: "Knowledge Graph", href: "/basecamp/graph" },
   { label: "Content Report", href: "/basecamp/content/report" },
   { label: "Places", href: "/basecamp/places" },
@@ -107,14 +108,14 @@ export default function BasecampMorningBriefingPage() {
     },
   ];
 
-  const southernVT100Published = southernVT100Destinations.filter((entry) => entry.editorialStatus === "Published").length;
-  const southernVT100Research = southernVT100Destinations.filter((entry) => entry.editorialStatus === "Research").length;
-  const southernVT100Photography = southernVT100Destinations.filter((entry) => entry.verification.photo).length;
-  const southernVT100Verification = southernVT100Destinations.filter(
-    (entry) => entry.verification.location && entry.verification.photo && entry.verification.visited && entry.verification.recommended,
+  const vermont100Published = vermont100Makers.filter((entry) => entry.editorialStatus === "Published").length;
+  const vermont100Research = vermont100Makers.filter((entry) => entry.editorialStatus === "Research").length;
+  const vermont100Photography = vermont100Makers.filter(
+    (entry) => entry.editorialStatus === "Photography" || entry.galleryStatus === "Ready" || entry.galleryStatus === "Published",
   ).length;
+  const vermont100Interviews = vermont100Makers.filter((entry) => entry.editorialStatus === "Interview").length;
   const topCategories = Object.entries(
-    southernVT100Destinations.reduce<Record<string, number>>((acc, entry) => {
+    vermont100Makers.reduce<Record<string, number>>((acc, entry) => {
       acc[entry.category] = (acc[entry.category] ?? 0) + 1;
       return acc;
     }, {}),
@@ -379,24 +380,24 @@ export default function BasecampMorningBriefingPage() {
             </article>
 
             <article className="rounded-[30px] border border-[#e8dfc8] bg-white/95 p-6 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">SouthernVT 100</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Vermont 100 Makers</p>
               <h2 className="mt-2 text-2xl font-semibold text-slate-900">Coverage Progress</h2>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
                   <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Published</p>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">{southernVT100Published}</p>
+                  <p className="mt-1 text-2xl font-semibold text-slate-900">{vermont100Published}</p>
                 </div>
                 <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
                   <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Research</p>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">{southernVT100Research}</p>
+                  <p className="mt-1 text-2xl font-semibold text-slate-900">{vermont100Research}</p>
                 </div>
                 <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
                   <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Photography</p>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">{southernVT100Photography}</p>
+                  <p className="mt-1 text-2xl font-semibold text-slate-900">{vermont100Photography}</p>
                 </div>
                 <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
-                  <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Verification</p>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">{southernVT100Verification}</p>
+                  <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Interviews</p>
+                  <p className="mt-1 text-2xl font-semibold text-slate-900">{vermont100Interviews}</p>
                 </div>
               </div>
               <div className="mt-4">
@@ -409,6 +410,9 @@ export default function BasecampMorningBriefingPage() {
                   ))}
                 </div>
               </div>
+              <Link href="/basecamp/vermont-100-makers" className="mt-4 inline-flex rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-white">
+                Open Vermont 100 Makers
+              </Link>
             </article>
           </section>
 

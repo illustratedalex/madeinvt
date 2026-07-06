@@ -23,10 +23,10 @@ export function ReviewList({ reviews, previewMode }: ReviewListProps) {
 
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-(--color-pine)">Reviews</p>
-          <h2 className="mt-2 text-2xl font-semibold text-slate-900">What visitors are saying</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-(--color-pine)">Customer Experiences</p>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-900">What customers are saying</h2>
         </div>
-        <Button variant="secondary">Write a review (coming soon)</Button>
+        <Button variant="secondary">Share an experience (coming soon)</Button>
       </div>
 
       <div className="mt-5 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
@@ -53,7 +53,7 @@ export function ReviewList({ reviews, previewMode }: ReviewListProps) {
           reviews.map((review) => <ReviewCard key={review.id} review={review} />)
         ) : (
           <div className="rounded-3xl border border-dashed border-[#d7cbb3] bg-[#fcfaf6] p-6 text-sm text-slate-600">
-            No approved reviews yet. Be the first to share your experience.
+            No approved experiences yet. Be the first to share your experience.
           </div>
         )}
       </div>

@@ -785,7 +785,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
             <PlacePassportCTA place={place} />
             <PlacePlanningCTA place={place} />
 
-            <NearbyPlacesRail places={nearbyPlaces} title="Related Places" />
+            <NearbyPlacesRail places={nearbyPlaces} title="Related Makers" />
             <NearbyPlacesRail places={nearbyFood} title="Nearby Food" />
             <NearbyPlacesRail places={nearbyLodging} title="Nearby Lodging" />
             <RecommendedEventsRail events={nearbyEvents} title="Nearby Events" />

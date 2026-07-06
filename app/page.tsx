@@ -11,7 +11,7 @@ import { getCollections } from "@/lib/repositories/collectionRepository";
 import { createPageMetadata } from "@/lib/seo";
 import { getPlaces } from "@/repositories/PlaceRepository";
 import { weeklyIssue } from "@/data/weeklyIssue";
-import { southernVT100Destinations } from "@/data/southernvt100";
+import { vermont100Makers } from "@/data/vermont100Makers";
 
 export const metadata = createPageMetadata({
   title: "MadeInVT | Vermont Makers, Artisans & Handcrafted Goods",
@@ -20,9 +20,8 @@ export const metadata = createPageMetadata({
 });
 
 export default async function Home() {
-  const [feed, premiumProfilesEnabled, editorialIntelligenceEnabled, places, collections] = await Promise.all([
+  const [feed, editorialIntelligenceEnabled, places, collections] = await Promise.all([
     ExperienceService.getHomeFeed(6),
-    isFeatureEnabled("premiumProfiles"),
     isFeatureEnabled("editorialIntelligence"),
     getPlaces(),
     getCollections(),
@@ -31,10 +30,7 @@ export default async function Home() {
   const publishedPlaces = places.filter((place) => place.status === "published");
   const publishedCollections = collections.filter((collection) => collection.status === "published");
 
-  const premiumPartners = publishedPlaces
-    .filter((place) => place.status === "published" && place.isPremium)
-    .sort((a, b) => (b.sponsorLevel ?? "").localeCompare(a.sponsorLevel ?? ""))
-    .slice(0, 8);
+  const featuredMakerProfiles = vermont100Makers.filter((maker) => maker.editorialStatus === "Published").slice(0, 4);
 
   const featuredPlace = feed.dailyAdventure.place ?? null;
   const todaysAdventure = feed.dailyAdventure.place ?? null;
@@ -58,30 +54,15 @@ export default async function Home() {
     )
     .slice(0, 3);
 
-  const mostPhotographed = publishedPlaces
-    .filter(
-      (place) =>
-        place.tags.some((tag) => ["photography", "foliage", "views", "waterfall"].includes(tag.toLowerCase())) ||
-        place.categories.some((category) => ["photography", "scenic drive", "waterfalls"].includes(category.toLowerCase())),
-    )
-    .slice(0, 3);
-
-  const dogFriendly = publishedPlaces
-    .filter((place) => {
-      const amenityMatch = place.amenities.some((amenity) => {
-        const normalized = amenity.toLowerCase();
-        return normalized.includes("dog") || normalized.includes("pet friendly");
-      });
-      const trailMatch = place.metadata.trail?.dogsAllowed ?? false;
-      const hotelMatch = place.metadata.hotel?.petFriendly ?? false;
-      return amenityMatch || trailMatch || hotelMatch;
-    })
-    .slice(0, 3);
-
   const weekendEscapes = publishedPlaces
     .filter((place) => ["Hotel", "Scenic Overlook", "Trail", "Waterfall"].includes(place.placeType))
     .slice(0, 3);
-
+  const workshopVisits = publishedPlaces
+    .filter((place) => {
+      const type = place.placeType.toLowerCase();
+      return type.includes("studio") || type.includes("shop") || type.includes("market") || type.includes("maker");
+    })
+    .slice(0, 3);
   const todaysAdventureRail = [
     todaysAdventure,
     ...publishedPlaces.filter((place) => feed.dailyAdventure.place?.relatedPlaces.includes(place.id)),
@@ -91,6 +72,7 @@ export default async function Home() {
     }
     return array.findIndex((candidate) => candidate?.id === place.id) === index;
   });
+  const customerFavorites = todaysAdventureRail.slice(0, 3);
 
   const editorsPicks = [
     "hamilton-falls",
@@ -112,7 +94,7 @@ export default async function Home() {
     ? "Artisan markets, studio open houses, and handcrafted gifts for the season."
     : "Open studios, outdoor markets, and handmade goods made for warm Vermont days.";
   const intelligenceSummary = getEditorialIntelligenceSummary();
-  const southernVT100Published = southernVT100Destinations.filter((destination) => destination.editorialStatus === "Published").length;
+  const vermont100Published = vermont100Makers.filter((maker) => maker.editorialStatus === "Published").length;
 
   const magazineGrid = [
     {
@@ -211,7 +193,7 @@ export default async function Home() {
 
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/places"
+                href="/makers"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-(--color-forest-green) px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
               >
                 Explore Makers
@@ -373,7 +355,7 @@ export default async function Home() {
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">Vermont 100 Makers</p>
                   <h3 className="mt-2 text-3xl font-semibold text-slate-900">
-                    {southernVT100Published} / {southernVT100Destinations.length} Published
+                    {vermont100Published} / {vermont100Makers.length} Published
                   </h3>
                 </div>
                 <Badge variant="featured">Editor View</Badge>
@@ -381,14 +363,12 @@ export default async function Home() {
               <div className="mt-4 h-2 overflow-hidden rounded-full bg-slate-100">
                 <div
                   className="h-full rounded-full bg-[linear-gradient(90deg,#d8b15d,#1f5a3d)]"
-                  style={{
-                    width: `${Math.round((southernVT100Published / southernVT100Destinations.length) * 100)}%`,
-                  }}
+                  style={{ width: `${Math.round((vermont100Published / vermont100Makers.length) * 100)}%` }}
                 />
               </div>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Link
-                  href="/places"
+                  href="/makers"
                   className="inline-flex h-11 items-center justify-center rounded-full bg-(--color-forest-green) px-4 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
                 >
                   Explore makers
@@ -471,9 +451,8 @@ export default async function Home() {
 
             {[
               { title: "Featured Makers", items: hiddenGems },
-              { title: "Customer Experiences", items: todaysAdventureRail },
-              { title: "Most Photographed", items: mostPhotographed },
-              { title: "Dog Friendly", items: dogFriendly },
+              { title: "Customer Favorites", items: customerFavorites },
+              { title: "Workshop Visits", items: workshopVisits },
               { title: "Made This Week", items: weekendEscapes },
             ].map((rail) => (
               <div key={rail.title}>
@@ -609,35 +588,41 @@ export default async function Home() {
           </EditorialSection>
         </section>
 
-        {premiumProfilesEnabled ? (
-          <EditorialSection
-            eyebrow="Featured Makers"
-            title="Featured Makers"
-            description="Verified makers and studios highlighted for discovery."
-          >
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              {premiumPartners.length ? (
-                premiumPartners.slice(0, 4).map((partner) => (
-                  <Link key={partner.id} href={`/places/${partner.slug}`}>
-                    <Card variant="sidebar" className="h-full p-4">
-                      <MetaText as="p" variant="eyebrow" className="text-[#7c5b13]">
-                        {partner.sponsorLevel ?? "premium"}
-                      </MetaText>
-                      <h3 className="mt-1 text-base font-semibold text-slate-900">{partner.name}</h3>
-                      <p className="mt-1 text-sm text-slate-600">
-                        {partner.city}, {partner.state}
-                      </p>
-                    </Card>
-                  </Link>
-                ))
-              ) : (
-                <Card variant="sidebar" className="p-4 sm:col-span-2 xl:col-span-4">
-                  <p className="text-sm text-slate-600">Featured makers are being updated.</p>
-                </Card>
-              )}
-            </div>
-          </EditorialSection>
-        ) : null}
+        <EditorialSection
+          eyebrow="Featured Makers"
+          title="Featured Makers"
+          description="Vermont 100 maker profiles highlighted for discovery."
+        >
+          <div className="mb-4">
+            <Link
+              href="/makers"
+              className="inline-flex h-10 items-center justify-center rounded-full border border-[#d7cbb3] bg-white px-4 text-sm font-semibold text-slate-800 motion-safe:transition motion-safe:hover:bg-[#fcfaf6]"
+            >
+              Browse all makers
+            </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {featuredMakerProfiles.length ? (
+              featuredMakerProfiles.map((maker) => (
+                <Link key={maker.id} href={`/makers/${maker.slug}`}>
+                  <Card variant="sidebar" className="h-full p-4">
+                    <MetaText as="p" variant="eyebrow" className="text-[#7c5b13]">
+                      {maker.editorialStatus}
+                    </MetaText>
+                    <h3 className="mt-1 text-base font-semibold text-slate-900">{maker.makerName}</h3>
+                    <p className="mt-1 text-sm text-slate-600">
+                      {maker.town || "Town pending"}
+                    </p>
+                  </Card>
+                </Link>
+              ))
+            ) : (
+              <Card variant="sidebar" className="p-4 sm:col-span-2 xl:col-span-4">
+                <p className="text-sm text-slate-600">Featured makers are being updated.</p>
+              </Card>
+            )}
+          </div>
+        </EditorialSection>
 
         <EditorialSection
           eyebrow="Footer"
@@ -647,7 +632,7 @@ export default async function Home() {
         >
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/places"
+              href="/makers"
               className="inline-flex h-11 items-center justify-center rounded-full bg-(--color-forest-green) px-5 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
             >
               Explore makers

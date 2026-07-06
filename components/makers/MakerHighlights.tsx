@@ -69,7 +69,7 @@ export function MakerHighlights({ products, customerExperiences, collections, ev
       </div>
 
       <div className="mt-5 border-t border-[#ece3cf] pt-4">
-        <LinkList title="Relationships" items={relationships.map((relationship) => ({ label: relationship.label, href: relationship.href }))} />
+        <LinkList title="Related Makers" items={relationships.map((relationship) => ({ label: relationship.label, href: relationship.href }))} />
       </div>
     </article>
   );

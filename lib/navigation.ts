@@ -15,10 +15,10 @@ export const publicNavigationGroups: NavigationGroup[] = [
   },
   {
     label: "Makers",
-    href: "/places",
+    href: "/makers",
     items: [
-      { label: "Makers", href: "/places" },
-      { label: "Featured Makers", href: "/places" },
+      { label: "Makers", href: "/makers" },
+      { label: "Featured Makers", href: "/makers" },
     ],
   },
   {
