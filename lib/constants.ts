@@ -1,5 +1,7 @@
-export const SITE_NAME = "MadeInVT";
-export const SITE_TAGLINE = "Made by Vermonters. Shared with the World.";
+import { madeInVTConfig } from "@/config/publications/madeinvt";
+
+export const SITE_NAME = madeInVTConfig.siteName || "MadeInVT";
+export const SITE_TAGLINE = madeInVTConfig.tagline || "Made by Vermonters. Shared with the World.";
 
 export const heroHighlights = ["Woodworkers", "Pottery", "Maple", "Jewelry", "Textiles", "Artisan Food"];
 

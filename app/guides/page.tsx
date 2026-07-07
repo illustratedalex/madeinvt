@@ -10,8 +10,8 @@ interface GuidesPageProps {
 }
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Vermont Guides",
-  description: "Browse editorial guides, lists, and itineraries across Vermont.",
+  title: "MadeInVT Stories",
+  description: "Browse maker stories, workshop visits, and editorial craft notes across Vermont.",
   path: "/guides",
 });
 
@@ -43,8 +43,8 @@ export default async function GuidesPage({ searchParams }: GuidesPageProps) {
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">MadeInVT Guides</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Editorial guides for Vermont travel.</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">Find trip ideas, local stories, and practical itineraries curated by the Trailhead editorial team.</p>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Editorial stories for Vermont makers.</h1>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">Find maker stories, behind-the-bench notes, and workshop-focused reporting curated by the MadeInVT editorial team.</p>
         </div>
       </section>
 
@@ -64,7 +64,7 @@ export default async function GuidesPage({ searchParams }: GuidesPageProps) {
 
         {featuredArticles.length ? (
           <section className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--color-pine)">Featured guides</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--color-pine)">Featured stories</p>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {featuredArticles.map((article) => <ArticleCard key={article.id} article={article} />)}
             </div>
@@ -73,7 +73,7 @@ export default async function GuidesPage({ searchParams }: GuidesPageProps) {
 
         <section className="space-y-4">
           <div className="flex items-end justify-between gap-2">
-            <h2 className="text-3xl font-semibold text-slate-900">Guide grid</h2>
+            <h2 className="text-3xl font-semibold text-slate-900">Story desk</h2>
             <p className="text-sm text-slate-600">{filtered.length} result{filtered.length === 1 ? "" : "s"}</p>
           </div>
 
@@ -82,7 +82,7 @@ export default async function GuidesPage({ searchParams }: GuidesPageProps) {
               {filtered.map((article) => <ArticleCard key={article.id} article={article} />)}
             </div>
           ) : (
-            <div className="rounded-[24px] border border-[#e8dfc8] bg-white p-6 text-sm leading-7 text-slate-700 shadow-sm">No published guides match this filter set yet.</div>
+            <div className="rounded-[24px] border border-[#e8dfc8] bg-white p-6 text-sm leading-7 text-slate-700 shadow-sm">No published stories match this filter set yet.</div>
           )}
         </section>
       </section>

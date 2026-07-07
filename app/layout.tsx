@@ -9,6 +9,7 @@ import { CommandPalette } from "@/components/search/CommandPalette";
 import { RelationshipStoreProvider } from "@/components/relationships/RelationshipStoreProvider";
 import { SearchProvider } from "@/components/search/SearchProvider";
 import { ErrorBoundary, ToastProvider } from "@/components/ui";
+import { madeInVTConfig } from "@/config/publications/madeinvt";
 import { RepositoryProvider } from "@/lib/repositories/RepositoryProvider";
 import "./globals.css";
 
@@ -24,8 +25,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "MadeInVT | Makers, Artisans & Handcrafted Vermont",
-  description: "Explore handcrafted goods, artisan workshops, local creators, and the stories behind Vermont craftsmanship.",
+  title: madeInVTConfig.seo?.title || "MadeInVT | Makers, Artisans & Handcrafted Vermont",
+  description: madeInVTConfig.seo?.description || "Explore handcrafted goods, artisan workshops, local creators, and the stories behind Vermont craftsmanship.",
 };
 
 export default function RootLayout({

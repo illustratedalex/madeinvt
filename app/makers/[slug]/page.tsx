@@ -173,11 +173,11 @@ export default async function MakerProfilePage({ params }: MakerPageProps) {
 
         <section className="grid gap-6 lg:grid-cols-2">
           <section className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-semibold text-slate-900">Gallery Placeholder</h2>
+            <h2 className="text-2xl font-semibold text-slate-900">Gallery</h2>
             <p className="mt-3 text-sm text-slate-700">{PROFILE_PROGRESS_COPY}</p>
           </section>
           <section className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-semibold text-slate-900">Products Placeholder</h2>
+            <h2 className="text-2xl font-semibold text-slate-900">Products</h2>
             <p className="mt-3 text-sm text-slate-700">{PROFILE_PROGRESS_COPY}</p>
           </section>
         </section>
@@ -209,9 +209,17 @@ export default async function MakerProfilePage({ params }: MakerPageProps) {
           )}
         </section>
 
+        <section className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-semibold text-slate-900">Events</h2>
+          <p className="mt-3 text-sm text-slate-700">
+            Event features are published through the editorial calendar and maker event queue.
+          </p>
+          <p className="mt-2 text-sm text-slate-700">{PROFILE_PROGRESS_COPY}</p>
+        </section>
+
         <section className="grid gap-6 lg:grid-cols-2">
           <section className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-semibold text-slate-900">Collections / Gift Guides</h2>
+            <h2 className="text-2xl font-semibold text-slate-900">Collections</h2>
             <p className="mt-3 text-sm text-slate-700"><span className="font-semibold">Collections:</span> {maker.collections.length ? maker.collections.join(", ") : "Not yet assigned"}</p>
             <p className="mt-2 text-sm text-slate-700"><span className="font-semibold">Gift Guides:</span> {maker.giftGuides.length ? maker.giftGuides.join(", ") : "Not yet assigned"}</p>
           </section>

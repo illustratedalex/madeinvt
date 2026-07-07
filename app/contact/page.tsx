@@ -4,29 +4,37 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ContactInquiryForm from "@/components/public/ContactInquiryForm";
 import { EditorialSection } from "@/components/ui";
+import { madeInVTConfig } from "@/config/publications/madeinvt";
 import { createPageMetadata } from "@/lib/seo";
 
+const siteName = madeInVTConfig.siteName || "MadeInVT";
+const contactEmails = {
+  hello: madeInVTConfig.emails?.hello || "hello@madeinvt.com",
+  partners: madeInVTConfig.emails?.partners || "partners@madeinvt.com",
+  press: madeInVTConfig.emails?.press || "press@madeinvt.com",
+};
+
 export const metadata = createPageMetadata({
-  title: "Contact MadeInVT | Questions, Partnerships & Media",
+  title: `Contact ${siteName} | Questions, Partnerships & Media`,
   description:
-    "Get in touch with MadeInVT about maker suggestions, studio partnerships, media inquiries, and Founding Partner opportunities.",
+    `Get in touch with ${siteName} about maker suggestions, studio partnerships, media inquiries, and Founding Partner opportunities.`,
   path: "/contact",
 });
 
 const contactCards = [
   {
     title: "General Questions",
-    email: "hello@madeinvt.com",
+    email: contactEmails.hello,
     description: "Questions, maker suggestions, listing corrections, and general inquiries.",
   },
   {
     title: "Founding Partners",
-    email: "partners@madeinvt.com",
+    email: contactEmails.partners,
     description: "Founding Partner opportunities, collaboration ideas, sponsorship discussions, and studio partnerships.",
   },
   {
     title: "Press & Media",
-    email: "press@madeinvt.com",
+    email: contactEmails.press,
     description: "Interviews, media requests, podcasts, speaking engagements, and editorial inquiries.",
   },
 ];
@@ -51,7 +59,7 @@ export default function ContactPage() {
           headingLevel="h1"
         >
           <div className="overflow-hidden rounded-[26px] border border-[#d8c7a0] bg-[linear-gradient(125deg,#f4dfb0,#d7b274_45%,#8ea188)] p-6 text-[#173325] shadow-[0_20px_60px_rgba(31,59,47,0.16)] sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] sm:tracking-[0.24em] text-[#274737]">MadeInVT Editorial Desk</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] sm:tracking-[0.24em] text-[#274737]">{siteName} Editorial Desk</p>
             <p className="mt-2 max-w-2xl text-lg font-medium leading-8">
               We respond to destination tips, listing corrections, business partner questions, and media requests.
             </p>
@@ -62,19 +70,19 @@ export default function ContactPage() {
           <EditorialSection
             eyebrow="Who You&apos;re Contacting"
             title="Meet the Editor"
-            description="MadeInVT combines editorial craft, photography, and deep roots in Vermont's maker community to create the most trusted guide to Vermont artisans."
+            description={`${siteName} combines editorial craft, photography, and deep roots in Vermont's maker community to create the most trusted guide to Vermont artisans.`}
           >
             <div className="rounded-3xl border border-[#e8dfc8] bg-[#fcfaf6] p-5">
               <p className="text-2xl font-semibold text-slate-900">Alex Lawrence</p>
               <p className="mt-1 text-sm font-semibold uppercase tracking-[0.16em] text-[#1f5a3d]">Founder &amp; Editor-in-Chief</p>
-              <p className="mt-1 text-sm text-slate-600">MadeInVT</p>
+              <p className="mt-1 text-sm text-slate-600">{siteName}</p>
             </div>
           </EditorialSection>
 
           <EditorialSection
             eyebrow="Our Promise"
             title="Authentic Vermont craftsmanship storytelling"
-            description="MadeInVT exists to tell authentic stories, support local makers, and help people discover the best of Vermont handcraft through editorial independence, original photography, and thoughtful recommendations."
+            description={`${siteName} exists to tell authentic stories, support local makers, and help people discover the best of Vermont handcraft through editorial independence, original photography, and thoughtful recommendations.`}
           />
         </section>
 
@@ -86,7 +94,9 @@ export default function ContactPage() {
                 className="rounded-3xl border border-[#dcc9a1] bg-[linear-gradient(170deg,#fffef8_0%,#faf3e4_100%)] p-5 shadow-[0_15px_35px_rgba(31,59,47,0.08)]"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f5a3d]">{card.title}</p>
-                <p className="mt-2 text-base font-semibold text-slate-900">{card.email}</p>
+                <a href={`mailto:${card.email}`} className="mt-2 inline-block text-base font-semibold text-slate-900 underline underline-offset-2">
+                  {card.email}
+                </a>
                 <p className="mt-2 text-sm leading-6 text-slate-600">{card.description}</p>
               </article>
             ))}
@@ -97,7 +107,7 @@ export default function ContactPage() {
           <ContactInquiryForm />
         </Suspense>
 
-        <EditorialSection         eyebrow="Quick Links" title="Popular MadeInVT destinations">
+        <EditorialSection eyebrow="Quick Links" title={`Popular ${siteName} destinations`}>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {quickActions.map((action) => (
               <Link

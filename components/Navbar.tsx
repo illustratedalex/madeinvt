@@ -73,7 +73,7 @@ export default function Navbar() {
                   href="/concierge"
                   className="inline-flex w-full items-center justify-center rounded-full bg-(--color-forest-green) px-4 py-2.5 text-sm font-semibold text-(--color-cream) transition hover:bg-(--color-pine)"
                 >
-                  Find a Maker
+                  Maker Finder
                 </Link>
               </div>
             </div>
@@ -83,7 +83,7 @@ export default function Navbar() {
             href="/concierge"
             className="hidden rounded-full bg-(--color-forest-green) px-4 py-2 text-sm font-semibold whitespace-nowrap text-(--color-cream) transition hover:bg-(--color-pine) lg:inline-flex"
           >
-            Find a Maker
+            Maker Finder
           </Link>
         </div>
       </Container>

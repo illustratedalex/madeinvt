@@ -28,31 +28,31 @@ export interface RelationshipTypeMeta {
 
 export const relationshipTypeMeta: Record<RelationshipType, RelationshipTypeMeta> = {
   nearby: {
-    label: "Nearby Place",
+    label: "Nearby Maker",
     badgeClassName: "bg-[#d9f2e3] text-[#1d5c3d]",
   },
   featured_in: {
-    label: "Featured In",
+    label: "Featured In Guide",
     badgeClassName: "bg-[#fbe8c7] text-[#6a4815]",
   },
   contains: {
-    label: "Contains",
+    label: "Includes",
     badgeClassName: "bg-[#d9e8ff] text-[#1f457c]",
   },
   related: {
-    label: "Related",
+    label: "Related Story",
     badgeClassName: "bg-[#ece6ff] text-[#5037a3]",
   },
   uses_media: {
-    label: "Uses Media",
+    label: "Uses Gallery Media",
     badgeClassName: "bg-[#f6dff0] text-[#8a2c63]",
   },
   hosts_event: {
-    label: "Hosts Event",
+    label: "Hosts Maker Event",
     badgeClassName: "bg-[#fde0dc] text-[#8a2a22]",
   },
   has_deal: {
-    label: "Has Deal",
+    label: "Has Product Offer",
     badgeClassName: "bg-[#def3ff] text-[#0f5a7a]",
   },
 };

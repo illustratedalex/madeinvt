@@ -22,8 +22,8 @@ import type {
 } from "@/types/Concierge";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Compass Maker Finder | Guided Day Planning",
-  description: "Use Compass Maker Finder to build a calm, guided discovery plan across Vermont using verified maker recommendations.",
+  title: "Maker Finder | Guided Maker Discovery",
+  description: "Use Maker Finder to build a guided discovery plan for Vermont makers, studios, collections, and gift ideas.",
   path: "/concierge",
 });
 

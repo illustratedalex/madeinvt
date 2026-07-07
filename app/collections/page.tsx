@@ -17,8 +17,8 @@ interface CollectionsPageProps {
 }
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Collection Guides for Vermont",
-  description: "Explore curated Vermont guides by season, audience, and travel style.",
+  title: "Maker Collections for Vermont",
+  description: "Explore curated maker collections by craft, season, and editorial focus.",
   path: "/collections",
 });
 
@@ -57,7 +57,7 @@ export default async function CollectionsPage({ searchParams }: CollectionsPageP
       fallback={
         <ComingSoon
           title="Collections Are Being Expanded"
-          description="Our team is rolling out richer collection narratives, stronger route previews, and upgraded planning modules."
+          description="Our team is rolling out richer maker collections, deeper studio storytelling, and better editorial curation."
           eyebrow="Public Collections"
         />
       }
@@ -67,10 +67,10 @@ export default async function CollectionsPage({ searchParams }: CollectionsPageP
 
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">MadeInVT Guides</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Plan with curated local collections.</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">MadeInVT Collections</p>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Discover curated maker collections.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
-            Discover seasonal itineraries and themed guide collections built from the best places across Vermont.
+            Explore holiday gifts, pottery, woodworkers, and handcrafted collections built around Vermont makers.
           </p>
         </div>
       </section>
@@ -82,7 +82,7 @@ export default async function CollectionsPage({ searchParams }: CollectionsPageP
           <section className="space-y-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--color-pine)">Featured collections</p>
-              <h2 className="mt-2 text-3xl font-semibold text-slate-900">Popular trailhead guides</h2>
+              <h2 className="mt-2 text-3xl font-semibold text-slate-900">Popular maker collections</h2>
             </div>
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
               {featuredCollections.map((collection) => (
@@ -94,7 +94,7 @@ export default async function CollectionsPage({ searchParams }: CollectionsPageP
 
         <section className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-2">
-            <h2 className="text-3xl font-semibold text-slate-900">Browse all guides</h2>
+            <h2 className="text-3xl font-semibold text-slate-900">Browse all collections</h2>
             <p className="text-sm text-slate-600">{filteredCollections.length} result{filteredCollections.length === 1 ? "" : "s"}</p>
           </div>
 
@@ -106,7 +106,7 @@ export default async function CollectionsPage({ searchParams }: CollectionsPageP
             </div>
           ) : (
             <div className="rounded-[24px] border border-[#e8dfc8] bg-white p-6 text-sm leading-7 text-slate-700 shadow-sm">
-              No collections match those filters yet. Try another season or audience.
+              No collections match those filters yet. Try another craft keyword, season, or audience.
             </div>
           )}
         </section>

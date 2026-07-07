@@ -27,8 +27,11 @@ export default async function Home() {
 
   const publishedMakerProfiles = vermont100Makers.filter((maker) => maker.editorialStatus === "Published");
   const featuredMakerProfiles = publishedMakerProfiles.slice(0, 4);
-  const makerStories = publishedMakerProfiles.slice(0, 3);
+  const makerStories = publishedMakerProfiles.slice(0, 4);
   const workshopMakers = vermont100Makers.filter((maker) => maker.workshop || maker.studioVisits).slice(0, 3);
+  const customerExperienceMakers = vermont100Makers
+    .filter((maker) => maker.customerExperienceStatus === "Published" || maker.customerExperienceStatus === "Ready")
+    .slice(0, 3);
   const featuredMaker =
     publishedMakerProfiles.find((maker) =>
       [
@@ -49,16 +52,12 @@ export default async function Home() {
     .map((status) => businessListings.find((listing) => listing.status === status))
     .filter((listing): listing is NonNullable<(typeof businessListings)[number]> => Boolean(listing));
 
-  const currentMonth = new Date().getMonth();
-  const isFall = currentMonth >= 8 && currentMonth <= 10;
   const seasonalCollection =
-    publishedCollections.find((collection) => collection.season === (isFall ? "Fall" : "Summer")) ??
+    publishedCollections.find((collection) => collection.slug === "holiday-gifts") ??
     featuredCollections[0] ??
     null;
-  const seasonalTitle = isFall ? "Fall Crafts in Vermont" : "Summer Studios in Vermont";
-  const seasonalSubtitle = isFall
-    ? "Artisan markets, studio open houses, and handcrafted gifts for the season."
-    : "Open studios, outdoor markets, and handmade goods made for warm Vermont days.";
+  const seasonalTitle = "Holiday Gift Guide";
+  const seasonalSubtitle = "Craft-led gift curation from Vermont makers, studios, and seasonal collections.";
   const intelligenceSummary = getEditorialIntelligenceSummary();
   const vermont100Published = vermont100Makers.filter((maker) => maker.editorialStatus === "Published").length;
 
@@ -71,7 +70,7 @@ export default async function Home() {
       imageClass:
         "bg-[linear-gradient(145deg,rgba(34,24,18,0.82),rgba(181,103,58,0.28)),url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1800&q=80')]",
       layoutClass: "lg:col-span-2 lg:row-span-2",
-      badge: "Studio Story",
+      badge: "Maker Spotlight",
     },
     {
       key: "bench-clay",
@@ -81,7 +80,7 @@ export default async function Home() {
       imageClass:
         "bg-[linear-gradient(145deg,rgba(37,28,22,0.84),rgba(181,103,58,0.3)),url('https://images.unsplash.com/photo-1459908676235-d5f02a50184b?auto=format&fit=crop&w=1400&q=80')]",
       layoutClass: "",
-      badge: "Craft Focus",
+      badge: "Workshop Visit",
     },
     {
       key: "bench-metal",
@@ -91,7 +90,7 @@ export default async function Home() {
       imageClass:
         "bg-[linear-gradient(145deg,rgba(44,34,29,0.82),rgba(181,103,58,0.32)),url('https://images.unsplash.com/photo-1516557070061-c3d1653fa646?auto=format&fit=crop&w=1400&q=80')]",
       layoutClass: "",
-      badge: "Workshop",
+      badge: "Gift Guide",
     },
     {
       key: "bench-leather",
@@ -101,7 +100,7 @@ export default async function Home() {
       imageClass:
         "bg-[linear-gradient(145deg,rgba(38,28,24,0.84),rgba(181,103,58,0.28)),url('https://images.unsplash.com/photo-1449247709967-d4461a6a6103?auto=format&fit=crop&w=1700&q=80')]",
       layoutClass: "lg:col-span-2",
-      badge: "Heritage",
+      badge: "Collection Spotlight",
     },
   ];
 
@@ -380,7 +379,7 @@ export default async function Home() {
           title="New Collections"
           description="Freshly curated collections built around craft, heritage, and handmade discovery."
         >
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {featuredCollections.map((collection) => (
               <Link key={collection.id} href={`/collections/${collection.slug}`}>
                 <Card variant="compact" className="h-full p-4">
@@ -396,8 +395,8 @@ export default async function Home() {
         </EditorialSection>
 
         <EditorialSection
-          eyebrow="Studio Access"
-          title="Visit the Workshop"
+          eyebrow="Workshop Visits"
+          title="Workshop Visits"
           description="Meet makers in their working studios and discover where craft comes to life."
         >
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -417,7 +416,7 @@ export default async function Home() {
           </div>
         </EditorialSection>
 
-        <EditorialSection eyebrow="Seasonal Collection" title="Seasonal Gift Guide" description={seasonalSubtitle}>
+        <EditorialSection eyebrow="Gift Guide" title="Seasonal Gift Guide" description={seasonalSubtitle}>
           <Card variant="hero" className="overflow-hidden">
             <div className="relative h-64">
               <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(36,28,22,0.88),rgba(181,103,58,0.26)),url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center" />
@@ -442,15 +441,15 @@ export default async function Home() {
 
         <EditorialSection
           eyebrow="Story Desk"
-          title="Maker Story Notes"
-          description="Short reads from the editorial desk while full profiles are in production."
+          title="Maker Notes, Workshop Visits, and Studio Stories"
+          description="Short reads from the editorial desk while full maker profiles are in production."
         >
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {makerStories.map((maker) => (
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {makerStories.map((maker, index) => (
               <Link key={maker.id} href={`/makers/${maker.slug}`}>
                 <Card variant="sidebar" className="h-full p-4">
                   <MetaText as="p" variant="eyebrow">
-                    {maker.category}
+                    {["Maker Notes", "Workshop Visits", "Behind the Bench", "Studio Stories"][index] ?? "Studio Stories"}
                   </MetaText>
                   <h3 className="mt-2 text-base font-semibold text-slate-900">{maker.makerName}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600">
@@ -463,8 +462,8 @@ export default async function Home() {
         </EditorialSection>
 
         <EditorialSection
-          eyebrow="Vermont Studios"
-          title="Vermont Studios"
+          eyebrow="Featured Studios"
+          title="Featured Studios"
           description={`A foundational directory of Vermont makers and studios. ${businessCount} listings currently published.`}
         >
           <div className="mb-4 flex flex-wrap gap-3">
@@ -486,6 +485,34 @@ export default async function Home() {
           >
             Browse all studio listings
           </Link>
+        </EditorialSection>
+
+        <EditorialSection
+          eyebrow="Customer Experiences"
+          title="Customer Experiences"
+          description="Published customer experience highlights connected to Vermont maker profiles."
+        >
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {customerExperienceMakers.length ? (
+              customerExperienceMakers.map((maker) => (
+                <Link key={maker.id} href={`/makers/${maker.slug}`}>
+                  <Card variant="compact" className="h-full p-4">
+                    <MetaText as="p" variant="eyebrow">
+                      {maker.category}
+                    </MetaText>
+                    <h4 className="mt-2 text-lg font-semibold text-slate-900">{maker.makerName}</h4>
+                    <p className="mt-2 text-sm leading-7 text-slate-600">
+                      Customer experience status: {maker.customerExperienceStatus}
+                    </p>
+                  </Card>
+                </Link>
+              ))
+            ) : (
+              <Card variant="compact" className="p-4 sm:col-span-2 xl:col-span-3">
+                <p className="text-sm text-slate-600">Customer experience stories are being prepared.</p>
+              </Card>
+            )}
+          </div>
         </EditorialSection>
 
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
@@ -525,9 +552,9 @@ export default async function Home() {
         </section>
 
         <EditorialSection
-          eyebrow="Featured Makers"
-          title="Featured Makers"
-          description="Vermont 100 maker profiles highlighted for discovery."
+          eyebrow="Maker Spotlight"
+          title="Maker Spotlight"
+          description="Featured maker profiles highlighted for discovery."
         >
           <div className="mb-4">
             <Link

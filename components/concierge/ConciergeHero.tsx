@@ -9,11 +9,11 @@ export function ConciergeHero() {
           Compass Maker Finder
         </Badge>
         <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-tight text-[#fff9ee] md:text-6xl">
-          What kind of day are you hoping for?
+          Maker Finder
         </h1>
         <Prose size="lg" className="mt-4 max-w-3xl text-[#eee4d4]">
           <p>A guided discovery experience powered by Compass and local editorial signals.</p>
-          <p>No chat. No noise. Just thoughtful recommendations you can use.</p>
+          <p>Try: “Find a handmade wedding gift.” “Find Vermont pottery.” “Find maple gifts under $75.” “Show me studios near Woodstock.”</p>
         </Prose>
       </div>
     </section>

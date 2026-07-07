@@ -13,27 +13,32 @@ interface SearchPageProps {
 }
 
 const emptySearchSuggestions = [
-  "Waterfalls",
-  "Stays",
-  "Restaurants",
-  "Bellows Falls",
-  "Manchester",
-  "Family friendly",
-  "Rainy day",
+  "Woodworker",
+  "Potter",
+  "Glass",
+  "Furniture",
+  "Maple",
+  "Leather",
+  "Ceramics",
+  "Jewelry",
+  "Candles",
+  "Soap",
+  "Cheese",
+  "Chocolate",
 ] as const;
 
 const resultTypeLabels: Record<SearchResultType, string> = {
-  place: "Place",
-  business: "Business",
-  stay: "Stay",
-  guide: "Guide",
+  place: "Maker",
+  business: "Studio",
+  stay: "Workshop",
+  guide: "Story",
   collection: "Collection",
   event: "Event",
 };
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Search MadeInVT | Places, businesses, stays, and guides",
-  description: "Search Vermont places, local businesses, stays, collections, guides, and events.",
+  title: "Search MadeInVT | Makers, studios, collections, and stories",
+  description: "Search Vermont makers, studios, collections, stories, and events.",
   path: "/search",
 });
 
@@ -57,14 +62,14 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <section className="border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#405d4c] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Search MadeInVT</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-5xl">Find places, businesses, stays, guides, and events.</h1>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-5xl">Find makers, studios, collections, and stories.</h1>
           <form action="/search" method="get" className="mt-6 max-w-3xl">
             <div className="flex flex-col gap-3 sm:flex-row">
               <input
                 type="search"
                 name="q"
                 defaultValue={query}
-                placeholder="Search waterfalls, restaurants, stays, guides..."
+                placeholder="Search makers, studios, products, collections..."
                 className="h-12 w-full rounded-2xl border border-white/20 bg-white/95 px-4 text-sm text-slate-900 placeholder:text-slate-500"
               />
               <button
@@ -81,7 +86,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <section className="mx-auto max-w-7xl space-y-6 px-6 py-10 sm:px-8 lg:px-10">
         {!query ? (
           <div className="rounded-[24px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">Try these suggestions</p>
+            <p className="text-sm font-semibold text-slate-900">Try these maker-focused searches</p>
             <div className="mt-4 flex flex-wrap gap-2">
               {emptySearchSuggestions.map((suggestion) => (
                 <Link
@@ -96,12 +101,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           </div>
         ) : results.length === 0 ? (
           <div className="rounded-[24px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
-            <p className="text-sm font-semibold text-slate-900">No results yet. Try a broader search or suggest a place.</p>
+            <p className="text-sm font-semibold text-slate-900">No results yet. Try a broader search or suggest a maker.</p>
             <Link
-              href="/feedback?category=Missing%20Place"
+              href="/feedback?category=Suggest%20a%20Maker"
               className="mt-4 inline-flex h-11 items-center justify-center rounded-full bg-(--color-forest-green) px-5 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
             >
-              Suggest a Place
+              Suggest a Maker
             </Link>
           </div>
         ) : (

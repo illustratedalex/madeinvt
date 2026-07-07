@@ -45,20 +45,20 @@ type RadiusOption = {
 };
 
 export const conciergeMoodOptions: MoodOption[] = [
-  { value: "adventure", label: "Adventure", moodSignals: ["adventure"], tagSignals: ["adventure", "trail"] },
-  { value: "relax", label: "Relax", moodSignals: ["relaxation", "quiet"], tagSignals: ["relax", "quiet"] },
+  { value: "adventure", label: "Workshop Discovery", moodSignals: ["adventure"], tagSignals: ["maker", "workshop"] },
+  { value: "relax", label: "Slow Craft", moodSignals: ["relaxation", "quiet"], tagSignals: ["artisan", "quiet"] },
   { value: "photography", label: "Photography", moodSignals: ["photography", "scenic"], tagSignals: ["photography", "scenic"] },
-  { value: "food", label: "Food", moodSignals: ["food"], tagSignals: ["food", "local"] },
+  { value: "food", label: "Food Makers", moodSignals: ["food"], tagSignals: ["food", "maker"] },
   { value: "family", label: "Family", moodSignals: ["family"], tagSignals: ["family", "kids"] },
-  { value: "romantic", label: "Romantic", moodSignals: ["romantic", "scenic"], tagSignals: ["romantic", "sunset"] },
-  { value: "rainy-day", label: "Rainy Day", moodSignals: ["rainy_day"], tagSignals: ["rainy day", "indoor"] },
-  { value: "history", label: "History", moodSignals: ["history"], tagSignals: ["history", "village"] },
-  { value: "shopping", label: "Shopping", moodSignals: ["shopping"], tagSignals: ["shopping", "village"] },
+  { value: "romantic", label: "Gift Gifting", moodSignals: ["romantic", "scenic"], tagSignals: ["gift", "artisan"] },
+  { value: "rainy-day", label: "Studio Indoors", moodSignals: ["rainy_day"], tagSignals: ["studio", "indoor"] },
+  { value: "history", label: "Craft Heritage", moodSignals: ["history"], tagSignals: ["heritage", "craft"] },
+  { value: "shopping", label: "Maker Shopping", moodSignals: ["shopping"], tagSignals: ["shopping", "maker"] },
 ];
 
 export const conciergeTimeOptions: TimeOption[] = [
-  { value: "1-hour", label: "1 Hour", visitLength: "under_1_hour" },
-  { value: "2-hours", label: "2 Hours", visitLength: "1_2_hours" },
+  { value: "1-hour", label: "Quick Browse", visitLength: "under_1_hour" },
+  { value: "2-hours", label: "Studio Stop", visitLength: "1_2_hours" },
   { value: "half-day", label: "Half Day", visitLength: "half_day" },
   { value: "full-day", label: "Full Day", visitLength: "full_day" },
   { value: "weekend", label: "Weekend", visitLength: "full_day" },
@@ -66,9 +66,9 @@ export const conciergeTimeOptions: TimeOption[] = [
 
 export const conciergeTravelStyleOptions: TravelStyleOption[] = [
   { value: "solo", label: "Solo", tagSignals: ["solo", "quiet"] },
-  { value: "couple", label: "Couple", tagSignals: ["couples", "romantic"] },
+  { value: "couple", label: "Couple", tagSignals: ["couples", "gift"] },
   { value: "family", label: "Family", tagSignals: ["family", "kids"] },
-  { value: "friends", label: "Friends", tagSignals: ["group", "weekend"] },
+  { value: "friends", label: "Friends", tagSignals: ["group", "makers"] },
   { value: "dog", label: "Dog", tagSignals: ["dog", "dogs"] },
 ];
 
@@ -124,50 +124,50 @@ export function buildTimeline(
 ): ConciergeTimelineItem[] {
   const secondary = recommendations.nearbyPlaces[0];
   const village = recommendations.nearbyPlaces[1];
-  const breakfast = recommendations.foodStop ? `Breakfast at ${recommendations.foodStop.name}` : "Breakfast stop";
-  const lunch = recommendations.foodStop ? `Lunch at ${recommendations.foodStop.name}` : "Lunch stop";
+  const breakfast = recommendations.foodStop ? `Start at ${recommendations.foodStop.name}` : "Start at a local maker café";
+  const lunch = recommendations.foodStop ? `Midday stop at ${recommendations.foodStop.name}` : "Midday maker stop";
 
   if (timeAvailable === "1-hour") {
     return [
-      { time: "Now", title: recommendations.featuredPlace.name, detail: "Start with the highest-fit stop for your selected mood." },
-      { time: "+45 min", title: "Quick wrap-up", detail: "Capture highlights, then transition to your next commitment." },
+      { time: "Now", title: recommendations.featuredPlace.name, detail: "Start with the highest-fit maker for your selected mood." },
+      { time: "+45 min", title: "Quick wrap-up", detail: "Save highlights and shortlist products for later." },
     ];
   }
 
   if (timeAvailable === "2-hours") {
     return [
-      { time: "Now", title: recommendations.featuredPlace.name, detail: "Anchor your short route with one strong local pick." },
-      { time: "+60 min", title: secondary ? secondary.name : "Nearby stop", detail: "Add one close follow-up to round out the experience." },
-      { time: "+110 min", title: recommendations.foodStop ? recommendations.foodStop.name : "Food break", detail: "Finish with a simple food or coffee stop." },
+      { time: "Now", title: recommendations.featuredPlace.name, detail: "Anchor your short route with one strong maker pick." },
+      { time: "+60 min", title: secondary ? secondary.name : "Nearby maker", detail: "Add one close follow-up studio to round out discovery." },
+      { time: "+110 min", title: recommendations.foodStop ? recommendations.foodStop.name : "Maker break", detail: "Finish with a simple food or coffee stop." },
     ];
   }
 
   if (timeAvailable === "half-day") {
     return [
-      { time: "9:00", title: breakfast, detail: "Start with fuel before your main stop." },
-      { time: "10:00", title: recommendations.featuredPlace.name, detail: "Primary destination window." },
+      { time: "9:00", title: breakfast, detail: "Start with context before your main studio visit." },
+      { time: "10:00", title: recommendations.featuredPlace.name, detail: "Primary maker destination window." },
       { time: "12:30", title: lunch, detail: "Relaxed midday break." },
-      { time: "2:00", title: secondary ? secondary.name : "Nearby scenic stop", detail: "Close with one extra local highlight." },
+      { time: "2:00", title: secondary ? secondary.name : "Nearby maker stop", detail: "Close with one extra local studio highlight." },
     ];
   }
 
   if (timeAvailable === "weekend") {
     return [
       { time: "Day 1 · 9:00", title: breakfast, detail: "Ease into the route with a local breakfast stop." },
-      { time: "Day 1 · 10:30", title: recommendations.featuredPlace.name, detail: "Main destination block." },
+      { time: "Day 1 · 10:30", title: recommendations.featuredPlace.name, detail: "Main maker destination block." },
       { time: "Day 1 · 1:30", title: lunch, detail: "Midday meal and reset." },
-      { time: "Day 1 · 3:00", title: secondary ? secondary.name : "Scenic extension", detail: "Optional add-on stop in your radius." },
-      { time: "Day 2 · 10:00", title: village ? village.name : "Village walk", detail: "Slow local browsing and photos." },
-      { time: "Day 2 · 6:00", title: "Dinner", detail: "Finish with a high-confidence dinner recommendation." },
+      { time: "Day 1 · 3:00", title: secondary ? secondary.name : "Studio extension", detail: "Optional add-on maker stop in your radius." },
+      { time: "Day 2 · 10:00", title: village ? village.name : "Local retail stop", detail: "Slow local browsing and studio photos." },
+      { time: "Day 2 · 6:00", title: "Dinner", detail: "Finish with a high-confidence local recommendation." },
     ];
   }
 
   return [
     { time: "9:00", title: breakfast, detail: "Breakfast and route setup." },
-    { time: "10:00", title: recommendations.featuredPlace.name, detail: "Primary destination block." },
+    { time: "10:00", title: recommendations.featuredPlace.name, detail: "Primary maker destination block." },
     { time: "1:00", title: lunch, detail: "Midday food stop." },
-    { time: "2:30", title: secondary ? secondary.name : "Nearby scenic stop", detail: "Second destination within your selected radius." },
-    { time: "4:00", title: village ? `${village.name} walk` : "Village walk", detail: "Flexible local exploration window." },
+    { time: "2:30", title: secondary ? secondary.name : "Nearby maker stop", detail: "Second destination within your selected radius." },
+    { time: "4:00", title: village ? `${village.name} walk` : "Local browsing", detail: "Flexible local exploration window." },
     { time: "6:00", title: "Dinner", detail: "Wrap the day with a relaxing dinner stop." },
   ];
 }
@@ -178,7 +178,7 @@ export function getConciergeReasoning(
 ): string[] {
   const reasons = [
     `Mood: ${preferences.mood.replace("-", " ")} matched to ${recommendations.featuredPlace.name}.`,
-    `Travel style: ${preferences.travelStyle} adjusted supporting recommendations.`,
+    `Discovery style: ${preferences.travelStyle} adjusted supporting recommendations.`,
     `Radius: ${preferences.radius} constrained nearby add-ons and food stop selection.`,
   ];
 

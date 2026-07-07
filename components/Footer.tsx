@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui";
-import { SITE_NAME } from "@/lib/constants";
+import { SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 
 const exploreLinks = [
   { label: "All Makers", href: "/makers" },
@@ -95,8 +95,8 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-4 pt-6 text-sm text-(--color-warm-linen) sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 MadeInVT</p>
-          <p className="font-medium text-(--color-cream)">Made by Vermonters. Shared with the World.</p>
+          <p>© 2026 {SITE_NAME}</p>
+          <p className="font-medium text-(--color-cream)">{SITE_TAGLINE}</p>
           <div className="flex items-center gap-4">
             <a href="#" aria-label="MadeInVT Facebook" className="transition hover:text-(--color-cream)">
               Facebook

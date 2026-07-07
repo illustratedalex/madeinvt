@@ -3,8 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSyncExternalStore, useState } from "react";
+import { madeInVTConfig } from "@/config/publications/madeinvt";
 
 const DISMISS_KEY = "madeinvt-beta-banner-dismissed";
+const DEFAULT_BETA_MESSAGE = "MadeInVT is currently in Public Beta. We're adding new makers every week. Know an artisan we should feature?";
+const DEFAULT_BETA_CTA_LABEL = "Let us know.";
+const DEFAULT_BETA_CTA_HREF = "/feedback";
 
 function isPublicPath(pathname: string): boolean {
   return !pathname.startsWith("/basecamp") && !pathname.startsWith("/partner-portal") && !pathname.startsWith("/admin");
@@ -39,13 +43,18 @@ export function BetaBanner() {
     return null;
   }
 
+  const betaBanner = madeInVTConfig.betaBanner;
+  const betaMessage = betaBanner?.message || DEFAULT_BETA_MESSAGE;
+  const betaCtaLabel = betaBanner?.ctaLabel || DEFAULT_BETA_CTA_LABEL;
+  const betaCtaHref = betaBanner?.ctaHref || DEFAULT_BETA_CTA_HREF;
+
   return (
     <div className="border-b border-[#d7cbb3] bg-[#f7efe1] px-4 py-2 text-sm text-slate-700 sm:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
         <p className="leading-6">
-          MadeInVT is currently in Public Beta. We&apos;re adding new makers every week. Know an artisan we should feature?{" "}
-          <Link href="/feedback" className="font-semibold text-[#1f3b2f] underline">
-            Let us know.
+          {betaMessage}{" "}
+          <Link href={betaCtaHref} className="font-semibold text-[#1f3b2f] underline">
+            {betaCtaLabel}
           </Link>
         </p>
         <button

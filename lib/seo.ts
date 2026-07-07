@@ -4,9 +4,10 @@ import type { Collection } from "@/types/Collection";
 import type { Deal } from "@/types/Deal";
 import type { Event } from "@/types/Event";
 import type { Place } from "@/types/Place";
+import { madeInVTConfig } from "@/config/publications/madeinvt";
 
 const DEFAULT_SITE_URL = "https://madeinvt.com";
-const SITE_NAME = "MadeInVT";
+const SITE_NAME = madeInVTConfig.siteName || "MadeInVT";
 
 function trimTrailingSlash(value: string) {
   return value.endsWith("/") ? value.slice(0, -1) : value;
@@ -62,7 +63,7 @@ export function createPageMetadata({ title, description, path, image, type = "we
 
 export function createPlaceMetadata(place: Place, storySummary?: string): Metadata {
   return createPageMetadata({
-    title: place.seoTitle || `${place.name} | MadeInVT`,
+    title: place.seoTitle || `${place.name} | ${SITE_NAME}`,
     description: place.seoDescription || storySummary || place.description,
     path: `/places/${place.slug}`,
     image: place.featuredImage,
@@ -72,7 +73,7 @@ export function createPlaceMetadata(place: Place, storySummary?: string): Metada
 
 export function createCollectionMetadata(collection: Collection, storySummary?: string): Metadata {
   return createPageMetadata({
-    title: collection.seoTitle || `${collection.title} | MadeInVT`,
+    title: collection.seoTitle || `${collection.title} | ${SITE_NAME}`,
     description: collection.seoDescription || storySummary || collection.description,
     path: `/collections/${collection.slug}`,
     image: collection.featuredImage,
@@ -82,7 +83,7 @@ export function createCollectionMetadata(collection: Collection, storySummary?: 
 
 export function createEventMetadata(event: Event): Metadata {
   return createPageMetadata({
-    title: event.seoTitle || `${event.title} | MadeInVT`,
+    title: event.seoTitle || `${event.title} | ${SITE_NAME}`,
     description: event.seoDescription || event.description,
     path: `/events/${event.slug}`,
     image: event.featuredImage,
@@ -92,7 +93,7 @@ export function createEventMetadata(event: Event): Metadata {
 
 export function createArticleMetadata(article: Article): Metadata {
   return createPageMetadata({
-    title: article.seoTitle || `${article.title} | MadeInVT`,
+    title: article.seoTitle || `${article.title} | ${SITE_NAME}`,
     description: article.seoDescription || article.excerpt,
     path: `/guides/${article.slug}`,
     image: article.featuredImage,
@@ -102,7 +103,7 @@ export function createArticleMetadata(article: Article): Metadata {
 
 export function createDealMetadata(deal: Deal): Metadata {
   return createPageMetadata({
-    title: deal.seoTitle || `${deal.title} | MadeInVT`,
+    title: deal.seoTitle || `${deal.title} | ${SITE_NAME}`,
     description: deal.seoDescription || deal.shortDescription,
     path: `/deals/${deal.slug}`,
     image: deal.featuredImage,

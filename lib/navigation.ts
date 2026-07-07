@@ -41,8 +41,8 @@ export const publicNavigationGroups: NavigationGroup[] = [
     items: [
       { label: "Gift Guides", href: "/collections" },
       { label: "New Collections", href: "/collections" },
-      { label: "Find Handmade", href: "/collections" },
-      { label: "Shop Coming Soon", href: "/collections" },
+      { label: "Browse Handmade Products", href: "/collections" },
+      { label: "Support Vermont Makers", href: "/collections" },
     ],
   },
 ];

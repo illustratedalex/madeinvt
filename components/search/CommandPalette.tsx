@@ -4,22 +4,27 @@ import type { SearchResult } from "@/types/Search";
 import { useSearch } from "./SearchProvider";
 
 const groupConfig = [
-  { key: "places", label: "Places" },
-  { key: "businesses", label: "Businesses" },
-  { key: "stays", label: "Stays" },
-  { key: "guides", label: "Guides" },
+  { key: "places", label: "Makers" },
+  { key: "businesses", label: "Studios" },
+  { key: "stays", label: "Workshops" },
+  { key: "guides", label: "Stories" },
   { key: "collections", label: "Collections" },
   { key: "events", label: "Events" },
 ] as const;
 
 const searchSuggestions = [
-  "Waterfalls",
-  "Stays",
-  "Restaurants",
-  "Bellows Falls",
-  "Manchester",
-  "Family friendly",
-  "Rainy day",
+  "Woodworker",
+  "Potter",
+  "Glass",
+  "Furniture",
+  "Maple",
+  "Leather",
+  "Ceramics",
+  "Jewelry",
+  "Candles",
+  "Soap",
+  "Cheese",
+  "Chocolate",
 ] as const;
 
 export function CommandPalette() {
@@ -66,7 +71,7 @@ export function CommandPalette() {
               autoFocus
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search places, businesses, stays, guides, collections, events"
+              placeholder="Search makers, studios, stories, collections, events"
               className="w-full bg-transparent text-base text-slate-800 outline-none"
             />
             <span className="rounded-md border border-[#d8c9ad] bg-white px-2 py-1 text-[11px] font-semibold text-slate-600">Esc</span>
@@ -99,14 +104,14 @@ export function CommandPalette() {
                 </div>
               ) : (
                 <div className="rounded-2xl border border-[#e2d5bd] bg-white/80 p-6 text-center">
-                  <p className="text-sm font-semibold text-slate-700">No results yet. Try a broader search or suggest a place.</p>
+                  <p className="text-sm font-semibold text-slate-700">No results yet. Try a broader search or suggest a maker.</p>
                   <div className="mt-3">
                     <button
                       type="button"
-                      onClick={() => activateResult({ id: "suggest-place", title: "Suggest a Place", subtitle: "Share a destination we should add", type: "guide", url: "/feedback?category=Missing%20Place", keywords: ["suggest", "place"] })}
+                      onClick={() => activateResult({ id: "suggest-maker", title: "Suggest a Maker", subtitle: "Share a Vermont maker we should feature", type: "guide", url: "/feedback?category=Suggest%20a%20Maker", keywords: ["suggest", "maker"] })}
                       className="inline-flex h-10 items-center justify-center rounded-full bg-[#1f3b2f] px-4 text-sm font-semibold text-[#f8f2e4]"
                     >
-                      Suggest a Place
+                      Suggest a Maker
                     </button>
                   </div>
                 </div>
@@ -196,10 +201,10 @@ function ResultRow({
         </div>
         <span className="rounded-full bg-[#f1e8d5] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#1f3b2f]">
           {{
-            place: "Place",
-            business: "Business",
-            stay: "Stay",
-            guide: "Guide",
+            place: "Maker",
+            business: "Studio",
+            stay: "Workshop",
+            guide: "Story",
             collection: "Collection",
             event: "Event",
           }[item.type]}
