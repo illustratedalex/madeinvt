@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { MakerDNA } from "@/components/makers/MakerDNA";
+import { getApprovedMakerGalleryImages } from "@/lib/makers/gallery";
 import { createPageMetadata } from "@/lib/seo";
 import { vermont100Makers } from "@/data/vermont100Makers";
 import type { MakerDNA as MakerDNAType } from "@/types/MakerDNA";
@@ -113,6 +114,7 @@ export default async function MakerProfilePage({ params }: MakerPageProps) {
     .filter((entry) => entry.id !== maker.id && (entry.category === maker.category || entry.region === maker.region))
     .slice(0, 6);
   const profileIncomplete = !maker.studio || !maker.town || !maker.region || !maker.website || maker.editorialStatus !== "Published";
+  const approvedGalleryImages = await getApprovedMakerGalleryImages(slug);
 
   return (
     <main className="min-h-screen bg-(--color-cream) text-(--color-slate)">
@@ -174,7 +176,26 @@ export default async function MakerProfilePage({ params }: MakerPageProps) {
         <section className="grid gap-6 lg:grid-cols-2">
           <section className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
             <h2 className="text-2xl font-semibold text-slate-900">Gallery</h2>
-            <p className="mt-3 text-sm text-slate-700">{PROFILE_PROGRESS_COPY}</p>
+            {approvedGalleryImages.length ? (
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {approvedGalleryImages.map((image) => (
+                  <article key={image.id} className="overflow-hidden rounded-2xl border border-[#ece3cf] bg-[#fcfaf6]">
+                    {image.signedUrl ? (
+                      <img
+                        src={image.signedUrl}
+                        alt={image.altText || image.caption || `${maker.makerName} gallery image`}
+                        className="h-44 w-full object-cover"
+                      />
+                    ) : null}
+                    <div className="p-3">
+                      <p className="text-sm text-slate-700">{image.caption || "MadeInVT gallery image"}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-3 text-sm text-slate-700">{PROFILE_PROGRESS_COPY}</p>
+            )}
           </section>
           <section className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
             <h2 className="text-2xl font-semibold text-slate-900">Products</h2>

@@ -14,6 +14,7 @@ const navItems = [
   { label: "Activity", href: "/basecamp/activity" },
   { label: "Partner Portal", href: "/basecamp/partner-portal" },
   { label: "Claims", href: "/basecamp/claims", active: true },
+  { label: "Maker Gallery Review", href: "/basecamp/maker-gallery" },
   { label: "Feature Flags", href: "/basecamp/settings/features" },
 ];
 

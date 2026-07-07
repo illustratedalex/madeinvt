@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { OwnerListingEditRequestForm } from "@/components/partner/OwnerListingEditRequestForm";
+import { MakerGalleryManager } from "@/components/partner/MakerGalleryManager";
 import { billingPlans, getCurrentBillingPlanLabel, getSquareBillingStatus } from "@/lib/billing/plans";
 import { getAuthenticatedOwnerUser } from "@/lib/auth/session";
 import { getOwnedBusinessListings } from "@/lib/claims/liveClaims";
@@ -186,6 +187,7 @@ export default async function PartnerPortalLandingPage() {
                 </p>
               </div>
               <OwnerListingEditRequestForm listing={listing} />
+              <MakerGalleryManager makerSlug={listing.slug} makerName={listing.name} />
               <div className="mt-4 rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-4 text-sm leading-7 text-slate-700">
                 <p className="font-semibold text-slate-900">What owners cannot edit</p>
                 <p className="mt-1">

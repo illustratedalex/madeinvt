@@ -70,6 +70,8 @@ export function FieldWizard() {
   const [photoPreviews, setPhotoPreviews] = useState<string[]>([]);
   const [details, setDetails] = useState<QuickDetailsState>(createInitialDetails);
   const [notes, setNotes] = useState("");
+  const [interviewNotes, setInterviewNotes] = useState("");
+  const [verificationNotes, setVerificationNotes] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [saveSuccess, setSaveSuccess] = useState<string | null>(null);
@@ -245,7 +247,16 @@ export function FieldWizard() {
       {step === 0 ? <GPSCaptureCard status={gpsStatus} latitude={latitude} longitude={longitude} townLabel={townLabel} onRequestGps={requestGps} /> : null}
       {step === 1 ? <PhotoCaptureCard previewImages={photoPreviews} onCapturePhoto={handleCapturePhoto} onUploadPhoto={handleUploadPhoto} /> : null}
       {step === 2 ? <QuickDetailsCard value={details} onChange={setDetails} /> : null}
-      {step === 3 ? <FieldNotesCard notes={notes} onChangeNotes={setNotes} /> : null}
+      {step === 3 ? (
+        <FieldNotesCard
+          notes={notes}
+          interviewNotes={interviewNotes}
+          verificationNotes={verificationNotes}
+          onChangeNotes={setNotes}
+          onChangeInterviewNotes={setInterviewNotes}
+          onChangeVerificationNotes={setVerificationNotes}
+        />
+      ) : null}
       {step === 4 ? (
         <SaveDraftCard
           placeName={details.name}
@@ -280,13 +291,13 @@ export function FieldWizard() {
       </section>
 
       <section className="rounded-3xl border border-[#d7cbb3] bg-[#fcfaf6] p-4 text-sm text-slate-700">
-        <p className="font-semibold text-slate-900">Future TODO</p>
+        <p className="font-semibold text-slate-900">Compass Field Queue</p>
         <ul className="mt-2 space-y-1">
-          <li>GPS reverse geocoding</li>
           <li>Weather snapshot</li>
+          <li>Nearby entities lookup</li>
           <li>Offline sync queue</li>
-          <li>Drone import</li>
-          <li>Supabase sync</li>
+          <li>Interview audio upload pipeline</li>
+          <li>Verification workflow hooks</li>
         </ul>
         <div className="mt-3">
           <Link href="/basecamp/places" className="text-sm font-semibold text-[#1f3b2f]">Open places list</Link>

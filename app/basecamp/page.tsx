@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Sidebar } from "@/components/admin";
 import { MorningBriefingNote } from "@/components/basecamp/MorningBriefingNote";
 import { foundingPartners } from "@/data/foundingPartners";
@@ -110,6 +111,35 @@ export default function BasecampMorningBriefingPage() {
   )
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
+  const [mediaSummary, setMediaSummary] = useState<{
+    recentUploads: Array<{ id: string; title: string; publication: string; createdAt: string }>;
+    missingHeroImages: number;
+    storiesWithoutGalleries: number;
+    approvedCount: number;
+  } | null>(null);
+
+  useEffect(() => {
+    async function loadMediaSummary() {
+      const response = await fetch("/api/basecamp/media?mode=summary");
+      const payload = (await response.json()) as {
+        recentUploads?: Array<{ id: string; title: string; publication: string; createdAt: string }>;
+        missingHeroImages?: number;
+        storiesWithoutGalleries?: number;
+        approvedCount?: number;
+      };
+      if (!response.ok) {
+        return;
+      }
+      setMediaSummary({
+        recentUploads: payload.recentUploads ?? [],
+        missingHeroImages: payload.missingHeroImages ?? 0,
+        storiesWithoutGalleries: payload.storiesWithoutGalleries ?? 0,
+        approvedCount: payload.approvedCount ?? 0,
+      });
+    }
+
+    void loadMediaSummary();
+  }, []);
 
   if (!hasSelectedPublication) {
     return (
@@ -287,6 +317,40 @@ export default function BasecampMorningBriefingPage() {
                 ))}
               </div>
             </article>
+          </section>
+
+          <section className="rounded-[30px] border border-[#e8dfc8] bg-white/95 p-6 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Compass Media Library</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-900">Media health</h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
+                <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Recent uploads</p>
+                <p className="mt-1 text-2xl font-semibold text-slate-900">{mediaSummary?.recentUploads.length ?? 0}</p>
+              </div>
+              <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
+                <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Missing hero images</p>
+                <p className="mt-1 text-2xl font-semibold text-slate-900">{mediaSummary?.missingHeroImages ?? 0}</p>
+              </div>
+              <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
+                <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Stories without galleries</p>
+                <p className="mt-1 text-2xl font-semibold text-slate-900">{mediaSummary?.storiesWithoutGalleries ?? 0}</p>
+              </div>
+            </div>
+            {mediaSummary?.recentUploads.length ? (
+              <div className="mt-4 space-y-2">
+                {mediaSummary.recentUploads.map((asset) => (
+                  <div key={asset.id} className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-3 py-2">
+                    <p className="text-sm font-semibold text-slate-900">{asset.title}</p>
+                    <p className="text-xs text-slate-600">
+                      {asset.publication} · {new Date(asset.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+            <Link href="/basecamp/media" className="mt-4 inline-flex rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-white">
+              Open Compass Media Library
+            </Link>
           </section>
 
           <section className="grid gap-6 xl:grid-cols-[1fr_1fr_0.9fr]">

@@ -9,8 +9,8 @@ export function PhotoCaptureCard({ previewImages, onCapturePhoto, onUploadPhoto 
     <section className="space-y-4 rounded-3xl border border-[#d7cbb3] bg-white p-5 shadow-sm">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Step 2</p>
-        <h2 className="mt-1 text-2xl font-semibold text-slate-900">Photos</h2>
-        <p className="mt-2 text-sm leading-7 text-slate-600">Use camera-first capture and fast upload while walking the destination.</p>
+        <h2 className="mt-1 text-2xl font-semibold text-slate-900">Photos + Video</h2>
+        <p className="mt-2 text-sm leading-7 text-slate-600">Capture visual proof quickly with camera-first tools for photo and video.</p>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
@@ -31,8 +31,8 @@ export function PhotoCaptureCard({ previewImages, onCapturePhoto, onUploadPhoto 
       </div>
 
       <div className="rounded-2xl border border-dashed border-[#d7cbb3] bg-[#fcfaf6] p-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Drone footage</p>
-        <p className="mt-2 text-sm text-slate-700">Drone import placeholder. Attach clips later during desktop review.</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Video</p>
+        <p className="mt-2 text-sm text-slate-700">Video capture/import placeholder. Attach clips during field capture or later review.</p>
       </div>
 
       <div className="space-y-3">
