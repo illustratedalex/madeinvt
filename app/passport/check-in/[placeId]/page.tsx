@@ -14,8 +14,8 @@ interface PassportCheckInPageProps {
 }
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Adventure Passport Check-In",
-  description: "Collect an Adventure Passport stamp for a participating MadeInVT place.",
+  title: "Maker Passport Check-In",
+  description: "Collect a Maker Passport stamp for a participating MadeInVT listing.",
   path: "/passport/check-in",
 });
 

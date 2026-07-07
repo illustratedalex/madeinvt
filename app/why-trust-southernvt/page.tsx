@@ -19,7 +19,7 @@ const verificationLevels = [
   {
     icon: "📸",
     title: "Photo Verified",
-    description: "Photos reflect what travelers can reasonably expect, with current visual context and quality standards.",
+    description: "Photos reflect what visitors can reasonably expect, with current visual context and quality standards.",
   },
   {
     icon: "🥾",
@@ -120,12 +120,12 @@ export default function WhyTrustSouthernVTPage() {
           className="bg-[#f9f4e8]"
         >
           <div className="flex flex-wrap gap-3">
-            <Link href="/places">
+            <Link href="/makers">
               <Button variant="secondary" size="lg">Explore Verified Makers</Button>
             </Link>
-            <Link href="/feedback?category=Missing%20Place">
+            <Link href="/feedback?category=Missing%20Maker">
               <Button variant="ghost" size="lg" className="border border-(--color-forest-green)/20 bg-white text-(--color-forest-green) motion-safe:hover:bg-[#f4efe1]">
-                Suggest a Place
+                Suggest a Maker
               </Button>
             </Link>
           </div>

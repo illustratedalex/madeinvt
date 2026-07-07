@@ -156,7 +156,7 @@ export default async function DealDetailPage({ params }: DealDetailPageProps) {
             </ContentSection>
 
             {collection ? (
-              <ContentSection title="Related collection" eyebrow="Trip theme" description="A collection that includes or complements this offer.">
+              <ContentSection title="Related collection" eyebrow="Collection theme" description="A collection that includes or complements this offer.">
                 <div className="space-y-2 text-sm leading-7 text-slate-700">
                   <p className="font-semibold text-slate-900">{collection.title}</p>
                   <p>{collection.subtitle}</p>

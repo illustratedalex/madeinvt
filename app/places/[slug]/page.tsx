@@ -145,9 +145,9 @@ export async function generateMetadata({ params }: PlaceDetailPageProps): Promis
 
   if (place.slug === "hamilton-falls") {
     return createPageMetadata({
-      title: "Hamilton Falls, Vermont: Flagship Waterfall Guide | MadeInVT",
+      title: `${place.name} | Featured Vermont Maker Profile | MadeInVT`,
       description:
-        "Plan Hamilton Falls like a local: hidden trail approach, seasonal water flow, swimming notes, photography windows, and nearby adventures for a complete Vermont day.",
+        "Discover this featured Vermont profile with editorial context, verified details, and related makers, guides, and collections.",
       path: `/places/${place.slug}`,
       image: place.featuredImage,
       type: "article",
@@ -156,9 +156,9 @@ export async function generateMetadata({ params }: PlaceDetailPageProps): Promis
 
   if (place.slug === "jamaica-state-park") {
     return createPageMetadata({
-      title: "Jamaica State Park, Vermont: Camping, Swimming & River Guide | MadeInVT",
+      title: `${place.name} | Featured Vermont Maker Profile | MadeInVT`,
       description:
-        "Discover Jamaica State Park's riverside basecamp: camping, swimming holes, picnic areas, West River trails, and direct access to Hamilton Falls for complete Southern Vermont family days.",
+        "Explore this featured Vermont profile with editorial notes, practical details, and connected collections and guides.",
       path: `/places/${place.slug}`,
       image: place.featuredImage,
       type: "article",
@@ -238,7 +238,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
     relationships: nearbyPlaces,
   });
 
-  const featuredCollectionNames = ["Summer Swimming Holes", "Hidden Waterfalls", "Photography Adventures"];
+  const featuredCollectionNames = ["Summer Craft Picks", "Studio Highlights", "Photography Stories"];
   const featuredCollectionEntries = featuredCollectionNames.map((name) => {
     const fromRelated = relatedCollections.find((collection) => collection.title.toLowerCase() === name.toLowerCase());
     const fromAll = allCollections.find((collection) => collection.title.toLowerCase() === name.toLowerCase());
@@ -279,18 +279,18 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
     place.slug === "hamilton-falls"
       ? {
           ...place,
-          seoTitle: "Hamilton Falls, Vermont: Hidden Waterfall Hike, Swimming Notes, and Day Trip Guide",
+          seoTitle: `${place.name}: Featured Vermont Maker Profile`,
           seoDescription:
-            "Explore Hamilton Falls with clear trailhead details, parking strategy, seasonal water flow guidance, safety notes, nearby food and lodging, and a complete Vermont day-trip plan.",
+            "Explore this featured profile with editorial context, practical planning notes, and nearby makers and guides.",
           gallery: scoringGallery.length >= 8 ? scoringGallery : [...scoringGallery, ...Array.from({ length: 8 - scoringGallery.length }, () => place.featuredImage)],
           relatedPlaces: Array.from(new Set([...place.relatedPlaces, ...nearbyAdventureFeed.map((candidate) => candidate.id)])).slice(0, 8),
         }
       : place.slug === "jamaica-state-park"
       ? {
           ...place,
-          seoTitle: "Jamaica State Park, Vermont: Camping, Swimming, Trails & River Guide",
+          seoTitle: `${place.name}: Featured Vermont Maker Profile`,
           seoDescription:
-            "Plan Jamaica State Park for camping, swimming, riverside picnics, West River trails, and family-friendly access to Hamilton Falls and nearby adventures.",
+            "Plan this featured profile with verified details, editorial guidance, and connected maker discoveries.",
           gallery: scoringGallery.length >= 8 ? scoringGallery : [...scoringGallery, ...Array.from({ length: 8 - scoringGallery.length }, () => place.featuredImage)],
           relatedPlaces: Array.from(new Set([...place.relatedPlaces, ...nearbyAdventureFeed.map((candidate) => candidate.id)])).slice(0, 8),
         }
@@ -300,43 +300,43 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
       ? {
           ...story,
           summary:
-            "A hidden Vermont waterfall approach with dramatic seasonal flow, careful swimming windows, and a complete day-trip plan across nearby food, lodging, and scenic stops.",
+            "A featured Vermont profile with strong editorial context, practical planning notes, and connected local recommendations.",
           visitorTips: [
-            "Wear proper footwear with grip for wet roots and exposed stone.",
-            "Bring water and a light layer because the ravine can run cool.",
-            "Leave no trace and pack out everything you carry in.",
-            "Visit early for quieter trail access and easier parking.",
-            "Watch children carefully near ledges and slick rock around the falls.",
+            "Confirm hours and access details before arrival.",
+            "Use published contact channels for the most current updates.",
+            "Save the profile and related collections for planning.",
+            "Arrive early when you want a quieter editorial-style visit.",
+            "Respect posted guidance and community etiquette.",
           ],
           photographyTips: [
-            "Morning light gives the clearest texture in the rock face and mist.",
-            "The day after rainfall brings stronger flow and dramatic spray.",
-            "Drone flight note: verify local regulations and launch only from open areas near the trailhead shoulder.",
-            "Recommended focal lengths: 16-24mm for canyon scale, 35-50mm for layered water detail.",
-            "Best fall colors usually peak in mid to late October around the upper canopy.",
+            "Morning light usually delivers the cleanest texture and color.",
+            "Capture both wide context and close craft details.",
+            "Verify local guidelines before using any aerial equipment.",
+            "Use short focal lengths for space and longer focal lengths for detail.",
+            "Seasonal changes can significantly shift color and mood.",
           ],
         }
       : place.slug === "jamaica-state-park"
       ? {
           ...story,
           summary:
-            "A flexible riverside basecamp where families find swimming, camping, picnicking, and trail access without choosing just one activity.",
+            "A flexible profile where families and collectors can discover makers, local stories, and supportive nearby stops.",
           visitorTips: [
-            "Bring water shoes for rocky river entries—smooth river stones create easy paths but require grip.",
-            "Check posted river conditions after storms; water levels can rise quickly and change swimming safety.",
-            "Plan a picnic window before noon for best table options and shade positioning.",
-            "Arrive early on summer weekends for preferred parking spots closer to river access.",
-            "Bug spray is essential in spring and early summer near the water.",
-            "Stay on marked trails—the forest here contains private property boundaries.",
-            "Leave No Trace is the local ethic; pack out everything you carry in.",
+            "Confirm hours and arrival notes before your visit.",
+            "Use saved collections to shape your day around featured makers.",
+            "Arrive early on peak days for smoother access.",
+            "Bring weather-appropriate layers for changing Vermont conditions.",
+            "Follow posted guidance and respect neighboring properties.",
+            "Use designated access points and keep your group together.",
+            "Support local shops and studios connected to this profile.",
           ],
           photographyTips: [
-            "Morning light on the riverbank is softer and easier for portraits and family scenes.",
-            "Use shoreline foreground stones and fallen trees to frame wider scenic shots.",
-            "Cloudy weather often brings cleaner color and less glare off the water surface.",
-            "Fall colors peak in early to mid-October; reflections in calm pool sections are excellent.",
-            "River bridges and covered areas create natural framing for composition.",
-            "Drone flight note: verify local regulations and use open launch areas near parking and picnic zones.",
+            "Morning light is often softer for portraits and environmental details.",
+            "Use foreground elements to frame wider editorial images.",
+            "Cloudy weather can improve color consistency and reduce glare.",
+            "Seasonal foliage windows offer strong backdrop variety.",
+            "Architectural details and signage can strengthen composition.",
+            "Verify local guidelines before using any aerial equipment.",
           ],
         }
       : story;
@@ -399,7 +399,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
       >
         <div className="space-y-4">
           {isRecommendedBySouthernVT ? <VerificationBadge level="southernvt_recommended" status={verificationRecord?.status ?? "verified"} emphasize /> : null}
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--color-maple-gold)">Flagship Place Experience</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-(--color-maple-gold)">Flagship Maker Experience</p>
           <div className="space-y-2 text-sm leading-7 text-slate-200">
             <p>{place.address}</p>
             <p>{place.city}, {place.state} {place.zip}</p>
@@ -496,20 +496,20 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
             <StorySummary story={scoringStory} />
             <ContentSection
               title={`Why Visit ${place.name}`}
-              eyebrow={isWaterfallLayout || isParkLayout ? "Flagship Standard" : "Destination Highlights"}
-              description={isWaterfallLayout || isParkLayout ? "This is the benchmark destination experience for future MadeInVT maker pages." : layoutProfile.contentLabels.storyDescription}
+              eyebrow={isWaterfallLayout || isParkLayout ? "Flagship Standard" : "Maker Highlights"}
+              description={isWaterfallLayout || isParkLayout ? "This is the benchmark profile experience for future MadeInVT maker pages." : layoutProfile.contentLabels.storyDescription}
             >
               {isWaterfallLayout ? (
                 <ul className="space-y-3 text-sm leading-7 text-slate-700">
-                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Rare sense of discovery: the approach feels hidden until the falls reveal themselves.</span></li>
-                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Compact but meaningful hike with high visual payoff and strong seasonal variety.</span></li>
-                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Easy to build into a full day with nearby food, lodging, and additional scenic stops.</span></li>
+                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Strong editorial profile with clear context and dependable details.</span></li>
+                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>High visual payoff with seasonal variety and distinctive local character.</span></li>
+                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Easy to pair with nearby makers, collections, and guide content.</span></li>
                 </ul>
               ) : isParkLayout ? (
                 <ul className="space-y-3 text-sm leading-7 text-slate-700">
-                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Flexible riverside basecamp that accommodates swimming, camping, picnicking, and hiking without demanding a single choice.</span></li>
-                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Gateway access to Hamilton Falls and the West River Trail network, with family-friendly swimming holes and picnic areas.</span></li>
-                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Seasonal variety from summer camping to fall foliage to quiet winter snowshoeing, with locals returning year-round.</span></li>
+                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Flexible profile that supports makers, studios, and family-friendly discovery.</span></li>
+                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Strong access to nearby listings, collections, and editorial context.</span></li>
+                  <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-(--color-forest-green)" /><span>Seasonal variety keeps this listing relevant year-round.</span></li>
                 </ul>
               ) : (
                 <ul className="space-y-3 text-sm leading-7 text-slate-700">
@@ -522,35 +522,36 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
             <ContentSection
               title="Story"
               eyebrow="Editorial Field Notes"
-              description={isWaterfallLayout ? "Hamilton Falls is the benchmark for how Vermont maker stories should feel: grounded, specific, and useful in the field." : isParkLayout ? "Jamaica State Park is the benchmark for flexibility and accessibility in destination planning." : layoutProfile.contentLabels.storyDescription}
+              description={isWaterfallLayout ? "This featured profile is the benchmark for how Vermont maker stories should feel: grounded, specific, and useful." : isParkLayout ? "This featured profile is the benchmark for flexibility and accessibility in maker discovery." : layoutProfile.contentLabels.storyDescription}
             >
               {isWaterfallLayout ? (
                 <div className="space-y-4 text-base leading-8 text-slate-700">
                   <p>
-                    Hamilton Falls hides in a fold of forest where the trail seems to narrow on purpose, forcing you to slow down and listen before you see anything at all.
-                    The walk in feels like a transition from road noise to river rhythm: wet soil, cedar shade, and the sound of water gathering strength somewhere below the ridge.
+                    This flagship profile highlights how MadeInVT approaches editorial storytelling: clear, practical, and rooted in local context.
+                    The goal is to help readers understand what makes this listing worth their time without relying on generic destination language.
                   </p>
                   <p>
-                    The hike is short enough for a morning plan yet rugged enough to demand attention, with roots and stone that hold moisture long after a storm.
-                    Then the waterfall appears all at once, dropping through dark rock in a way that makes the canyon feel larger than the map suggests.
-                    In spring and early summer, runoff gives it force; by late summer, clearer pools and calmer edges invite careful swimming for those who respect changing conditions.
+                    We focus on useful details: what to expect, how to prepare, and which nearby makers, guides, and collections add value to the experience.
+                    This keeps each profile actionable for both locals and first-time visitors.
                   </p>
                   <p>
-                    Hamilton Falls changes by season rather than by trend: bright green walls in June, golden canopy in October, and a quieter, colder mood when days shorten.
-                    It is beautiful because it is still wild, and that means each visit carries responsibility.
-                    Stay on trail, keep children close near wet rock, and leave every corner of the place cleaner than you found it so the next hiker meets the same first impression.
+                    Seasonal updates keep this profile current across the year.
+                    As coverage evolves, we refine recommendations, strengthen verification, and connect related listings so discovery feels cohesive.
                   </p>
                 </div>
               ) : isParkLayout ? (
                 <div className="space-y-4 text-base leading-8 text-slate-700">
                   <p>
-                    Jamaica State Park is where many Vermont weekends settle into rhythm. The West River corridor gives you shade, water access, and enough room to spread out without feeling remote. It is the kind of place locals return to each season because the day can stay flexible: swim in the morning, walk a trail at midday, picnic when you&apos;re hungry, then head into nearby towns for dinner.
+                    This profile demonstrates flexible planning for MadeInVT readers who want makers, stories, and practical details in one place.
+                    Editorial coverage is designed to remain useful whether someone is planning a short stop or a full day.
                   </p>
                   <p>
-                    The park sits in a fold of the West River Valley where the water moves at a pace that feels negotiable—fast enough for visual interest, slow enough for swimming and riverside exploration. The campground and day-use picnic areas give you multiple anchors, which means you can plan a full day without choosing just one activity. Families come for the sandy entry points and shallow pools. Photographers find morning light on the water and fall foliage reflected in quiet sections. Hikers use it as a basecamp for nearby trails, especially the short walk to nearby Hamilton Falls or longer routes through the river corridor.
+                    We emphasize clear recommendations, reliable context, and meaningful related links.
+                    Families, collectors, and local shoppers can all use this profile to decide what to explore next.
                   </p>
                   <p>
-                    Winter brings a different kind of solitude. When snow covers the picnic areas and the river slows beneath winter light, locals return for quiet walks, snowshoeing in the surrounding woods, and the strange peace of a state park with few visitors. Spring brings rushing water and mud season trails. Fall turns the surrounding hillsides into layers of color that deepen by week, making October weekends the busiest season and late September mornings some of the most peaceful.
+                    Throughout the year, updates keep content aligned with current availability, seasonal context, and editorial standards.
+                    This helps ensure each listing stays trustworthy and discovery-ready.
                   </p>
                 </div>
               ) : (
@@ -579,7 +580,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
 
             <ContentSection
               title={layoutProfile.contentLabels.safetyTitle}
-              eyebrow={isWaterfallLayout ? "Trail Conditions" : "Planning Note"}
+              eyebrow="Editorial Note"
               description={layoutProfile.contentLabels.safetyDescription}
             >
               <p className="rounded-2xl border border-[#ecd4c7] bg-[#fff7f3] px-4 py-3 text-sm leading-7 text-[#7a341f]">
@@ -589,7 +590,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
               </p>
             </ContentSection>
 
-            <ContentSection title="Nearby Adventures" eyebrow="Discovery Engine" description={layoutProfile.contentLabels.nearbyDescription}>
+            <ContentSection title="Nearby Makers" eyebrow="Discovery Engine" description={layoutProfile.contentLabels.nearbyDescription}>
               <div className="grid gap-3 md:grid-cols-2">
                 {nearbyAdventureFeed.map((candidate) => (
                   <Link
@@ -628,17 +629,16 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
             {isWaterfallLayout ? (
               <ContentSection title="SEO Snippet Preview" eyebrow="Search Result" description="How this flagship page is framed for search and social discovery.">
                 <div className="rounded-2xl border border-[#e8dfc8] bg-[#fcfaf6] p-4">
-                  <p className="text-sm font-semibold text-[#1a0dab]">Hamilton Falls, Vermont: Hidden Waterfall Hike, Swimming Notes, and Day Trip Guide</p>
-                  <p className="mt-1 text-xs text-[#006621]">madeinvt.com/places/hamilton-falls</p>
+                  <p className="text-sm font-semibold text-[#1a0dab]">Featured Vermont Maker Profile | MadeInVT</p>
+                  <p className="mt-1 text-xs text-[#006621]">madeinvt.com/makers/featured-maker</p>
                   <p className="mt-2 text-sm leading-6 text-slate-700">
-                    Explore Hamilton Falls with clear trailhead details, parking strategy, seasonal water flow guidance, safety notes, nearby food and lodging,
-                    and a complete Vermont day-trip plan.
+                    Explore a featured Vermont maker profile with practical details, editorial context, and connected collections.
                   </p>
                 </div>
               </ContentSection>
             ) : null}
 
-            <ContentSection title="Collections" eyebrow="Featured In" description={`Collections connected to ${place.name} for reusable route planning and storytelling.`}>
+            <ContentSection title="Collections" eyebrow="Featured In" description={`Collections connected to ${place.name} for reusable maker storytelling.`}>
               <div className="grid gap-3 md:grid-cols-3">
                 {featuredCollectionEntries.map((collection) => (
                   <Link
@@ -653,12 +653,12 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
               </div>
             </ContentSection>
 
-            <ContentSection title="Suggested Day Trip" eyebrow="Route Builder" description={`A practical one-day rhythm anchored by ${place.name}.`}>
+            <ContentSection title="Suggested Day Flow" eyebrow="Editorial Planner" description={`A practical one-day rhythm anchored by ${place.name}.`}>
               <ol className="space-y-3 text-sm leading-7 text-slate-700">
-                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Morning:</strong> Start at {place.name} and settle into the destination rhythm.</li>
-                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Lunch:</strong> Nearby local cafe or market stop.</li>
-                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Afternoon:</strong> Add a nearby scenic or village experience.</li>
-                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Evening:</strong> Wrap with local dining or lodging based on your route.</li>
+                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Morning:</strong> Start with {place.name} and core profile highlights.</li>
+                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Midday:</strong> Add a nearby maker or studio listing.</li>
+                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Afternoon:</strong> Use collections and guides to expand discovery.</li>
+                <li className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3"><strong className="text-slate-900">Evening:</strong> Save follow-up profiles for your next visit.</li>
               </ol>
             </ContentSection>
 
@@ -835,7 +835,7 @@ export default async function PlaceDetailPage({ params, searchParams }: PlaceDet
                 reasons: recommendation.reasons,
               })}
             />
-            <NextAdventureCard adventure={nextAdventure} title="Next Adventure" />
+            <NextAdventureCard adventure={nextAdventure} title="Next Recommendation" />
           </aside>
         </div>
       </section>
@@ -886,26 +886,26 @@ function createFallbackStory(place: Place): Story {
     id: `story-fallback-${place.id}`,
     title: `${place.name}: A Vermont Maker Story`,
     subtitle: `${place.placeType} in ${place.city}, ${place.state}`,
-    body: `${place.description}\n\nThis stop works best when paired with nearby routes, local food, and one additional destination before sunset.`,
+    body: `${place.description}\n\nThis listing works best when paired with nearby makers, local stories, and one related collection before the day ends.`,
     summary: place.description,
-    author: "Trailhead Editorial",
+    author: "MadeInVT Editorial",
     readingTime: "3 min",
     difficulty: "Easy",
     season: "Year-Round",
     history: [
-      `${place.name} has become a dependable stop in Vermont itineraries.`,
-      "Local trip planning often links this destination with nearby villages and seasonal events.",
+      `${place.name} has become a dependable listing in MadeInVT editorial coverage.`,
+      "Local planning often links this listing with nearby makers and seasonal events.",
       "Recent updates have improved discoverability through collections and guide coverage.",
     ],
     visitorTips: [
       "Confirm operating hours before leaving for the day.",
-      "Plan one nearby stop to make the route feel complete.",
-      "Leave buffer time for weather and parking variability.",
+      "Plan one nearby maker to make the sequence feel complete.",
+      "Leave buffer time for weather and arrival variability.",
     ],
     photographyTips: [
       "Use morning or late-day light for softer color and detail.",
       "Capture one wide frame and one close detail for variety.",
-      "Keep horizon lines level for cleaner scenic compositions.",
+      "Keep horizon lines level for cleaner editorial compositions.",
     ],
     localSecrets: [
       "Weekday visits can feel calmer than weekend peaks.",

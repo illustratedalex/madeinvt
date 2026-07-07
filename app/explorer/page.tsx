@@ -8,8 +8,8 @@ import { ExperienceService } from "@/lib/experience/ExperienceService";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Explorer Mode | MadeInVT",
-  description: "Tap into a curated Vermont surprise adventure with places, food, guides, deals, and optional events.",
+  title: "Discovery Picks | MadeInVT",
+  description: "Tap into curated Vermont maker and studio recommendations with guides, collections, and local stories.",
   path: "/explorer",
 });
 
@@ -37,7 +37,7 @@ export default async function ExplorerPage() {
             key={rail.key}
             title={rail.title}
             recommendations={rail.recommendations}
-            emptyMessage="Explorer recommendations are updating. Check back in a moment."
+            emptyMessage="Recommendations are updating. Check back in a moment."
             mapItem={(recommendation) => ({
               id: recommendation.item.id,
               title: recommendation.item.name,

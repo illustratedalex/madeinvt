@@ -9,8 +9,8 @@ import hiddenGems from "@/data/hidden-gems.json";
 import { getPlaces } from "@/repositories/PlaceRepository";
 
 export const metadata: Metadata = {
-  title: "Trip Builder | MadeInVT",
-  description: "Build a custom multi-day Vermont itinerary with places, dining, hidden gems, and collections.",
+  title: "Gift Finder | MadeInVT",
+  description: "Build a curated maker discovery list with studios, collections, and hidden gems.",
 };
 
 export default async function NewTripPage() {
@@ -30,8 +30,8 @@ export default async function NewTripPage() {
       flag="aiPlanner"
       fallback={
         <ComingSoon
-          title="AI Trip Planner Is Coming Soon"
-          description="Trip planning intelligence is being tuned for better route logic, preferences, and daily pacing recommendations."
+          title="AI Gift Finder Is Coming Soon"
+          description="Discovery intelligence is being tuned for better recommendation logic, preferences, and pacing."
           eyebrow="AI Planner"
         />
       }
@@ -41,10 +41,10 @@ export default async function NewTripPage() {
 
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-gradient-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Trip Planner</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Build your perfect MadeInVT itinerary.</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Gift Finder</p>
+          <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Build your perfect MadeInVT maker list.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
-            Tell us your travel style and generate a day-by-day route with dining, hidden gems, collection guides, and planning tools.
+            Tell us your preferences and generate a curated list with makers, hidden gems, collection guides, and planning tools.
           </p>
         </div>
       </section>

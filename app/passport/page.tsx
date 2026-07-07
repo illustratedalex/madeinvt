@@ -10,8 +10,8 @@ import { getPlaces } from "@/repositories/PlaceRepository";
 import { getMembers, getRewards, getStampsByMemberId } from "@/repositories/PassportRepository";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "MadeInVT Adventure Passport",
-  description: "Collect Vermont passport stamps and unlock local rewards.",
+  title: "MadeInVT Maker Passport",
+  description: "Collect maker passport stamps and unlock local rewards.",
   path: "/passport",
 });
 
@@ -43,14 +43,14 @@ export default async function PassportPage() {
 
       <section className="relative overflow-hidden border-b border-(--color-pine)/20 bg-linear-to-br from-[#12241d] via-[#1f3b2f] to-[#3d5d4b] text-(--color-cream)">
         <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 lg:px-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Adventure Passport</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Maker Passport</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-6xl">Collect stamps. Unlock local rewards.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-200">
-            Explore participating Vermont places and earn reward milestones in this beta preview passport experience.
+            Visit participating makers and studios to earn reward milestones in this beta preview passport experience.
           </p>
           {!passportEnabled ? (
             <p className="mt-5 inline-flex rounded-full border border-[#d7cbb3] bg-[#fff7e4] px-4 py-2 text-sm font-semibold text-[#6b5a30]">
-              Adventure Passport is in preview mode.
+              Maker Passport is in preview mode.
             </p>
           ) : null}
         </div>
@@ -76,7 +76,7 @@ export default async function PassportPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-slate-900">Featured participating places</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">Featured participating makers</h2>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
             {featuredPlaces.map((place) => (
               <article key={place.id} className="rounded-2xl border border-[#e8dfc8] bg-white p-4 shadow-sm">
@@ -91,10 +91,10 @@ export default async function PassportPage() {
         </section>
 
         <section className="rounded-3xl border border-[#d7cbb3] bg-[#fcfaf6] p-6 text-center shadow-sm">
-          <h2 className="text-2xl font-semibold text-slate-900">Start your Passport</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">Start your Maker Passport</h2>
           <p className="mt-2 text-sm text-slate-600">Jump into the preview check-in flow and collect your first stamp.</p>
-          <Link href="/passport/check-in/place-hamilton-falls" className="mt-4 inline-flex rounded-full bg-[#1f3b2f] px-5 py-3 text-sm font-semibold text-[#f8f2e4]">
-            Start your Passport
+          <Link href={`/passport/check-in/${featuredPlaces[0]?.id ?? "place-grafton-inn"}`} className="mt-4 inline-flex rounded-full bg-[#1f3b2f] px-5 py-3 text-sm font-semibold text-[#f8f2e4]">
+            Start your Maker Passport
           </Link>
         </section>
 

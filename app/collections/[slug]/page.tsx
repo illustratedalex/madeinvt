@@ -124,7 +124,7 @@ export default async function CollectionPublicPage({ params }: CollectionPublicP
               <p className="text-base leading-8 text-slate-700">{story.body}</p>
             </ContentSection>
 
-            <ContentSection title="Highlights" eyebrow="On this route" description="Core moments that make this collection worth the drive.">
+            <ContentSection title="Highlights" eyebrow="In this collection" description="Core moments that make this collection worth exploring.">
               <ul className="space-y-3 text-sm leading-7 text-slate-700">
                 {story.visitorTips.map((tip) => (
                   <li key={tip} className="flex gap-3">
@@ -135,7 +135,7 @@ export default async function CollectionPublicPage({ params }: CollectionPublicP
               </ul>
             </ContentSection>
 
-            <ContentSection title="Suggested Route" eyebrow="Trip planning" description="A practical sequence for the strongest version of this day.">
+            <ContentSection title="Suggested Flow" eyebrow="Collection planning" description="A practical sequence for getting the most from this collection.">
               {collectionPlaces.length ? (
                 <ol className="space-y-3 text-sm leading-7 text-slate-700">
                   {collectionPlaces.slice(0, 5).map((place, index) => (
@@ -152,7 +152,7 @@ export default async function CollectionPublicPage({ params }: CollectionPublicP
               )}
             </ContentSection>
 
-            <ContentSection title="What Makes This Collection Special" eyebrow="Local perspective" description="Notes from editors and regional travelers.">
+            <ContentSection title="What Makes This Collection Special" eyebrow="Local perspective" description="Notes from editors and regional contributors.">
               <ul className="space-y-3 text-sm leading-7 text-slate-700">
                 {story.localSecrets.map((secret) => (
                   <li key={secret} className="flex gap-3">
@@ -233,10 +233,10 @@ export default async function CollectionPublicPage({ params }: CollectionPublicP
 
             <PublicCTA
               eyebrow="Ready to go"
-              title="Plan this trip"
-              description="Save this collection and build your Vermont itinerary with local stops, meals, and scenic moments."
-              href="/planner/new"
-              label="Plan this trip"
+              title="Build your maker list"
+              description="Save this collection and build your MadeInVT discovery list with makers, stories, and gift-ready picks."
+              href="/search"
+              label="Build your list"
             />
           </aside>
         </div>
@@ -250,18 +250,18 @@ export default async function CollectionPublicPage({ params }: CollectionPublicP
 function createFallbackCollectionStory(collection: Collection): Story {
   return {
     id: `story-fallback-${collection.id}`,
-    title: `${collection.title}: A Vermont Route Story`,
+    title: `${collection.title}: A Vermont Collection Story`,
     subtitle: collection.subtitle,
     body: collection.description,
     summary: collection.description,
-    author: "Trailhead Editorial",
+    author: "MadeInVT Editorial",
     readingTime: "4 min",
     difficulty: "Easy",
     season: collection.season,
     history: [
-      "This route evolved from repeat local travel patterns in Vermont.",
-      "Stops were selected to balance scenery, pacing, and practical logistics.",
-      "Seasonal updates keep the sequence fresh while preserving the core experience.",
+      "This collection evolved from repeat local maker and studio patterns in Vermont.",
+      "Stops were selected to balance editorial value, pacing, and practical logistics.",
+      "Seasonal updates keep the sequence fresh while preserving the core maker experience.",
     ],
     visitorTips: [
       "Start with your longest scenic segment first.",
@@ -270,15 +270,15 @@ function createFallbackCollectionStory(collection: Collection): Story {
     ],
     photographyTips: [
       "Shoot one hero frame at each anchor stop.",
-      "Capture local signage and street details to tell the full route story.",
+      "Capture local signage and studio details to tell the full collection story.",
       "Plan foliage shots around golden hour for stronger color depth.",
     ],
     localSecrets: [
-      "This route works best when you leave room for small village detours.",
+      "This collection works best when you leave room for small village detours.",
       "Weekdays can make high-interest stops easier to enjoy.",
       "Pair this collection with a matching guide to add context before driving.",
     ],
-    bestTimeToVisit: `${collection.season} is the strongest season, but this route can be adapted year-round.`,
+    bestTimeToVisit: `${collection.season} is the strongest season, but this collection can be adapted year-round.`,
     featuredQuote: "The best collection days are the ones with one plan and two good detours.",
     createdAt: collection.createdAt,
     updatedAt: collection.updatedAt,
