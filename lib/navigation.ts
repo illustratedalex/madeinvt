@@ -7,71 +7,42 @@ type NavigationGroup = {
 export const publicNavigationGroups: NavigationGroup[] = [
   {
     label: "Explore",
-    href: "/search",
+    href: "/collections",
     items: [
-      { label: "Explore", href: "/search" },
-      { label: "Search", href: "/search" },
+      { label: "Collections", href: "/collections" },
+      { label: "Gift Guides", href: "/collections" },
+      { label: "Events", href: "/events" },
+      { label: "New Makers", href: "/updates" },
     ],
   },
   {
     label: "Makers",
     href: "/makers",
     items: [
-      { label: "Makers", href: "/makers" },
-      { label: "Featured Makers", href: "/makers" },
-    ],
-  },
-  {
-    label: "Collections",
-    href: "/collections",
-    items: [
-      { label: "Collections", href: "/collections" },
-      { label: "Gift Guides", href: "/collections" },
-    ],
-  },
-  {
-    label: "Gift Guides",
-    href: "/collections",
-    items: [
-      { label: "Gift Guides", href: "/collections" },
-      { label: "Gift Finder", href: "/planner" },
-      { label: "Maker Finder", href: "/concierge" },
+      { label: "All Makers", href: "/makers" },
+      { label: "Studios", href: "/businesses" },
+      { label: "Visit the Workshop", href: "/events" },
+      { label: "Suggest a Maker", href: "/feedback?category=Suggest%20a%20Maker" },
     ],
   },
   {
     label: "Stories",
     href: "/guides",
     items: [
-      { label: "Stories", href: "/guides" },
-      { label: "New Makers", href: "/updates" },
-      { label: "Why Trust MadeInVT", href: "/why-trust-southernvt" },
+      { label: "Maker Stories", href: "/guides" },
+      { label: "Behind the Bench", href: "/guides" },
+      { label: "Why Trust MadeInVT?", href: "/why-trust-southernvt" },
       { label: "How We Choose Makers", href: "/our-coverage" },
-    ],
-  },
-  {
-    label: "Studios",
-    href: "/businesses",
-    items: [
-      { label: "Studios", href: "/businesses" },
-      { label: "Claim a Listing", href: "/businesses" },
-      { label: "Founding Makers", href: "/founding-partners" },
-      { label: "Maker Portal", href: "/partner-portal" },
-    ],
-  },
-  {
-    label: "Events",
-    href: "/events",
-    items: [
-      { label: "Events", href: "/events" },
-      { label: "Workshops", href: "/events" },
     ],
   },
   {
     label: "Shop",
     href: "/collections",
     items: [
+      { label: "Gift Guides", href: "/collections" },
+      { label: "New Collections", href: "/collections" },
       { label: "Find Handmade", href: "/collections" },
-      { label: "Gift Finder", href: "/concierge" },
+      { label: "Shop Coming Soon", href: "/collections" },
     ],
   },
 ];
