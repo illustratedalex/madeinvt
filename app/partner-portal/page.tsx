@@ -39,6 +39,15 @@ export default async function PartnerPortalLandingPage() {
         ) : null}
       </header>
 
+      <article className="rounded-[28px] border border-[#e8dfc8] bg-[#fcfaf6] p-6 shadow-sm">
+        <p className="inline-flex rounded-full border border-[#d7cbb3] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">
+          Early Access
+        </p>
+        <p className="mt-3 text-sm leading-7 text-slate-700">
+          We&apos;re gradually expanding access while we continue improving the platform.
+        </p>
+      </article>
+
       {!authEnabled ? (
         <article className="rounded-[28px] border border-amber-200 bg-amber-50 p-6 shadow-sm">
           <h2 className="text-2xl font-semibold text-amber-900">Accounts are not enabled yet</h2>
@@ -128,16 +137,19 @@ export default async function PartnerPortalLandingPage() {
       {user && ownedListings.length === 0 ? (
         <article className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Pending</p>
-          <h2 className="mt-2 text-xl font-semibold text-slate-900">No approved maker profiles yet.</h2>
+          <h2 className="mt-2 text-xl font-semibold text-slate-900">No maker profiles are connected to this account yet.</h2>
           <p className="mt-2 text-sm leading-7 text-slate-600">
             Your claim may still be under review. MadeInVT manually reviews every claim before granting edit access.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/feedback?category=Suggest%20a%20Maker" className="rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4]">
-              Claim or suggest a maker profile
+            <Link href="/claim" className="rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4]">
+              Claim a Maker
+            </Link>
+            <Link href="/feedback?category=Suggest%20a%20Maker" className="rounded-full border border-[#d7cbb3] bg-white px-5 py-2.5 text-sm font-semibold text-slate-700">
+              Suggest a Maker
             </Link>
             <a href="mailto:partners@madeinvt.com" className="rounded-full border border-[#d7cbb3] px-5 py-2.5 text-sm font-semibold text-slate-700">
-              partners@madeinvt.com
+              Contact Support
             </a>
           </div>
         </article>

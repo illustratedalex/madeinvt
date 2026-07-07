@@ -3,8 +3,8 @@ import { hasSupabaseConfig } from "@/lib/supabase/config";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Owner Sign Up | MadeInVT",
-  description: "Create a MadeInVT owner account to access approved business listings.",
+  title: "Create Your Maker Account | MadeInVT",
+  description: "Create a MadeInVT Maker Portal account for claimed maker or studio profiles.",
   path: "/signup",
 });
 
@@ -29,10 +29,10 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
   return (
     <section className="mx-auto max-w-xl space-y-6 px-6 py-12 sm:px-8 lg:px-10">
       <header className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Business Owner Access</p>
-        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Create account</h1>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Maker Portal Access</p>
+        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Create Your Maker Account</h1>
         <p className="mt-2 text-sm leading-7 text-slate-700">
-          Use the same email you submit in your business claim so Basecamp can approve ownership access.
+          Accounts are intended for makers who have claimed or are claiming a MadeInVT profile.
         </p>
       </header>
 
@@ -110,10 +110,17 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
         </button>
       </form>
 
+      <div className="rounded-2xl border border-[#e8dfc8] bg-white px-4 py-3 text-sm text-slate-700">
+        <p className="font-semibold text-slate-900">Maker account flow</p>
+        <p className="mt-1">
+          Find your maker profile → Claim your profile → Create account → Email confirmation → Review → Portal access.
+        </p>
+      </div>
+
       <p className="text-sm text-slate-700">
-        Already have an account?{" "}
+        Already claimed your maker profile?{" "}
         <Link href="/login" className="font-semibold text-[#1f3b2f] underline underline-offset-4">
-          Login
+          Sign in
         </Link>
       </p>
     </section>

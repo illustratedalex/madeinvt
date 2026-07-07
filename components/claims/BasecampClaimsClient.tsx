@@ -10,10 +10,30 @@ import type { BusinessClaim } from "@/types/Claim";
 import { ClaimDetailsDrawer } from "./ClaimDetailsDrawer";
 import { ClaimTable } from "./ClaimTable";
 
+type ClaimQueueFilter = "all" | "pending" | "approved" | "rejected" | "needs_follow_up";
+
+function requiresFollowUp(claim: BusinessClaim): boolean {
+  const combinedNotes = `${claim.reviewNotes ?? ""} ${claim.verificationNotes} ${claim.requestedUpdates}`.toLowerCase();
+  const noteFlag = /follow[-\s]?up|need(s)?\s+more|missing|clarif/i.test(combinedNotes);
+  if (noteFlag) {
+    return true;
+  }
+  if (claim.status !== "pending") {
+    return false;
+  }
+  const submittedMs = Date.parse(claim.submittedAt);
+  if (Number.isNaN(submittedMs)) {
+    return false;
+  }
+  const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+  return Date.now() - submittedMs >= sevenDaysMs;
+}
+
 export function BasecampClaimsClient() {
   const [claims, setClaims] = useState<BusinessClaim[]>([]);
   const [selected, setSelected] = useState<BusinessClaim | null>(null);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<ClaimQueueFilter>("all");
   const [businessPortalEnabled, setBusinessPortalEnabled] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -36,17 +56,38 @@ export function BasecampClaimsClient() {
     setClaims(loaded);
   };
 
+  const filteredClaims = useMemo(() => {
+    if (statusFilter === "all") {
+      return claims;
+    }
+    if (statusFilter === "needs_follow_up") {
+      return claims.filter(requiresFollowUp);
+    }
+    return claims.filter((claim) => claim.status === statusFilter);
+  }, [claims, statusFilter]);
+
   const visibleClaims = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) {
-      return claims;
+      return filteredClaims;
     }
 
-    return claims.filter((claim) => {
+    return filteredClaims.filter((claim) => {
       const haystack = `${claim.businessName} ${claim.contactName} ${claim.businessSlug} ${claim.email}`.toLowerCase();
       return haystack.includes(q);
     });
-  }, [claims, search]);
+  }, [filteredClaims, search]);
+
+  const filterCounts = useMemo(
+    () => ({
+      all: claims.length,
+      pending: claims.filter((claim) => claim.status === "pending").length,
+      approved: claims.filter((claim) => claim.status === "approved").length,
+      rejected: claims.filter((claim) => claim.status === "rejected").length,
+      needs_follow_up: claims.filter(requiresFollowUp).length,
+    }),
+    [claims],
+  );
 
   const transitionClaim = async (claim: BusinessClaim, status: "approved" | "rejected", reviewNotes?: string) => {
     try {
@@ -109,7 +150,41 @@ export function BasecampClaimsClient() {
             bulkLabel="Queue"
           />
 
-          <BasecampSection title="Claim queue" eyebrow="Business Portal" description="Pending, approved, and rejected ownership requests.">
+          <div className="flex flex-wrap gap-2">
+            {[
+              { id: "all", label: "All" },
+              { id: "pending", label: "Pending" },
+              { id: "approved", label: "Approved" },
+              { id: "rejected", label: "Rejected" },
+              { id: "needs_follow_up", label: "Needs Follow-up" },
+            ].map((filter) => {
+              const isActive = statusFilter === filter.id;
+              const count = filterCounts[filter.id as ClaimQueueFilter];
+              return (
+                <button
+                  key={filter.id}
+                  type="button"
+                  onClick={() => setStatusFilter(filter.id as ClaimQueueFilter)}
+                  className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                    isActive
+                      ? "border-[#1f3b2f] bg-[#1f3b2f] text-[#f8f2e4]"
+                      : "border-[#d7cbb3] bg-white text-slate-700 hover:bg-[#fcfaf6]"
+                  }`}
+                >
+                  <span>{filter.label}</span>
+                  <span className={`rounded-full px-2 py-0.5 text-xs ${isActive ? "bg-white/20 text-white" : "bg-[#f6f0e4] text-slate-600"}`}>
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <BasecampSection
+            title="Claim queue"
+            eyebrow="Business Portal"
+            description="Pending, approved, rejected, and needs follow-up ownership requests."
+          >
             {visibleClaims.length === 0 ? (
               <p className="text-sm leading-7 text-slate-600">No claims found for the current filter.</p>
             ) : (
@@ -143,6 +218,9 @@ export function BasecampClaimsClient() {
             </p>
             <p className="mt-1 text-slate-500">
               Approval creates an owner mapping record. Rejection keeps the listing unclaimed.
+            </p>
+            <p className="mt-1 text-slate-500">
+              Approved claims are also linked automatically after signup/login when the account email matches the approved claim email.
             </p>
             <p className="mt-1 text-slate-500">
               Basecamp reviewer authentication is not fully implemented yet. This queue assumes trusted internal access.

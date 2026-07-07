@@ -488,6 +488,27 @@ export default async function Home() {
         </EditorialSection>
 
         <EditorialSection
+          eyebrow="Maker Portal"
+          title="Own Your Maker Profile?"
+          description="If you're a Vermont artisan, craftsperson, studio, or maker, you can claim your profile and help us keep your information accurate."
+        >
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/claim"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-(--color-forest-green) px-5 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
+            >
+              Claim Your Profile
+            </Link>
+            <Link
+              href="/partner-portal"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-(--color-pine)/20 px-5 text-sm font-semibold text-(--color-forest-green) motion-safe:transition motion-safe:hover:bg-white"
+            >
+              Learn More
+            </Link>
+          </div>
+        </EditorialSection>
+
+        <EditorialSection
           eyebrow="Customer Experiences"
           title="Customer Experiences"
           description="Published customer experience highlights connected to Vermont maker profiles."

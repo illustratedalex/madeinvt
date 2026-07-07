@@ -3,8 +3,8 @@ import { hasSupabaseConfig } from "@/lib/supabase/config";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Owner Login | MadeInVT",
-  description: "Business owner login for MadeInVT listing claiming and partner portal access.",
+  title: "Maker Portal | Login | MadeInVT",
+  description: "Sign in to the MadeInVT Maker Portal after claiming your maker profile.",
   path: "/login",
 });
 
@@ -40,10 +40,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <section className="mx-auto max-w-xl space-y-6 px-6 py-12 sm:px-8 lg:px-10">
       <header className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Business Owner Access</p>
-        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Login</h1>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Maker Portal</p>
+        <h1 className="mt-2 text-3xl font-semibold text-slate-900">Maker Portal</h1>
         <p className="mt-2 text-sm leading-7 text-slate-700">
-          Sign in to manage your approved MadeInVT business listings.
+          Already claimed your maker profile? Sign in below.
         </p>
       </header>
 
@@ -118,12 +118,18 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </button>
       </form>
 
-      <p className="text-sm text-slate-700">
-        Don&apos;t have an account?{" "}
-        <Link href="/signup" className="font-semibold text-[#1f3b2f] underline underline-offset-4">
-          Create one
-        </Link>
-      </p>
+      <div className="rounded-2xl border border-[#e8dfc8] bg-white px-4 py-3 text-sm text-slate-700">
+        <p className="font-semibold text-slate-900">Don&apos;t have access yet?</p>
+        <p className="mt-1">Claim your maker profile first.</p>
+        <div className="mt-3 flex flex-wrap gap-3">
+          <Link href="/claim" className="font-semibold text-[#1f3b2f] underline underline-offset-4">
+            Claim Your Profile
+          </Link>
+          <Link href="/signup" className="font-semibold text-[#1f3b2f] underline underline-offset-4">
+            Create Your Maker Account
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }

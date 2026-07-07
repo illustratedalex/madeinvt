@@ -118,10 +118,11 @@ export function ClaimForm({ listing }: ClaimFormProps) {
     return (
       <section className="rounded-[30px] border border-[#cde8d6] bg-[#ecf8f0] p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f5a3d]">Request received</p>
-        <h2 className="mt-2 text-2xl font-semibold text-slate-900">Success</h2>
+        <h2 className="mt-2 text-2xl font-semibold text-slate-900">Your request has been received.</h2>
         <p className="mt-3 text-sm leading-7 text-slate-700">
-          Your claim request has been submitted. MadeInVT will review it before granting access.
+          We&apos;ll review your request and connect it to your account.
         </p>
+        <p className="mt-2 text-sm leading-7 text-slate-700">You&apos;ll receive an email when access is approved.</p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link href={listing.publicHref} className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-3 text-sm font-semibold text-[#f8f2e4]">
             Return to {listing.publicLabel}
