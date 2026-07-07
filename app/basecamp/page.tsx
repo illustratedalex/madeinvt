@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Sidebar } from "@/components/admin";
 import { MorningBriefingNote } from "@/components/basecamp/MorningBriefingNote";
@@ -5,7 +7,8 @@ import { foundingPartners } from "@/data/foundingPartners";
 import { copyDeskStories, morningPriorities, photoDeskNeeds, publishTodayItems, weatherPlaceholder } from "@/data/morningBriefing";
 import { vermont100Makers } from "@/data/vermont100Makers";
 import { weeklyIssue } from "@/data/weeklyIssue";
-import { findMissingRelationships, findWeakStories } from "@/lib/editorial/EditorialIntelligence";
+import { useBasecampPublication } from "@/hooks/useBasecampPublication";
+import { basecampPublicationDashboard } from "@/lib/basecamp/publication";
 
 const navItems = [
   { label: "Dashboard", href: "/basecamp", active: true },
@@ -61,33 +64,18 @@ const upcomingMeetings = [
 ];
 
 export default function BasecampMorningBriefingPage() {
+  const { activePublication } = useBasecampPublication();
+  const publicationDashboard = basecampPublicationDashboard[activePublication];
   const now = new Date();
   const greeting = greetingForHour(now.getHours());
-  const issueProgress = weeklyIssue.completionPercent;
-  const readyToPublishCount = copyDeskStories.filter((story) => story.readyToPublish).length;
+  const issueProgress = publicationDashboard.currentIssueProgress;
   const interestedBusinesses = foundingPartners.filter((partner) => partner.status === "interested").length;
   const foundingPartnerCount = foundingPartners.length;
   const partnerFollowUps = foundingPartners
     .filter((partner) => partner.status === "invited" || partner.status === "interested")
     .slice(0, 4);
 
-  const intelligenceCandidates = [...findMissingRelationships(8), ...findWeakStories(8)].sort(
-    (left, right) => right.priority - left.priority,
-  );
-  const focusRecommendation =
-    intelligenceCandidates.find((entry) => entry.entityName.toLowerCase().includes("mount equinox")) ??
-    intelligenceCandidates[0] ?? {
-      entityName: "Mount Equinox Skyline Drive",
-      href: "/places/mount-equinox-skyline-drive",
-      missing: ["Needed for Fall Foliage issue."],
-      priority: 90,
-    };
-
   const impactStars = "★".repeat(5);
-  const focusReason =
-    focusRecommendation.entityName.toLowerCase().includes("mount equinox")
-      ? "Needed for Fall Foliage issue."
-      : (focusRecommendation.missing[0] ?? "High-impact editorial gap for this week.");
 
   const todayAssignments = [
     ...morningPriorities.map((priority, index) => ({
@@ -139,7 +127,7 @@ export default function BasecampMorningBriefingPage() {
               </article>
               <article className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Current Editorial Issue</p>
-                <p className="mt-1 text-sm font-semibold text-slate-900">{weeklyIssue.title}</p>
+                <p className="mt-1 text-sm font-semibold text-slate-900">{publicationDashboard.currentIssueTitle}</p>
               </article>
               <article className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Issue Progress</p>
@@ -157,11 +145,11 @@ export default function BasecampMorningBriefingPage() {
 
           <section className="rounded-[32px] border border-[#d7be8a] bg-[linear-gradient(135deg,#fff6df,#f6efe1)] p-6 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#7c5b13]">Today&apos;s Focus</p>
-            <h2 className="mt-2 text-3xl font-semibold text-slate-900">Today&apos;s Highest Impact Work</h2>
+            <h2 className="mt-2 text-3xl font-semibold text-slate-900">{publicationDashboard.focusTitle}</h2>
             <div className="mt-4 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
               <article className="rounded-2xl border border-[#e5d2a6] bg-white/80 p-5">
-                <p className="text-lg font-semibold text-slate-900">{focusRecommendation.entityName}</p>
-                <p className="mt-2 text-sm leading-7 text-slate-700">{focusReason}</p>
+                <p className="text-lg font-semibold text-slate-900">{publicationDashboard.brandLabel} Editorial Focus</p>
+                <p className="mt-2 text-sm leading-7 text-slate-700">{publicationDashboard.focusReason}</p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <span className="rounded-full border border-[#d7cbb3] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700">
                     Estimated Time · 32 minutes
@@ -171,18 +159,18 @@ export default function BasecampMorningBriefingPage() {
                   </span>
                 </div>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link href={focusRecommendation.href} className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-white">
+                  <Link href={publicationDashboard.focusHref} className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-white">
                     Open Assignment
                   </Link>
-                  <Link href={focusRecommendation.href} className="inline-flex rounded-full border border-[#d7cbb3] bg-white px-5 py-2 text-sm font-semibold text-slate-800">
+                  <Link href={publicationDashboard.focusHref} className="inline-flex rounded-full border border-[#d7cbb3] bg-white px-5 py-2 text-sm font-semibold text-slate-800">
                     View Story
                   </Link>
                 </div>
               </article>
               <article className="rounded-2xl border border-[#e5d2a6] bg-white/80 p-5">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#7c5b13]">This Week&apos;s Issue</p>
-                <p className="mt-2 text-xl font-semibold text-slate-900">{weeklyIssue.title}</p>
-                <p className="mt-2 text-sm leading-7 text-slate-600">{weeklyIssue.theme}</p>
+                <p className="mt-2 text-xl font-semibold text-slate-900">{publicationDashboard.currentIssueTitle}</p>
+                <p className="mt-2 text-sm leading-7 text-slate-600">{publicationDashboard.currentIssueTheme}</p>
               </article>
             </div>
           </section>
@@ -299,8 +287,8 @@ export default function BasecampMorningBriefingPage() {
 
             <article className="rounded-[30px] border border-[#e8dfc8] bg-white/95 p-6 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Publish Today</p>
-              <h2 className="mt-2 text-2xl font-semibold text-slate-900">Stories ready to publish</h2>
-              <p className="mt-1 text-sm text-slate-600">{readyToPublishCount} stories are currently ready.</p>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-900">{publicationDashboard.storiesReadyLabel}</h2>
+              <p className="mt-1 text-sm text-slate-600">{publicationDashboard.storiesReadyValue} stories are currently ready.</p>
               <div className="mt-5 space-y-3">
                 {publishTodayItems.map((item) => (
                   <Link key={item.title} href={item.href} className="flex items-center justify-between gap-3 rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] px-4 py-3 transition hover:bg-white">
@@ -318,28 +306,14 @@ export default function BasecampMorningBriefingPage() {
 
             <article className="rounded-[30px] border border-[#e8dfc8] bg-white/95 p-6 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Today</p>
-              <h2 className="mt-2 text-2xl font-semibold text-slate-900">Metrics</h2>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-900">KPIs</h2>
               <div className="mt-4 space-y-3 text-sm">
-                <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
-                  <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Visitors</p>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">2,143</p>
-                </div>
-                <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
-                  <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Trips Planned</p>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">186</p>
-                </div>
-                <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
-                  <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Businesses Clicked</p>
-                  <p className="mt-1 text-2xl font-semibold text-slate-900">94</p>
-                </div>
-                <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
-                  <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Top Story</p>
-                  <p className="mt-1 text-sm font-semibold text-slate-900">{weeklyIssue.coverStory.title}</p>
-                </div>
-                <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
-                  <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Top Business</p>
-                  <p className="mt-1 text-sm font-semibold text-slate-900">{partnerFollowUps[0]?.businessName ?? "Grafton Inn"}</p>
-                </div>
+                {publicationDashboard.kpis.map((kpi) => (
+                  <div key={kpi.label} className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
+                    <p className="text-xs uppercase tracking-[0.14em] text-slate-500">{kpi.label}</p>
+                    <p className="mt-1 text-2xl font-semibold text-slate-900">{kpi.value}</p>
+                  </div>
+                ))}
               </div>
             </article>
           </section>
@@ -347,13 +321,13 @@ export default function BasecampMorningBriefingPage() {
           <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
             <article className="rounded-[30px] border border-[#e8dfc8] bg-white/95 p-6 shadow-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">This Week&apos;s Issue</p>
-              <h2 className="mt-2 text-3xl font-semibold text-slate-900">{weeklyIssue.title}</h2>
-              <p className="mt-2 text-sm leading-7 text-slate-600">{weeklyIssue.theme}</p>
+              <h2 className="mt-2 text-3xl font-semibold text-slate-900">{publicationDashboard.currentIssueTitle}</h2>
+              <p className="mt-2 text-sm leading-7 text-slate-600">{publicationDashboard.currentIssueTheme}</p>
               <div className="mt-4 rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Completion</p>
-                <p className="mt-1 text-3xl font-semibold text-slate-900">{weeklyIssue.completionPercent}%</p>
+                <p className="mt-1 text-3xl font-semibold text-slate-900">{issueProgress}%</p>
                 <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
-                  <div className="h-full rounded-full bg-[linear-gradient(90deg,#d8b15d,#1f5a3d)]" style={{ width: `${weeklyIssue.completionPercent}%` }} />
+                  <div className="h-full rounded-full bg-[linear-gradient(90deg,#d8b15d,#1f5a3d)]" style={{ width: `${issueProgress}%` }} />
                 </div>
               </div>
               <div className="mt-4 grid gap-3 md:grid-cols-2">
@@ -380,8 +354,10 @@ export default function BasecampMorningBriefingPage() {
             </article>
 
             <article className="rounded-[30px] border border-[#e8dfc8] bg-white/95 p-6 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">Vermont 100 Makers</p>
-              <h2 className="mt-2 text-2xl font-semibold text-slate-900">Coverage Progress</h2>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#1f3b2f]">
+                {activePublication === "madeinvt" ? "Vermont 100 Makers" : "SouthernVT 100"}
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold text-slate-900">{publicationDashboard.coverageTitle}</h2>
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-3">
                   <p className="text-xs uppercase tracking-[0.14em] text-slate-500">Published</p>
@@ -410,8 +386,8 @@ export default function BasecampMorningBriefingPage() {
                   ))}
                 </div>
               </div>
-              <Link href="/basecamp/vermont-100-makers" className="mt-4 inline-flex rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-white">
-                Open Vermont 100 Makers
+              <Link href={publicationDashboard.coverageCtaHref} className="mt-4 inline-flex rounded-full bg-[#1f3b2f] px-5 py-2 text-sm font-semibold text-white">
+                {publicationDashboard.coverageCtaLabel}
               </Link>
             </article>
           </section>

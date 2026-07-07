@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useBasecampPublication } from "@/hooks/useBasecampPublication";
+import { basecampPublicationSidebarItems } from "@/lib/basecamp/publication";
 import { useFeatureFlags } from "@/hooks/useFeatureFlags";
 import type { BasecampFeatureKey } from "@/lib/basecampFeatureFlags";
 
@@ -36,6 +39,8 @@ const conditionalModuleMap: Array<{ label: string; href: string; flag: BasecampF
 
 export function Sidebar({ items }: SidebarProps) {
   const { featureFlags } = useFeatureFlags();
+  const pathname = usePathname();
+  const { activePublication, setActivePublication, options } = useBasecampPublication();
 
   const conditionalItems: SidebarItem[] = conditionalModuleMap.map((moduleItem) => {
     const enabled = featureFlags[moduleItem.flag];
@@ -47,7 +52,25 @@ export function Sidebar({ items }: SidebarProps) {
     };
   });
 
-  const allItems = [...items];
+  const publicationItems = basecampPublicationSidebarItems[activePublication];
+  const publicationItemsByHref = Object.fromEntries(publicationItems.map((item) => [item.href, item]));
+
+  const allItems = [...items].map((item) =>
+    publicationItemsByHref[item.href]
+      ? {
+          ...item,
+          label: publicationItemsByHref[item.href].label,
+        }
+      : item,
+  );
+
+  for (const publicationItem of publicationItems) {
+    const exists = allItems.some((item) => item.href === publicationItem.href || item.label === publicationItem.label);
+    if (!exists) {
+      allItems.push({ ...publicationItem, note: "ON" });
+    }
+  }
+
   for (const conditionalItem of conditionalItems) {
     const exists = allItems.some((item) => item.href === conditionalItem.href || item.label === conditionalItem.label);
     if (!exists) {
@@ -85,9 +108,29 @@ export function Sidebar({ items }: SidebarProps) {
           SV
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">SouthernVT</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">
+            {activePublication === "madeinvt" ? "MadeInVT" : "SouthernVT"}
+          </p>
           <p className="text-sm text-slate-300">Basecamp</p>
         </div>
+      </div>
+
+      <div className="mt-6">
+        <label htmlFor="basecamp-publication" className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-300">
+          Active publication
+        </label>
+        <select
+          id="basecamp-publication"
+          value={activePublication}
+          onChange={(event) => setActivePublication(event.target.value as "southernvt" | "madeinvt")}
+          className="mt-2 w-full rounded-xl border border-white/15 bg-[#0f2119] px-3 py-2 text-sm text-slate-100 outline-none"
+        >
+          {options.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <nav className="mt-8 space-y-1.5">
@@ -105,7 +148,7 @@ export function Sidebar({ items }: SidebarProps) {
               key={item.label}
               href={item.href}
               className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                item.active
+                item.active || pathname === item.href
                   ? "bg-white/12 text-white shadow-lg"
                   : "text-slate-300 hover:bg-white/8 hover:text-white"
               }`}
