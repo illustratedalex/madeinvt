@@ -1,20 +1,22 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { hasSupabaseConfig } from "@/lib/supabase/config";
+import { hasSupabaseConfig, requireAppUrl } from "@/lib/supabase/config";
 
 export async function POST(request: Request) {
   if (!hasSupabaseConfig()) {
-    return NextResponse.json(
-      { error: "Accounts are not enabled yet. Email partners@madeinvt.com to request early access." },
-      { status: 503 },
-    );
+    return NextResponse.redirect(new URL("/login?error=auth_not_enabled", request.url));
   }
 
   const formData = await request.formData();
   const email = String(formData.get("email") ?? "").trim();
   const next = String(formData.get("next") ?? "").trim();
   const encodedNext = next.startsWith("/") ? `?next=${encodeURIComponent(next)}` : "";
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() || new URL(request.url).origin;
+  let appUrl = "";
+  try {
+    appUrl = requireAppUrl();
+  } catch {
+    return NextResponse.redirect(new URL("/login?error=auth_not_enabled", request.url));
+  }
 
   if (!email) {
     return NextResponse.redirect(new URL("/login?error=missing_email", request.url));

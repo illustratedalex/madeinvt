@@ -40,10 +40,10 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   return (
     <section className="mx-auto max-w-xl space-y-6 px-6 py-12 sm:px-8 lg:px-10">
       <header className="rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Maker Portal</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#1f3b2f]">Maker Portal Access</p>
         <h1 className="mt-2 text-3xl font-semibold text-slate-900">Maker Portal</h1>
         <p className="mt-2 text-sm leading-7 text-slate-700">
-          Already claimed your maker profile? Sign in below.
+          Sign in to manage your approved MadeInVT maker profile.
         </p>
       </header>
 

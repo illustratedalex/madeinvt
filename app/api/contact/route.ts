@@ -32,7 +32,7 @@ export async function POST(request: Request) {
   // Service guard — fail loud if email is unconfigured
   if (!isContactEmailConfigured()) {
     return NextResponse.json(
-      { success: false, error: "Email service is not configured." },
+      { success: false, error: "Email service is not configured yet. Please email hello@madeinvt.com directly." },
       { status: 503 },
     );
   }

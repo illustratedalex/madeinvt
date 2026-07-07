@@ -6,6 +6,7 @@ import { getAuthenticatedOwnerUser } from "@/lib/auth/session";
 import { getOwnedBusinessListings } from "@/lib/claims/liveClaims";
 import { createPageMetadata } from "@/lib/seo";
 import { hasSupabaseConfig } from "@/lib/supabase/config";
+import { hasSupabaseServiceRoleEnv } from "@/lib/supabase/admin";
 
 export const metadata = createPageMetadata({
   title: "Maker Portal | MadeInVT",
@@ -14,9 +15,9 @@ export const metadata = createPageMetadata({
 });
 
 export default async function PartnerPortalLandingPage() {
-  const authEnabled = hasSupabaseConfig();
-  const user = await getAuthenticatedOwnerUser();
-  if (!user) {
+  const authEnabled = hasSupabaseConfig() && hasSupabaseServiceRoleEnv();
+  const user = authEnabled ? await getAuthenticatedOwnerUser() : null;
+  if (authEnabled && !user) {
     redirect("/login?next=/partner-portal");
   }
   const ownedListings = user ? await getOwnedBusinessListings(user.id) : [];
@@ -50,9 +51,9 @@ export default async function PartnerPortalLandingPage() {
 
       {!authEnabled ? (
         <article className="rounded-[28px] border border-amber-200 bg-amber-50 p-6 shadow-sm">
-          <h2 className="text-2xl font-semibold text-amber-900">Accounts are not enabled yet</h2>
+          <h2 className="text-2xl font-semibold text-amber-900">Account login is not enabled yet</h2>
           <p className="mt-2 text-sm leading-7 text-amber-800">
-            Public beta accounts are not enabled in this environment yet. Email{" "}
+            Account login is not enabled yet. Email{" "}
             <a href="mailto:partners@madeinvt.com" className="font-semibold underline underline-offset-2">
               partners@madeinvt.com
             </a>{" "}
@@ -119,9 +120,9 @@ export default async function PartnerPortalLandingPage() {
 
       {!user ? (
         <article className="rounded-[28px] border border-[#e8dfc8] bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-semibold text-slate-900">Login to manage your listing</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">Login to manage your maker profile</h2>
           <p className="mt-2 text-sm leading-7 text-slate-600">
-            Log in or create a free account to access your approved business listings. Approval is required before edit access is granted.
+            Log in or create a free account to access your approved maker profile. Approval is required before edit access is granted.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link href="/login" className="rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4]">

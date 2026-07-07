@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { hasSupabaseConfig } from "@/lib/supabase/config";
+import { hasSupabaseConfig, requireAppUrl } from "@/lib/supabase/config";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function POST(request: Request) {
@@ -14,7 +14,12 @@ export async function POST(request: Request) {
     return NextResponse.redirect(new URL("/forgot-password?error=missing_email", request.url));
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() || new URL(request.url).origin;
+  let appUrl = "";
+  try {
+    appUrl = requireAppUrl();
+  } catch {
+    return NextResponse.redirect(new URL("/forgot-password?error=auth_not_enabled", request.url));
+  }
   const supabase = getSupabaseServerClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${appUrl}/reset-password`,

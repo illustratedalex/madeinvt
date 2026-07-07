@@ -28,6 +28,7 @@ type BusinessClaimRow = {
 
 type BusinessOwnerRow = {
   business_listing_id: string;
+  status?: string | null;
 };
 
 type ApprovedClaimOwnerRow = {
@@ -141,7 +142,7 @@ export async function linkApprovedClaimsForOwnerEmail(userId: string, claimantEm
   const encodedListingIds = listingIds.map((id) => `"${id}"`).join(",");
 
   const existingOwnersQuery = new URLSearchParams({
-    select: "business_listing_id",
+    select: "business_listing_id,status",
     user_id: `eq.${userId}`,
     business_listing_id: `in.(${encodedListingIds})`,
   });
@@ -152,10 +153,16 @@ export async function linkApprovedClaimsForOwnerEmail(userId: string, claimantEm
     cache: "no-store",
   });
   const existingOwners = await parseJsonResponse<BusinessOwnerRow[]>(existingOwnersResponse);
-  const existingListingIds = new Set(existingOwners.map((row) => row.business_listing_id));
+  const existingOwnerRowsByListingId = new Map(existingOwners.map((row) => [row.business_listing_id, row]));
 
   const rowsToInsert = listingIds
-    .filter((listingId) => !existingListingIds.has(listingId))
+    .filter((listingId) => {
+      const ownerRow = existingOwnerRowsByListingId.get(listingId);
+      if (!ownerRow) {
+        return true;
+      }
+      return ownerRow.status !== "active";
+    })
     .map((listingId) => ({
       business_listing_id: listingId,
       user_id: userId,
@@ -278,18 +285,6 @@ export async function reviewBusinessClaim(claimId: string, input: ClaimReviewInp
     throw new Error("Claim not found.");
   }
 
-  if (input.status === "approved") {
-    const userId = await findAuthUserIdByEmail(claimRow.claimant_email);
-    if (userId) {
-      await linkApprovedClaimsForOwnerEmail(userId, claimRow.claimant_email);
-    } else {
-      console.warn(
-        `[Claims] Approved claim ${claimRow.id} for ${claimRow.claimant_email} but no auth user found. ` +
-          "Deferred linking will run when the claimant signs up or logs in with the same email.",
-      );
-    }
-  }
-
   const updateResponse = await fetch(`${url}/rest/v1/business_claims?id=eq.${encodedId}`, {
     method: "PATCH",
     headers: restHeaders(serviceRoleKey, { Prefer: "return=representation" }),
@@ -306,6 +301,18 @@ export async function reviewBusinessClaim(claimId: string, input: ClaimReviewInp
   const updatedRow = updatedRows[0];
   if (!updatedRow) {
     throw new Error("Unable to review claim.");
+  }
+
+  if (updatedRow.status === "approved") {
+    const userId = await findAuthUserIdByEmail(updatedRow.claimant_email);
+    if (userId) {
+      await linkApprovedClaimsForOwnerEmail(userId, updatedRow.claimant_email);
+    } else {
+      console.warn(
+        `[Claims] Approved claim ${updatedRow.id} for ${updatedRow.claimant_email} but no auth user found. ` +
+          "Deferred linking will run when the claimant signs up or logs in with the same email.",
+      );
+    }
   }
 
   return mapClaimRowToBusinessClaim(updatedRow);

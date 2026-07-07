@@ -6,10 +6,7 @@ import { hasSupabaseConfig } from "@/lib/supabase/config";
 
 export async function GET(request: Request) {
   if (!hasSupabaseConfig()) {
-    return NextResponse.json(
-      { error: "Accounts are not enabled yet. Email partners@madeinvt.com to request early access." },
-      { status: 503 },
-    );
+    return NextResponse.redirect(new URL("/login?error=auth_not_enabled", request.url));
   }
 
   const url = new URL(request.url);

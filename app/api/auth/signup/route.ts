@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { OWNER_AUTH_COOKIE } from "@/lib/auth/session";
-import { hasSupabaseConfig } from "@/lib/supabase/config";
+import { hasSupabaseConfig, requireAppUrl } from "@/lib/supabase/config";
 import { linkApprovedClaimsForOwnerEmail } from "@/lib/claims/liveClaims";
 
 const accountTypes = new Set(["Maker", "Studio", "Partner"]);
 
 export async function POST(request: Request) {
   if (!hasSupabaseConfig()) {
-    return NextResponse.json(
-      { error: "Accounts are not enabled yet. Email partners@madeinvt.com to request early access." },
-      { status: 503 },
-    );
+    return NextResponse.redirect(new URL("/signup?error=auth_not_enabled", request.url));
   }
 
   const formData = await request.formData();
@@ -34,7 +31,12 @@ export async function POST(request: Request) {
     return NextResponse.redirect(new URL("/signup?error=invalid_account_type", request.url));
   }
 
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() || new URL(request.url).origin;
+  let appUrl = "";
+  try {
+    appUrl = requireAppUrl();
+  } catch {
+    return NextResponse.redirect(new URL("/signup?error=auth_not_enabled", request.url));
+  }
   const supabase = getSupabaseServerClient();
   const { data, error } = await supabase.auth.signUp({
     email,

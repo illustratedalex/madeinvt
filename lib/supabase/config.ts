@@ -3,6 +3,10 @@ export interface SupabaseConfig {
   anonKey: string;
 }
 
+export function getAppUrl(): string {
+  return process.env.NEXT_PUBLIC_APP_URL?.trim() ?? "";
+}
+
 export function getSupabaseConfig(): SupabaseConfig {
   return {
     url: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
@@ -21,4 +25,12 @@ export function requireSupabaseConfig(): SupabaseConfig {
     throw new Error("Supabase environment variables are missing.");
   }
   return config;
+}
+
+export function requireAppUrl(): string {
+  const appUrl = getAppUrl();
+  if (!appUrl) {
+    throw new Error("NEXT_PUBLIC_APP_URL is required.");
+  }
+  return appUrl;
 }
