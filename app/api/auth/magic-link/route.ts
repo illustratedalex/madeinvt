@@ -4,11 +4,17 @@ import { hasSupabaseConfig } from "@/lib/supabase/config";
 
 export async function POST(request: Request) {
   if (!hasSupabaseConfig()) {
-    return NextResponse.redirect(new URL("/login?error=auth_not_enabled", request.url));
+    return NextResponse.json(
+      { error: "Accounts are not enabled yet. Email partners@madeinvt.com to request early access." },
+      { status: 503 },
+    );
   }
 
   const formData = await request.formData();
   const email = String(formData.get("email") ?? "").trim();
+  const next = String(formData.get("next") ?? "").trim();
+  const encodedNext = next.startsWith("/") ? `?next=${encodeURIComponent(next)}` : "";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() || new URL(request.url).origin;
 
   if (!email) {
     return NextResponse.redirect(new URL("/login?error=missing_email", request.url));
@@ -18,7 +24,7 @@ export async function POST(request: Request) {
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${new URL(request.url).origin}/auth/callback`,
+      emailRedirectTo: `${appUrl}/auth/callback${encodedNext}`,
     },
   });
 

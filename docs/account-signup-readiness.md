@@ -4,6 +4,8 @@
 
 MadeInVT public beta account flows now support real Supabase-backed signup/login when configured, and show explicit disabled messaging when auth is not configured.
 
+Public signup remains **beta**.
+
 ## What works
 
 - `/signup`
@@ -20,7 +22,7 @@ MadeInVT public beta account flows now support real Supabase-backed signup/login
 - `/forgot-password`
   - Sends reset email through Supabase when configured.
 - `/reset-password`
-  - Updates password for authenticated reset sessions.
+  - Handles recovery sessions and updates password for valid reset tokens/sessions.
 - `/maker-portal`
   - Redirects to `/partner-portal`.
 - `/partner-portal`
@@ -61,8 +63,8 @@ MadeInVT public beta account flows now support real Supabase-backed signup/login
 ## Password reset behavior
 
 1. User requests reset from `/forgot-password`.
-2. Supabase sends reset email with callback to `/auth/callback?next=/reset-password`.
-3. After callback verification, user sets a new password on `/reset-password`.
+2. Supabase sends reset email with redirect to `/reset-password`.
+3. Reset flow verifies recovery token/session and allows password update.
 4. User logs in with new credentials.
 
 ## Portal access rules
@@ -76,8 +78,17 @@ MadeInVT public beta account flows now support real Supabase-backed signup/login
 
 - Claim submission and Basecamp review are live with service-role-backed persistence.
 - Approval tries to link auth user by claimant email into `business_listing_owners`.
-- If no matching auth user exists at approval time, automatic mapping is not completed and manual support is still required.
+- Deferred owner linking is enabled on signup/login:
+  - On successful signup or login, the system checks approved claims where `claimant_email` matches the authenticated user email.
+  - Missing `business_listing_owners` rows are created automatically with `status=active`.
+  - Pending and rejected claims are not linked.
+- If auth/supabase service-role env is unavailable, claim-owner linking still requires manual support.
 - UI and docs should continue to communicate that full self-service claim-to-owner linking is still partially manual during beta.
+
+## Owner dashboard scope
+
+- Owner dashboard is currently limited to placeholder/profile-management starter sections.
+- Full self-service owner management remains in staged rollout.
 
 ## Not-configured behavior (intentional)
 

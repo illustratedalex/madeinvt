@@ -2,12 +2,16 @@ import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { OWNER_AUTH_COOKIE } from "@/lib/auth/session";
 import { hasSupabaseConfig } from "@/lib/supabase/config";
+import { linkApprovedClaimsForOwnerEmail } from "@/lib/claims/liveClaims";
 
 const accountTypes = new Set(["Maker", "Studio", "Partner"]);
 
 export async function POST(request: Request) {
   if (!hasSupabaseConfig()) {
-    return NextResponse.redirect(new URL("/signup?error=auth_not_enabled", request.url));
+    return NextResponse.json(
+      { error: "Accounts are not enabled yet. Email partners@madeinvt.com to request early access." },
+      { status: 503 },
+    );
   }
 
   const formData = await request.formData();
@@ -30,6 +34,7 @@ export async function POST(request: Request) {
     return NextResponse.redirect(new URL("/signup?error=invalid_account_type", request.url));
   }
 
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() || new URL(request.url).origin;
   const supabase = getSupabaseServerClient();
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -39,12 +44,20 @@ export async function POST(request: Request) {
         full_name: name,
         account_type: accountType,
       },
-      emailRedirectTo: `${new URL(request.url).origin}/auth/callback`,
+      emailRedirectTo: `${appUrl}/auth/callback`,
     },
   });
 
   if (error) {
     return NextResponse.redirect(new URL("/signup?error=signup_failed", request.url));
+  }
+
+  if (data.user?.id && data.user.email) {
+    try {
+      await linkApprovedClaimsForOwnerEmail(data.user.id, data.user.email);
+    } catch (linkError) {
+      console.error("Deferred claim owner linking failed on signup:", linkError);
+    }
   }
 
   const accessToken = data.session?.access_token;

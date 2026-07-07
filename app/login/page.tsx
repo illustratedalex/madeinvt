@@ -27,7 +27,7 @@ const noticeMessages: Record<string, string> = {
 };
 
 interface LoginPageProps {
-  searchParams: Promise<{ error?: string; notice?: string }>;
+  searchParams: Promise<{ error?: string; notice?: string; next?: string }>;
 }
 
 export default async function LoginPage({ searchParams }: LoginPageProps) {
@@ -35,6 +35,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const error = params.error ? errorMessages[params.error] : "";
   const notice = params.notice ? noticeMessages[params.notice] : "";
   const authEnabled = hasSupabaseConfig();
+  const next = params.next && params.next.startsWith("/") ? params.next : "/partner-portal";
 
   return (
     <section className="mx-auto max-w-xl space-y-6 px-6 py-12 sm:px-8 lg:px-10">
@@ -63,6 +64,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       ) : null}
 
       <form action="/api/auth/login" method="post" className="space-y-4 rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
+        <input type="hidden" name="next" value={next} />
         <label className="block space-y-2 text-sm font-medium text-slate-700">
           Email
           <input
@@ -96,6 +98,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       </form>
 
       <form action="/api/auth/magic-link" method="post" className="space-y-4 rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
+        <input type="hidden" name="next" value={next} />
         <p className="text-sm font-semibold text-slate-900">Or request a magic link</p>
         <label className="block space-y-2 text-sm font-medium text-slate-700">
           Email

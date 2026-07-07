@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { OwnerListingEditRequestForm } from "@/components/partner/OwnerListingEditRequestForm";
 import { billingPlans, getCurrentBillingPlanLabel, getSquareBillingStatus } from "@/lib/billing/plans";
 import { getAuthenticatedOwnerUser } from "@/lib/auth/session";
@@ -15,6 +16,9 @@ export const metadata = createPageMetadata({
 export default async function PartnerPortalLandingPage() {
   const authEnabled = hasSupabaseConfig();
   const user = await getAuthenticatedOwnerUser();
+  if (!user) {
+    redirect("/login?next=/partner-portal");
+  }
   const ownedListings = user ? await getOwnedBusinessListings(user.id) : [];
   const squareStatus = getSquareBillingStatus();
 

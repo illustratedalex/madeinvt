@@ -14,9 +14,10 @@ export async function POST(request: Request) {
     return NextResponse.redirect(new URL("/forgot-password?error=missing_email", request.url));
   }
 
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim() || new URL(request.url).origin;
   const supabase = getSupabaseServerClient();
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${new URL(request.url).origin}/auth/callback?next=/reset-password`,
+    redirectTo: `${appUrl}/reset-password`,
   });
 
   if (error) {

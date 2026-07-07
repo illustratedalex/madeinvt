@@ -30,6 +30,11 @@ type BusinessOwnerRow = {
   business_listing_id: string;
 };
 
+type ApprovedClaimOwnerRow = {
+  business_listing_id: string;
+  role_at_business: string;
+};
+
 type SupabaseAdminUsersResponse = {
   users: Array<{ id: string; email?: string }>;
 };
@@ -91,6 +96,86 @@ function mapClaimRowToBusinessClaim(row: BusinessClaimRow): BusinessClaim {
     reviewedBy: row.reviewed_by ?? undefined,
     reviewNotes: row.review_notes ?? undefined,
   };
+}
+
+function toOwnerRole(role: string) {
+  const normalizedRole = role.trim().toLowerCase();
+  if (normalizedRole === "editor") {
+    return "editor";
+  }
+  if (normalizedRole === "manager") {
+    return "manager";
+  }
+  return "owner";
+}
+
+export async function linkApprovedClaimsForOwnerEmail(userId: string, claimantEmail: string): Promise<number> {
+  if (!hasSupabaseServiceRoleEnv()) {
+    return 0;
+  }
+
+  const { url, serviceRoleKey } = requireSupabaseAdminEnv();
+  const normalizedEmail = claimantEmail.trim().toLowerCase();
+
+  const claimsQuery = new URLSearchParams({
+    select: "business_listing_id,role_at_business",
+    claimant_email: `eq.${normalizedEmail}`,
+    status: "eq.approved",
+  });
+
+  const approvedClaimsResponse = await fetch(`${url}/rest/v1/business_claims?${claimsQuery.toString()}`, {
+    method: "GET",
+    headers: restHeaders(serviceRoleKey),
+    cache: "no-store",
+  });
+  const approvedClaims = await parseJsonResponse<ApprovedClaimOwnerRow[]>(approvedClaimsResponse);
+  if (approvedClaims.length === 0) {
+    return 0;
+  }
+
+  const latestRoleByListing = new Map<string, string>();
+  for (const claim of approvedClaims) {
+    latestRoleByListing.set(claim.business_listing_id, claim.role_at_business);
+  }
+  const listingIds = [...latestRoleByListing.keys()];
+  const encodedListingIds = listingIds.map((id) => `"${id}"`).join(",");
+
+  const existingOwnersQuery = new URLSearchParams({
+    select: "business_listing_id",
+    user_id: `eq.${userId}`,
+    business_listing_id: `in.(${encodedListingIds})`,
+  });
+
+  const existingOwnersResponse = await fetch(`${url}/rest/v1/business_listing_owners?${existingOwnersQuery.toString()}`, {
+    method: "GET",
+    headers: restHeaders(serviceRoleKey),
+    cache: "no-store",
+  });
+  const existingOwners = await parseJsonResponse<BusinessOwnerRow[]>(existingOwnersResponse);
+  const existingListingIds = new Set(existingOwners.map((row) => row.business_listing_id));
+
+  const rowsToInsert = listingIds
+    .filter((listingId) => !existingListingIds.has(listingId))
+    .map((listingId) => ({
+      business_listing_id: listingId,
+      user_id: userId,
+      role: toOwnerRole(latestRoleByListing.get(listingId) ?? "owner"),
+      status: "active",
+    }));
+
+  if (rowsToInsert.length === 0) {
+    return 0;
+  }
+
+  const insertResponse = await fetch(`${url}/rest/v1/business_listing_owners?on_conflict=business_listing_id,user_id`, {
+    method: "POST",
+    headers: restHeaders(serviceRoleKey, { Prefer: "resolution=merge-duplicates,return=minimal" }),
+    body: JSON.stringify(rowsToInsert),
+    cache: "no-store",
+  });
+  await parseJsonResponse<null>(insertResponse);
+
+  return rowsToInsert.length;
 }
 
 async function findAuthUserIdByEmail(email: string): Promise<string | null> {
@@ -196,29 +281,11 @@ export async function reviewBusinessClaim(claimId: string, input: ClaimReviewInp
   if (input.status === "approved") {
     const userId = await findAuthUserIdByEmail(claimRow.claimant_email);
     if (userId) {
-      const normalizedRole = claimRow.role_at_business.trim().toLowerCase();
-      // Create owner row when a matching auth account exists
-      await fetch(`${url}/rest/v1/business_listing_owners?on_conflict=business_listing_id,user_id`, {
-        method: "POST",
-        headers: restHeaders(serviceRoleKey, { Prefer: "resolution=merge-duplicates,return=minimal" }),
-        body: JSON.stringify([
-          {
-            business_listing_id: claimRow.business_listing_id,
-            user_id: userId,
-            role: normalizedRole === "editor" ? "editor" : normalizedRole === "manager" ? "manager" : "owner",
-            status: "active",
-          },
-        ]),
-        cache: "no-store",
-      }).then(parseJsonResponse<null>);
+      await linkApprovedClaimsForOwnerEmail(userId, claimRow.claimant_email);
     } else {
-      // TODO: claimant has not yet created an account — owner dashboard access cannot be
-      // granted automatically. Send them a signup invitation manually or implement
-      // an invite-by-email flow. Approval still proceeds so the claim record is marked
-      // approved and the claimant receives an email notification.
       console.warn(
         `[Claims] Approved claim ${claimRow.id} for ${claimRow.claimant_email} but no auth user found. ` +
-          "business_listing_owners row was NOT created. Owner must sign up and be manually linked.",
+          "Deferred linking will run when the claimant signs up or logs in with the same email.",
       );
     }
   }

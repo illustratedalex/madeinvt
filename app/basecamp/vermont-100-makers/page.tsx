@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { Sidebar } from "@/components/admin";
+import { MakerQualityCard } from "@/components/makers/MakerQualityCard";
 import { vermont100Makers } from "@/data/vermont100Makers";
+import { calculateMakerProfileQuality } from "@/lib/makers/makerProfileQuality";
+import type { MakerProfileQualityStatus } from "@/types/MakerProfileQuality";
 import type { Vermont100Maker } from "@/types/Vermont100Maker";
 
 const navItems = [
@@ -20,6 +23,14 @@ const navItems = [
 
 type FilterValue = "All" | string;
 type QuickAction = "assign" | "interview" | "publish" | "ready";
+
+const qualityStatusLabel: Record<MakerProfileQualityStatus, string> = {
+  needs_research: "Needs Research",
+  needs_photos: "Needs Photos",
+  needs_story: "Needs Story",
+  ready_for_review: "Ready for Review",
+  publish_ready: "Publish Ready",
+};
 
 function cloneMaker(maker: Vermont100Maker): Vermont100Maker {
   return {
@@ -65,13 +76,25 @@ export default function Vermont100MakersPage() {
     });
   }, [makers, regionFilter, categoryFilter, editorialFilter, priorityFilter]);
 
+  const makerQuality = useMemo(
+    () =>
+      makers.reduce<Record<string, ReturnType<typeof calculateMakerProfileQuality>>>((acc, maker) => {
+        acc[maker.id] = calculateMakerProfileQuality(maker);
+        return acc;
+      }, {}),
+    [makers],
+  );
+
   const stats = useMemo(() => {
     const published = makers.filter((maker) => maker.editorialStatus === "Published").length;
-    const research = makers.filter((maker) => maker.editorialStatus === "Research").length;
-    const photography = makers.filter((maker) => maker.editorialStatus === "Photography" || maker.galleryStatus === "Published" || maker.galleryStatus === "Ready").length;
-    const interviews = makers.filter((maker) => maker.editorialStatus === "Interview").length;
-    return { total: makers.length, published, research, photography, interviews };
-  }, [makers]);
+    const qualityValues = Object.values(makerQuality);
+    const publishReady = qualityValues.filter((quality) => quality.status === "publish_ready").length;
+    const needsStory = qualityValues.filter((quality) => quality.status === "needs_story").length;
+    const needsPhotos = qualityValues.filter((quality) => quality.status === "needs_photos").length;
+    const needsResearch = qualityValues.filter((quality) => quality.status === "needs_research").length;
+
+    return { total: makers.length, published, publishReady, needsStory, needsPhotos, needsResearch };
+  }, [makers, makerQuality]);
 
   function applyQuickAction(action: QuickAction) {
     if (!selectedId) return;
@@ -113,7 +136,7 @@ export default function Vermont100MakersPage() {
             </p>
           </section>
 
-          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
             <article className="rounded-3xl border border-[#e8dfc8] bg-white p-5">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Overall Progress</p>
               <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.published} / 100</p>
@@ -123,20 +146,24 @@ export default function Vermont100MakersPage() {
               <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.total}</p>
             </article>
             <article className="rounded-3xl border border-[#e8dfc8] bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Published</p>
-              <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.published}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Publish Ready</p>
+              <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.publishReady}</p>
             </article>
             <article className="rounded-3xl border border-[#e8dfc8] bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Research</p>
-              <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.research}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Needs Story</p>
+              <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.needsStory}</p>
             </article>
             <article className="rounded-3xl border border-[#e8dfc8] bg-white p-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Photography / Interviews</p>
-              <p className="mt-2 text-3xl font-semibold text-slate-900">
-                {stats.photography} / {stats.interviews}
-              </p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Needs Photos</p>
+              <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.needsPhotos}</p>
+            </article>
+            <article className="rounded-3xl border border-[#e8dfc8] bg-white p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Needs Research</p>
+              <p className="mt-2 text-3xl font-semibold text-slate-900">{stats.needsResearch}</p>
             </article>
           </section>
+
+          {selectedMaker ? <MakerQualityCard quality={makerQuality[selectedMaker.id]} /> : null}
 
           <section className="rounded-3xl border border-[#e8dfc8] bg-white p-5">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">Filters</p>
@@ -223,7 +250,7 @@ export default function Vermont100MakersPage() {
 
           <section className="overflow-hidden rounded-3xl border border-[#e8dfc8] bg-white">
             <div className="overflow-x-auto">
-              <table className="min-w-[1900px] divide-y divide-[#ece3cf] text-sm">
+              <table className="min-w-[2200px] divide-y divide-[#ece3cf] text-sm">
                 <thead className="bg-[#fcfaf6]">
                   <tr>
                     <th className="px-3 py-3 text-left font-semibold text-slate-600">Maker Name</th>
@@ -244,35 +271,44 @@ export default function Vermont100MakersPage() {
                     <th className="px-3 py-3 text-left font-semibold text-slate-600">Online Store</th>
                     <th className="px-3 py-3 text-left font-semibold text-slate-600">Studio Visits</th>
                     <th className="px-3 py-3 text-left font-semibold text-slate-600">Years Crafting</th>
+                    <th className="px-3 py-3 text-left font-semibold text-slate-600">Quality Score</th>
+                    <th className="px-3 py-3 text-left font-semibold text-slate-600">Quality Status</th>
+                    <th className="px-3 py-3 text-left font-semibold text-slate-600">Next Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f2ebda]">
-                  {filteredMakers.map((maker) => (
-                    <tr
-                      key={maker.id}
-                      onClick={() => setSelectedId(maker.id)}
-                      className={`cursor-pointer align-top ${selectedId === maker.id ? "bg-[#f3f8f4]" : "bg-white hover:bg-[#fdf8ef]"}`}
-                    >
-                      <td className="px-3 py-3 font-semibold text-slate-900">{maker.makerName}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.studio || "—"}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.town || "—"}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.region || "—"}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.craft}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.category}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.priority}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.editorialStatus}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.storyStatus}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.galleryStatus}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.customerExperienceStatus}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.collections.length ? maker.collections.join(", ") : "—"}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.giftGuides.length ? maker.giftGuides.join(", ") : "—"}</td>
-                      <td className="px-3 py-3">{boolPill(maker.workshop)}</td>
-                      <td className="px-3 py-3">{boolPill(maker.ships)}</td>
-                      <td className="px-3 py-3">{boolPill(maker.onlineStore)}</td>
-                      <td className="px-3 py-3">{boolPill(maker.studioVisits)}</td>
-                      <td className="px-3 py-3 text-slate-700">{maker.yearsCrafting ?? "—"}</td>
-                    </tr>
-                  ))}
+                  {filteredMakers.map((maker) => {
+                    const quality = makerQuality[maker.id];
+                    return (
+                      <tr
+                        key={maker.id}
+                        onClick={() => setSelectedId(maker.id)}
+                        className={`cursor-pointer align-top ${selectedId === maker.id ? "bg-[#f3f8f4]" : "bg-white hover:bg-[#fdf8ef]"}`}
+                      >
+                        <td className="px-3 py-3 font-semibold text-slate-900">{maker.makerName}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.studio || "—"}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.town || "—"}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.region || "—"}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.craft}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.category}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.priority}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.editorialStatus}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.storyStatus}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.galleryStatus}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.customerExperienceStatus}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.collections.length ? maker.collections.join(", ") : "—"}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.giftGuides.length ? maker.giftGuides.join(", ") : "—"}</td>
+                        <td className="px-3 py-3">{boolPill(maker.workshop)}</td>
+                        <td className="px-3 py-3">{boolPill(maker.ships)}</td>
+                        <td className="px-3 py-3">{boolPill(maker.onlineStore)}</td>
+                        <td className="px-3 py-3">{boolPill(maker.studioVisits)}</td>
+                        <td className="px-3 py-3 text-slate-700">{maker.yearsCrafting ?? "—"}</td>
+                        <td className="px-3 py-3 text-slate-900">{quality.overallScore}</td>
+                        <td className="px-3 py-3 text-slate-700">{qualityStatusLabel[quality.status]}</td>
+                        <td className="px-3 py-3 text-slate-700">{quality.recommendedNextAction}</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
