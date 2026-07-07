@@ -20,6 +20,13 @@ export function useBasecampPublication() {
     const storedValue = window.localStorage.getItem(BASECAMP_PUBLICATION_STORAGE_KEY);
     return isPublicationId(storedValue) ? storedValue : "madeinvt";
   });
+  const [hasSelectedPublication, setHasSelectedPublication] = useState<boolean>(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    const storedValue = window.localStorage.getItem(BASECAMP_PUBLICATION_STORAGE_KEY);
+    return isPublicationId(storedValue);
+  });
 
   useEffect(() => {
     function handleStorage(event: StorageEvent) {
@@ -28,6 +35,10 @@ export function useBasecampPublication() {
       }
       if (isPublicationId(event.newValue)) {
         setActivePublicationState(event.newValue);
+        setHasSelectedPublication(true);
+      } else {
+        setActivePublicationState("madeinvt");
+        setHasSelectedPublication(false);
       }
     }
 
@@ -35,6 +46,7 @@ export function useBasecampPublication() {
       const customEvent = event as CustomEvent<BasecampPublicationId>;
       if (isPublicationId(customEvent.detail)) {
         setActivePublicationState(customEvent.detail);
+        setHasSelectedPublication(true);
       }
     }
 
@@ -49,12 +61,14 @@ export function useBasecampPublication() {
 
   const setActivePublication = useCallback((publication: BasecampPublicationId) => {
     setActivePublicationState(publication);
+    setHasSelectedPublication(true);
     window.localStorage.setItem(BASECAMP_PUBLICATION_STORAGE_KEY, publication);
     window.dispatchEvent(new CustomEvent<BasecampPublicationId>(BASECAMP_PUBLICATION_EVENT, { detail: publication }));
   }, []);
 
   return {
     activePublication,
+    hasSelectedPublication,
     setActivePublication,
     options: basecampPublicationOptions,
   };

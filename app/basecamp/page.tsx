@@ -64,7 +64,7 @@ const upcomingMeetings = [
 ];
 
 export default function BasecampMorningBriefingPage() {
-  const { activePublication } = useBasecampPublication();
+  const { activePublication, setActivePublication, options, hasSelectedPublication } = useBasecampPublication();
   const publicationDashboard = basecampPublicationDashboard[activePublication];
   const now = new Date();
   const greeting = greetingForHour(now.getHours());
@@ -110,6 +110,43 @@ export default function BasecampMorningBriefingPage() {
   )
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
+
+  if (!hasSelectedPublication) {
+    return (
+      <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(213,183,102,0.15),transparent_34%),linear-gradient(140deg,#f7efe1_0%,#fcfaf6_48%,#fffdf9_100%)] px-4 py-8 text-slate-800 sm:px-6 lg:px-8">
+        <main className="mx-auto max-w-5xl space-y-6">
+          <header className="rounded-[32px] border border-[#e8dfc8] bg-white/90 p-8 shadow-[0_20px_80px_rgba(31,59,47,0.08)] backdrop-blur">
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#1f3b2f]">Compass Basecamp</p>
+            <h1 className="mt-3 text-4xl font-semibold text-slate-900">Choose Publication</h1>
+            <p className="mt-3 text-base leading-8 text-slate-600">
+              Basecamp is publication-aware. Choose the publication you want to operate so sidebar, dashboard, issue, focus, analytics, and KPIs adapt automatically.
+            </p>
+          </header>
+
+          <section className="grid gap-4 md:grid-cols-2">
+            {options.map((option) => {
+              const dashboard = basecampPublicationDashboard[option.id];
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => setActivePublication(option.id)}
+                  className="rounded-3xl border border-[#e8dfc8] bg-white p-6 text-left shadow-sm transition hover:border-[#d7cbb3] hover:bg-[#fcfaf6]"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">Publication</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-slate-900">{option.label}</h2>
+                  <p className="mt-2 text-sm leading-7 text-slate-600">{dashboard.currentIssueTheme}</p>
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
+                    Current issue · {dashboard.currentIssueTitle}
+                  </p>
+                </button>
+              );
+            })}
+          </section>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(213,183,102,0.15),transparent_34%),linear-gradient(140deg,#f7efe1_0%,#fcfaf6_48%,#fffdf9_100%)] text-slate-800">

@@ -104,13 +104,14 @@ export function Sidebar({ items }: SidebarProps) {
     <aside className="w-full rounded-[30px] border border-white/10 bg-[#12261d] p-5 text-[#f7efe0] shadow-[0_24px_90px_rgba(10,18,15,0.28)] lg:sticky lg:top-6 lg:w-72 lg:shrink-0 lg:p-6">
       <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-(--color-maple-gold) text-sm font-semibold uppercase tracking-[0.24em] text-[#12261d]">
-          SV
+          CB
         </div>
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">
+          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-(--color-maple-gold)">Compass</p>
+          <p className="text-sm text-slate-300">Basecamp</p>
+          <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">
             {activePublication === "madeinvt" ? "MadeInVT" : "SouthernVT"}
           </p>
-          <p className="text-sm text-slate-300">Basecamp</p>
         </div>
       </div>
 
