@@ -2,11 +2,17 @@ import { NextResponse } from "next/server";
 import type { EmailOtpType } from "@supabase/supabase-js";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { OWNER_AUTH_COOKIE } from "@/lib/auth/session";
+import { hasSupabaseConfig } from "@/lib/supabase/config";
 
 export async function GET(request: Request) {
+  if (!hasSupabaseConfig()) {
+    return NextResponse.redirect(new URL("/login?error=auth_not_enabled", request.url));
+  }
+
   const url = new URL(request.url);
   const tokenHash = url.searchParams.get("token_hash");
   const type = url.searchParams.get("type");
+  const next = url.searchParams.get("next");
 
   if (!tokenHash || !type) {
     return NextResponse.redirect(new URL("/login?error=invalid_callback", request.url));
@@ -27,7 +33,8 @@ export async function GET(request: Request) {
     return NextResponse.redirect(new URL("/login?error=callback_failed", request.url));
   }
 
-  const response = NextResponse.redirect(new URL("/partner-portal", request.url));
+  const destination = next && next.startsWith("/") ? next : "/partner-portal";
+  const response = NextResponse.redirect(new URL(destination, request.url));
   response.cookies.set(OWNER_AUTH_COOKIE, data.session.access_token, {
     httpOnly: true,
     sameSite: "lax",

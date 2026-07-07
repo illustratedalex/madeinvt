@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
+import { hasSupabaseConfig } from "@/lib/supabase/config";
 
 export async function POST(request: Request) {
+  if (!hasSupabaseConfig()) {
+    return NextResponse.redirect(new URL("/login?error=auth_not_enabled", request.url));
+  }
+
   const formData = await request.formData();
   const email = String(formData.get("email") ?? "").trim();
 

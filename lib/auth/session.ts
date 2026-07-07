@@ -1,7 +1,7 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { createClient, type User } from "@supabase/supabase-js";
-import { getSupabaseConfig } from "@/lib/supabase/config";
+import { getSupabaseConfig, hasSupabaseConfig } from "@/lib/supabase/config";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import type { Database } from "@/lib/supabase/types";
 
@@ -32,6 +32,10 @@ export async function getOwnerAccessToken() {
 }
 
 export async function getAuthenticatedOwnerUser(): Promise<User | null> {
+  if (!hasSupabaseConfig()) {
+    return null;
+  }
+
   const accessToken = await getOwnerAccessToken();
   if (!accessToken) {
     return null;

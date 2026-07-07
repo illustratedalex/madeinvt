@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { hasSupabaseConfig } from "@/lib/supabase/config";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -8,7 +9,11 @@ export const metadata = createPageMetadata({
 });
 
 const errorMessages: Record<string, string> = {
+  auth_not_enabled: "Account signup is not enabled yet. Email partners@madeinvt.com to request early access.",
   missing_fields: "Name, email, and password are required.",
+  invalid_account_type: "Select a valid account type.",
+  password_mismatch: "Passwords do not match.",
+  password_too_short: "Password must be at least 8 characters.",
   signup_failed: "Unable to create account. Please verify your details and try again.",
 };
 
@@ -19,6 +24,7 @@ interface SignupPageProps {
 export default async function SignupPage({ searchParams }: SignupPageProps) {
   const params = await searchParams;
   const error = params.error ? errorMessages[params.error] : "";
+  const authEnabled = hasSupabaseConfig();
 
   return (
     <section className="mx-auto max-w-xl space-y-6 px-6 py-12 sm:px-8 lg:px-10">
@@ -32,6 +38,15 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
 
       {error ? (
         <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">{error}</p>
+      ) : null}
+      {!authEnabled ? (
+        <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          Account signup is not enabled yet. Email{" "}
+          <a href="mailto:partners@madeinvt.com" className="font-semibold underline underline-offset-2">
+            partners@madeinvt.com
+          </a>{" "}
+          to request early access.
+        </p>
       ) : null}
 
       <form action="/api/auth/signup" method="post" className="space-y-4 rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
@@ -63,7 +78,34 @@ export default async function SignupPage({ searchParams }: SignupPageProps) {
             className="h-11 w-full rounded-2xl border border-[#d7cbb3] bg-white px-4 text-sm text-slate-800"
           />
         </label>
-        <button type="submit" className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4]">
+        <label className="block space-y-2 text-sm font-medium text-slate-700">
+          Confirm password
+          <input
+            type="password"
+            name="confirmPassword"
+            minLength={8}
+            required
+            className="h-11 w-full rounded-2xl border border-[#d7cbb3] bg-white px-4 text-sm text-slate-800"
+          />
+        </label>
+        <label className="block space-y-2 text-sm font-medium text-slate-700">
+          Account type
+          <select
+            name="accountType"
+            required
+            defaultValue="Maker"
+            className="h-11 w-full rounded-2xl border border-[#d7cbb3] bg-white px-4 text-sm text-slate-800"
+          >
+            <option value="Maker">Maker</option>
+            <option value="Studio">Studio</option>
+            <option value="Partner">Partner</option>
+          </select>
+        </label>
+        <button
+          type="submit"
+          disabled={!authEnabled}
+          className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4] disabled:cursor-not-allowed disabled:opacity-50"
+        >
           Create account
         </button>
       </form>

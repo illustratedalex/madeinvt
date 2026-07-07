@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { hasSupabaseConfig } from "@/lib/supabase/config";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -8,6 +9,7 @@ export const metadata = createPageMetadata({
 });
 
 const errorMessages: Record<string, string> = {
+  auth_not_enabled: "Account login is not enabled yet. Email partners@madeinvt.com to request early access.",
   callback_failed: "We could not complete the magic link sign-in. Please try again.",
   invalid_callback: "Invalid sign-in callback. Please request a new magic link.",
   invalid_credentials: "Invalid email or password.",
@@ -20,6 +22,8 @@ const noticeMessages: Record<string, string> = {
   confirm_email: "Your account was created. Please confirm your email before logging in.",
   logged_out: "You have been logged out.",
   magic_link_sent: "Magic link sent. Check your inbox to finish sign-in.",
+  password_reset_sent: "If your email is registered, a password reset link has been sent.",
+  password_updated: "Your password has been updated. You can now log in.",
 };
 
 interface LoginPageProps {
@@ -30,6 +34,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
   const params = await searchParams;
   const error = params.error ? errorMessages[params.error] : "";
   const notice = params.notice ? noticeMessages[params.notice] : "";
+  const authEnabled = hasSupabaseConfig();
 
   return (
     <section className="mx-auto max-w-xl space-y-6 px-6 py-12 sm:px-8 lg:px-10">
@@ -46,6 +51,15 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
       ) : null}
       {notice ? (
         <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">{notice}</p>
+      ) : null}
+      {!authEnabled ? (
+        <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          Account login is not enabled yet. Email{" "}
+          <a href="mailto:partners@madeinvt.com" className="font-semibold underline underline-offset-2">
+            partners@madeinvt.com
+          </a>{" "}
+          to request early access.
+        </p>
       ) : null}
 
       <form action="/api/auth/login" method="post" className="space-y-4 rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
@@ -67,9 +81,18 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             className="h-11 w-full rounded-2xl border border-[#d7cbb3] bg-white px-4 text-sm text-slate-800"
           />
         </label>
-        <button type="submit" className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4]">
+        <button
+          type="submit"
+          disabled={!authEnabled}
+          className="inline-flex rounded-full bg-[#1f3b2f] px-5 py-2.5 text-sm font-semibold text-[#f8f2e4] disabled:cursor-not-allowed disabled:opacity-50"
+        >
           Login
         </button>
+        <p className="text-sm text-slate-700">
+          <Link href="/forgot-password" className="font-semibold text-[#1f3b2f] underline underline-offset-4">
+            Forgot password?
+          </Link>
+        </p>
       </form>
 
       <form action="/api/auth/magic-link" method="post" className="space-y-4 rounded-3xl border border-[#e8dfc8] bg-white p-6 shadow-sm">
@@ -83,7 +106,11 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             className="h-11 w-full rounded-2xl border border-[#d7cbb3] bg-white px-4 text-sm text-slate-800"
           />
         </label>
-        <button type="submit" className="inline-flex rounded-full border border-[#d7cbb3] px-5 py-2.5 text-sm font-semibold text-slate-700">
+        <button
+          type="submit"
+          disabled={!authEnabled}
+          className="inline-flex rounded-full border border-[#d7cbb3] px-5 py-2.5 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+        >
           Send magic link
         </button>
       </form>
