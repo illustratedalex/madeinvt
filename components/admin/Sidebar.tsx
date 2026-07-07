@@ -20,7 +20,6 @@ type SidebarProps = {
 };
 
 const alwaysVisibleItems: SidebarItem[] = [
-  { label: "Compass HQ", href: "/compass" },
   { label: "Businesses", href: "/basecamp/businesses" },
   { label: "Founding Partners", href: "/basecamp/founding-partners" },
   { label: "Subscriptions", href: "/basecamp/subscriptions" },

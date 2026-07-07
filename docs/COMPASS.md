@@ -42,3 +42,9 @@ Compass Core includes:
 - Cape Cod Explorer
 - Berkshire Made
 - Adirondack Guide
+
+## Compass HQ plan (internal only)
+
+- The `/compass` route is intentionally disabled for now and should not be publicly accessible.
+- Basecamp remains the active operational interface, now publication-aware across SouthernVT and MadeInVT.
+- A future Compass HQ should launch only as an internal/admin surface after access controls, publication workflows, and readiness criteria are complete.
