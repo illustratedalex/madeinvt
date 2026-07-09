@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DeadSignalCredit from "@/components/DeadSignalCredit";
 import { Container } from "@/components/ui";
 import { SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 
@@ -97,7 +98,7 @@ export default function Footer() {
         <div className="flex flex-col gap-4 pt-6 text-sm text-(--color-warm-linen) sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 {SITE_NAME}</p>
           <p className="font-medium text-(--color-cream)">{SITE_TAGLINE}</p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <a href="#" aria-label="MadeInVT Facebook" className="transition hover:text-(--color-cream)">
               Facebook
             </a>
@@ -107,6 +108,7 @@ export default function Footer() {
             <a href="#" aria-label="MadeInVT YouTube" className="transition hover:text-(--color-cream)">
               YouTube
             </a>
+            <DeadSignalCredit />
           </div>
         </div>
       </Container>
