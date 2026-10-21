@@ -1,5 +1,22 @@
 # SEO Foundation
 
+## October 21, 2026 canonical repair
+
+Production source was verified against deployment `dpl_Y1ceLR6Cehqo7KqVRfKa3jZBAbbD`,
+commit `9b164d09166d6bd8e08a4ef31a76e2efadfd0ecf` on `develop`.
+Public checks found a bare-host homepage canonical and 170 bare-host sitemap URLs,
+while visitors resolve to HTTPS www and robots already advertises the www sitemap.
+The shared helper normalizes either owned production host to `https://www.madeinvt.com`,
+including legacy environment values, while preserving custom/preview origins.
+The existing About page receives unique metadata and a sitemap entry.
+Visible content, maker/product data, private routes, authentication, billing and
+analytics instrumentation are unchanged. Hosted checks and live release evidence
+must be verified separately; no indexing, ranking or traffic improvement is implied.
+The existing media-upload smoke test failed on the unchanged production source
+because it targeted a removed dialog. Its fixture now exercises the current
+inline upload form with a mocked HTTP response, including file and metadata
+assertions. No real media is uploaded and no media application code is changed.
+
 ## Metadata strategy
 
 The public site uses centralized metadata helpers in [lib/seo.ts](../lib/seo.ts):

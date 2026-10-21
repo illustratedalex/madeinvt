@@ -6,7 +6,7 @@ import type { Event } from "@/types/Event";
 import type { Place } from "@/types/Place";
 import { madeInVTConfig } from "@/config/publications/madeinvt";
 
-const DEFAULT_SITE_URL = "https://madeinvt.com";
+const DEFAULT_SITE_URL = "https://www.madeinvt.com";
 const SITE_NAME = madeInVTConfig.siteName || "MadeInVT";
 
 function trimTrailingSlash(value: string) {
@@ -14,7 +14,18 @@ function trimTrailingSlash(value: string) {
 }
 
 export function getSiteUrl() {
-  return trimTrailingSlash(process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL);
+  const configuredUrl = trimTrailingSlash(process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL);
+  // Both owned production hosts resolve to HTTPS www. Keep custom/preview
+  // configuration available without emitting redirecting production URLs.
+  try {
+    const url = new URL(configuredUrl);
+    if (["madeinvt.com", "www.madeinvt.com"].includes(url.hostname)) {
+      return DEFAULT_SITE_URL;
+    }
+    return configuredUrl;
+  } catch {
+    return DEFAULT_SITE_URL;
+  }
 }
 
 export function absoluteUrl(path: string) {
