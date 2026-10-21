@@ -1,5 +1,12 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "About MadeInVT | Vermont Makers & Artisan Studios",
+  description: "Learn about MadeInVT, a guide to Vermont makers, artisan studios, workshops, and handcrafted goods.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

@@ -1,5 +1,5 @@
-import { describe, expect, it, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
+import { render, screen, waitFor, within, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { ReactNode } from "react";
 import { ToastProvider, useToasts } from "@/components/ui";
@@ -41,6 +41,8 @@ function ToastHarness() {
 beforeEach(() => {
   setRepositoryModeOverride("mock");
 });
+
+afterEach(() => vi.unstubAllGlobals());
 
 describe("Basecamp save flow smoke tests", () => {
   it("Place save draft", async () => {
@@ -142,17 +144,33 @@ describe("Basecamp save flow smoke tests", () => {
 
   it("Media upload save", async () => {
     const user = userEvent.setup();
-
-    renderWithToasts(<MediaLibraryClient initialAssets={mediaAssets} />);
-
-    await user.click(screen.getByRole("button", { name: /upload media/i }));
-    await user.type(screen.getByLabelText("Title"), "Smoke Test Asset");
-    await user.type(screen.getByLabelText("Alt Text"), "Smoke test alt text");
-    await user.click(screen.getByRole("button", { name: /save upload/i }));
+    const asset = { ...mediaAssets[0], id: "media-smoke-test", title: "Smoke Test Asset", altText: "Smoke test alt text" };
+    const upload = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ asset }) });
+    vi.stubGlobal("fetch", upload);
+    const { container } = renderWithToasts(<MediaLibraryClient initialAssets={mediaAssets} />);
+    const form = container.querySelector("form")!;
+    const fields = within(form);
+    await user.type(fields.getByPlaceholderText("Asset title"), asset.title);
+    await user.type(fields.getByPlaceholderText("Alt text"), asset.altText);
+    await user.type(fields.getByPlaceholderText("Related Entity (Maker/Place...)"), "Test Maker");
+    await user.type(fields.getByPlaceholderText("Issue"), "Test Issue");
+    const file = new File(["test image"], "smoke.png", { type: "image/png" });
+    await user.upload(form.querySelector<HTMLInputElement>('input[type="file"]')!, file);
+    expect(fields.getByRole("button", { name: /^upload asset$/i })).toBeEnabled();
+    // Submit the React form directly: jsdom does not validate user-event's
+    // synthetic FileList like a browser's native file picker.
+    fireEvent.submit(form);
 
     await waitFor(() => {
-      expect(screen.getByText("Media saved")).toBeInTheDocument();
+      expect(screen.getByText("Upload saved")).toBeInTheDocument();
     });
+    expect(upload).toHaveBeenCalledOnce();
+    expect(upload).toHaveBeenCalledWith("/api/basecamp/media", expect.objectContaining({ method: "POST" }));
+    const body = upload.mock.calls[0][1].body as FormData;
+    expect(body.get("title")).toBe(asset.title);
+    expect(body.get("altText")).toBe(asset.altText);
+    expect(body.get("file")).toBe(file);
+    expect(screen.getByText(asset.title)).toBeInTheDocument();
   });
 
   it("Feature flag toggle save", async () => {
