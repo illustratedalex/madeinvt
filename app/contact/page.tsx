@@ -44,7 +44,7 @@ const quickActions = [
   { label: "Claim a Listing", href: "/businesses" },
   { label: "Founding Partners", href: "/founding-partners" },
   { label: "Our Coverage", href: "/our-coverage" },
-  { label: "Why Trust MadeInVT", href: "/why-trust-southernvt" },
+  { label: "Why Trust MadeInVT", href: "/why-trust-madeinvt" },
 ];
 
 export default function ContactPage() {

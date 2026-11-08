@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui";
 import { SearchButton } from "@/components/search/SearchButton";
-import { publicNavigationGroups } from "@/lib/navigation";
+import { publicNavigationLinks } from "@/lib/navigation";
 
 export default function Navbar() {
   return (
@@ -20,31 +20,10 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 whitespace-nowrap pr-4 xl:flex">
-          {publicNavigationGroups.map((group) => (
-            <div key={group.label} className="group relative">
-              <Link
-                href={group.href}
-                className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-(--color-forest-green)"
-              >
-                {group.label}
-                <svg className="h-3 w-3 text-slate-500" viewBox="0 0 10 6" fill="none" aria-hidden>
-                  <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-              <div className="pointer-events-none invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100">
-                <div className="min-w-56 rounded-2xl border border-[#e8dfc8] bg-white p-2 shadow-[0_18px_48px_rgba(31,59,47,0.14)]">
-                  {group.items.map((item) => (
-                    <Link
-                      key={item.label}
-                      href={item.href}
-                      className="block rounded-xl px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-[#fcfaf6] hover:text-[#1f5a3d]"
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+          {publicNavigationLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="rounded-full px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-white hover:text-(--color-forest-green)">
+              {link.label}
+            </Link>
           ))}
         </nav>
 
@@ -57,17 +36,10 @@ export default function Navbar() {
             </summary>
             <div className="absolute right-0 top-full z-50 mt-2 w-[min(90vw,22rem)] rounded-2xl border border-[#e8dfc8] bg-white p-4 shadow-[0_20px_60px_rgba(31,59,47,0.18)]">
               <div className="max-h-[70vh] space-y-4 overflow-auto pr-1">
-                {publicNavigationGroups.map((group) => (
-                  <div key={group.label}>
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1f5a3d]">{group.label}</p>
-                    <div className="mt-2 space-y-1">
-                      {group.items.map((item) => (
-                        <Link key={`${group.label}-${item.label}`} href={item.href} className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-[#fcfaf6]">
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                {publicNavigationLinks.map((link) => (
+                  <Link key={link.href} href={link.href} className="block rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-[#fcfaf6]">
+                    {link.label}
+                  </Link>
                 ))}
                 <Link
                   href="/concierge"

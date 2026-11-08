@@ -109,16 +109,16 @@ export default async function Home() {
       <Navbar />
 
       <section className="relative overflow-hidden border-b border-[#d7cbb3] bg-[#10261e] text-[#f8f2e4]">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=2200&q=80')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/quechee-glassworks.jpg')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(7,18,14,0.52),rgba(8,22,17,0.24))]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_44%,rgba(4,12,9,0.3)_100%)]" />
-        <div className="absolute inset-y-0 left-0 w-full bg-[linear-gradient(95deg,rgba(8,31,24,0.86),rgba(8,31,24,0.72)_42%,rgba(8,31,24,0.24)_72%,transparent)] lg:w-[62%]" />
+        <div className="absolute inset-y-0 left-0 w-full bg-[linear-gradient(95deg,rgba(8,31,24,0.86),rgba(8,31,24,0.82)_62%,rgba(8,31,24,0.58)_100%)] lg:w-[62%]" />
 
         <div className="relative mx-auto grid max-w-7xl gap-8 px-6 py-14 sm:px-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)] lg:px-10 lg:py-20">
           <div className="space-y-6">
-            <MetaText as="p" variant="eyebrow" className="text-(--color-maple-gold)">
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#ffe0b6]">
               MadeInVT — Vermont Makers Magazine
-            </MetaText>
+            </p>
             <h1 className="max-w-5xl text-3xl font-semibold leading-tight text-[#fff9ee] drop-shadow-[0_8px_22px_rgba(0,0,0,0.45)] sm:text-4xl md:text-6xl">
               Discover Vermont&apos;s Makers
             </h1>
@@ -167,19 +167,7 @@ export default async function Home() {
                 href="/collections"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/40 bg-transparent px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-white/12"
               >
-                Gift Guides
-              </Link>
-              <Link
-                href="/guides"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-(--color-maple-gold)/60 bg-(--color-maple-gold)/18 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-maple-gold)/28"
-              >
-                Meet the Makers
-              </Link>
-              <Link
-                href="/collections"
-                className="inline-flex h-12 items-center justify-center rounded-full border border-white/25 bg-white/8 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-(--color-cream) motion-safe:transition motion-safe:hover:bg-white/15"
-              >
-                Find Handmade
+                Browse Collections
               </Link>
             </div>
           </div>
@@ -207,6 +195,14 @@ export default async function Home() {
             </Card>
           </div>
         </div>
+        <p className="relative mx-auto max-w-7xl px-6 pb-4 text-xs text-[#fff9ee] sm:px-8 lg:px-10">
+          <span className="inline-block rounded-md bg-[#10261e] px-2 py-1">
+            <a className="underline" href="https://commons.wikimedia.org/wiki/File:QUEECHEE_HISTORIC_MILL_DISTRICT.JPG">Quechee glassworks photo by Jerrye &amp; Roy Klotz MD</a>
+            {" · "}
+            <a className="underline" href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+            {" · Cropped for display"}
+          </span>
+        </p>
       </section>
 
       <section className="mx-auto max-w-7xl space-y-9 px-6 py-10 sm:px-8 lg:px-10">
@@ -215,69 +211,29 @@ export default async function Home() {
           title="Maker Stories"
           description="Original editorial stories centered on craft heritage, process, and Vermont makers."
         >
-          <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-            <Card variant="compact" className="p-5">
-              <div className="flex flex-wrap items-center gap-3">
-                <Badge variant="featured">Weekly Issue</Badge>
-                <span className="rounded-full border border-[#d7cbb3] bg-[#fcfaf6] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">
-                  {weeklyIssue.currentStage}
-                </span>
-              </div>
-              <h3 className="mt-4 text-2xl font-semibold text-slate-900">Handmade work, studio process, and maker heritage.</h3>
-              <Prose size="sm" className="mt-3">
-                <p>
-                  This week&apos;s issue follows makers at the bench, in the kiln, and at the worktable—highlighting
-                  how materials, tools, and tradition shape each finished piece.
-                </p>
-              </Prose>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Link
-                  href="/guides"
-                  className="inline-flex h-12 items-center justify-center rounded-full bg-(--color-forest-green) px-5 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
-                >
-                  Read Maker Stories
-                </Link>
-                <Link
-                  href="/guides"
-                  className="inline-flex h-12 items-center justify-center rounded-full border border-[#d7cbb3] bg-white px-5 text-sm font-semibold text-slate-800 motion-safe:transition motion-safe:hover:bg-[#fcfaf6]"
-                >
-                  Browse stories
-                </Link>
-              </div>
-            </Card>
-
-            <Card variant="compact" className="p-5">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">Newsletter Preview</p>
-                  <h3 className="mt-2 text-2xl font-semibold text-slate-900">What Makers Are Building This Week</h3>
-                </div>
-                <Badge variant="forest">Example</Badge>
-              </div>
-
-              <div className="mt-4 space-y-3">
-                {[
-                  {
-                    title: "Studio Notes",
-                    summary: "Bench-level process, material choices, and craft techniques from Vermont workshops.",
-                  },
-                  {
-                    title: "Maker Stories",
-                    summary: "Profiles that center heritage, process, and the creators behind handmade work.",
-                  },
-                  {
-                    title: "Gift Collections",
-                    summary: "Seasonal curation built around artisan-made goods for thoughtful gifting.",
-                  },
-                ].map((section) => (
-                  <div key={section.title} className="rounded-2xl border border-[#ece3cf] bg-[#fcfaf6] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1f3b2f]">{section.title}</p>
-                    <p className="mt-2 text-sm leading-7 text-slate-600">{section.summary}</p>
-                  </div>
-                ))}
-              </div>
-            </Card>
-          </div>
+          <Card variant="compact" className="p-5">
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge variant="featured">Weekly Issue</Badge>
+              <span className="rounded-full border border-[#d7cbb3] bg-[#fcfaf6] px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">
+                {weeklyIssue.currentStage}
+              </span>
+            </div>
+            <h3 className="mt-4 text-2xl font-semibold text-slate-900">Handmade work, studio process, and maker heritage.</h3>
+            <Prose size="sm" className="mt-3">
+              <p>
+                This week&apos;s issue follows makers at the bench, in the kiln, and at the worktable—highlighting
+                how materials, tools, and tradition shape each finished piece.
+              </p>
+            </Prose>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href="/guides"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-(--color-forest-green) px-5 text-sm font-semibold text-(--color-cream) motion-safe:transition motion-safe:hover:bg-(--color-pine)"
+              >
+                Read Maker Stories
+              </Link>
+            </div>
+          </Card>
         </EditorialSection>
 
         {editorialIntelligenceEnabled && intelligenceSummary.bestOpportunity ? (

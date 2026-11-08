@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "Why Trust MadeInVT? | Verification Promise",
   description: "Learn how MadeInVT verifies makers through editorial standards, studio visits, photography, and ongoing review.",
-  path: "/why-trust-southernvt",
+  path: "/why-trust-madeinvt",
 });
 
 const verificationLevels = [
@@ -35,7 +35,7 @@ const verificationLevels = [
 
 const verificationSteps = ["Research", "Visit or verify", "Photograph", "Review details", "Publish", "Recheck over time"];
 
-export default function WhyTrustSouthernVTPage() {
+export default function WhyTrustMadeInVTPage() {
   return (
     <main className="min-h-screen bg-(--color-cream) text-(--color-slate)">
       <Navbar />

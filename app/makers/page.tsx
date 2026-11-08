@@ -37,7 +37,7 @@ function toggleMatches(value: boolean, filter: string) {
 
 export default async function MakersPage({ searchParams }: MakersPageProps) {
   const params = await searchParams;
-  const selectedCraft = params.craft?.trim() || "All";
+  const requestedCraft = params.craft?.trim() || "All";
   const selectedTown = params.town?.trim() || "All";
   const selectedRegion = params.region?.trim() || "All";
   const shipsFilter = normalizeToggle(params.ships);
@@ -46,12 +46,15 @@ export default async function MakersPage({ searchParams }: MakersPageProps) {
   const selectedStatus = params.status?.trim() || "All";
 
   const allMakers = [...vermont100Makers];
-  const crafts = [...new Set(allMakers.map((maker) => maker.craft).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const crafts = [...new Set(allMakers.map((maker) => maker.category).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const selectedCraft = crafts.some((craft) => craft === requestedCraft)
+    ? requestedCraft
+    : allMakers.find((maker) => maker.craft === requestedCraft)?.category ?? "All";
   const towns = [...new Set(allMakers.map((maker) => maker.town).filter(Boolean))].sort((a, b) => a.localeCompare(b));
   const regions = [...new Set(allMakers.map((maker) => maker.region).filter(Boolean))].sort((a, b) => a.localeCompare(b));
 
   const filteredMakers = allMakers.filter((maker) => {
-    const craftMatch = selectedCraft === "All" || maker.craft === selectedCraft;
+    const craftMatch = selectedCraft === "All" || maker.category === selectedCraft;
     const townMatch = selectedTown === "All" || maker.town === selectedTown;
     const regionMatch = selectedRegion === "All" || maker.region === selectedRegion;
     const shipsMatch = toggleMatches(maker.ships, shipsFilter);

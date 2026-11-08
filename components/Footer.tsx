@@ -7,16 +7,13 @@ const exploreLinks = [
   { label: "All Makers", href: "/makers" },
   { label: "Studios", href: "/businesses" },
   { label: "Collections", href: "/collections" },
-  { label: "Gift Guides", href: "/gift-guides" },
   { label: "Events", href: "/events" },
-  { label: "New Makers", href: "/makers?sort=new" },
 ];
 
 const learnLinks = [
-  { label: "Maker Stories", href: "/stories" },
-  { label: "Behind the Bench", href: "/stories?category=Behind%20the%20Bench" },
+  { label: "Maker Stories", href: "/guides" },
   { label: "How We Choose Makers", href: "/our-coverage" },
-  { label: "Why Trust MadeInVT", href: "/why-trust-southernvt" },
+  { label: "Why Trust MadeInVT", href: "/why-trust-madeinvt" },
   { label: "Public Beta", href: "/updates" },
   { label: "About", href: "/about" },
 ];
