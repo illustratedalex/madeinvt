@@ -47,7 +47,7 @@ export default async function MakersPage({ searchParams }: MakersPageProps) {
 
   const allMakers = [...vermont100Makers];
   const crafts = [...new Set(allMakers.map((maker) => maker.category).filter(Boolean))].sort((a, b) => a.localeCompare(b));
-  const selectedCraft = crafts.includes(requestedCraft)
+  const selectedCraft = crafts.some((craft) => craft === requestedCraft)
     ? requestedCraft
     : allMakers.find((maker) => maker.craft === requestedCraft)?.category ?? "All";
   const towns = [...new Set(allMakers.map((maker) => maker.town).filter(Boolean))].sort((a, b) => a.localeCompare(b));
