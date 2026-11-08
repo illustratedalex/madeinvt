@@ -12,7 +12,7 @@ type MetaTextProps = {
 
 const variantStyles: Record<MetaVariant, string> = {
   /** Small all-caps label used as a section divider or category marker. */
-  eyebrow: "text-xs font-semibold uppercase tracking-[0.26em] text-[#1f5a3d]",
+  eyebrow: "text-xs font-semibold uppercase tracking-[0.26em] text-[#173e2c]",
   /** Image caption or footnote — light, de-emphasised. */
   caption: "text-xs leading-5 text-slate-500",
   /** Inline metadata: dates, distances, town names, etc. */

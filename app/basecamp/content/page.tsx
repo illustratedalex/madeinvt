@@ -674,7 +674,7 @@ export default async function BasecampContentStudioPage() {
               <Link href="/our-coverage" className="rounded-full border border-[#d7cbb3] bg-[#fcfaf6] px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-white">
                 Coverage Policy
               </Link>
-              <Link href="/why-trust-southernvt" className="rounded-full border border-[#d7cbb3] bg-[#fcfaf6] px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-white">
+              <Link href="/why-trust-madeinvt" className="rounded-full border border-[#d7cbb3] bg-[#fcfaf6] px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-white">
                 Verification Promise
               </Link>
             </div>

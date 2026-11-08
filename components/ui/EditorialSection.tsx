@@ -47,7 +47,7 @@ export function EditorialSection({
     <section className={cn(wrapper, className)}>
       <header className={cn("space-y-2", alignment)}>
         {eyebrow ? (
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-[0.26em] text-[#1f5a3d]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-[0.26em] text-[#173e2c]">
             {eyebrow}
           </p>
         ) : null}
